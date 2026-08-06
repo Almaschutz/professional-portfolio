@@ -1,47 +1,44 @@
 ---
-title: "Alma Schutz"
-subtitle: "Data Science & Analytics Leader"
+title: ""
 page-layout: full
-toc: false
 ---
 
-## 15+ years turning data into strategy, growth and mesuarable business impact.
+::: {.home-hero}
 
-I lead analytics, machine learning and data science initiatives across
-Product, Commercial, Marketing and Operations.
+# Alma Schutz
 
-My work combines business strategy, technical depth and organizational
-leadership to build analytics capabilities, lead multidisciplinary teams and
-create measurable business impact.
+<p class="home-role">Data Science & Analytics Leader</p>
+
+## I bridge business strategy and technical analytics to turn complex problems into clear decisions, scalable solutions and measurable growth.
+
+My work spans problem framing, measurement design, modeling, implementation and executive decision support across global analytics and data science initiatives.
+
+:::
 
 ---
 
-## Selected Impact
+## Business Impact at Scale
 
-::: {.grid .impact-grid}
+::: {.impact-grid}
 
-::: {.g-col-12 .g-col-sm-6 .g-col-lg-3 .impact-card}
+::: {.impact-card}
 ### +30%
-
-Growth in Monthly Active Users
+Exceeded the annual active-user growth target.
 :::
 
-::: {.g-col-12 .g-col-sm-6 .g-col-lg-3 .impact-card}
+::: {.impact-card}
 ### 1.5M+
-
-Merchants supported through product analytics
+Merchants supported through global platform migration and adoption.
 :::
 
-::: {.g-col-12 .g-col-sm-6 .g-col-lg-3 .impact-card}
+::: {.impact-card}
 ### +5%
-
-Conversion improvement in a key payment experience
+Conversion uplift in a key digital payment journey.
 :::
 
-::: {.g-col-12 .g-col-sm-6 .g-col-lg-3 .impact-card}
+::: {.impact-card}
 ### $4.2M
-
-Incremental marginal contribution generated through experimentation
+Incremental marginal contribution generated through experimentation.
 :::
 
 :::
@@ -50,75 +47,134 @@ Incremental marginal contribution generated through experimentation
 
 ## Areas of Expertise
 
-::: {layout-ncol=3}
+::: {.expertise-grid}
 
+::: {.expertise-column}
 ### Business Analytics
 
-- Product Analytics
-- Commercial Analytics
-- Marketing Analytics
-- Supply Chain Analytics
-
-### Data Science
-
-- Machine Learning
-- Experimentation
-- Causal Inference
-- Predictive Modeling
-
-### Analytics Leadership
-
-- Data Strategy
-- Team Leadership
-- Executive Communication
-- Measurement Systems
+- Product analytics
+- Commercial analytics
+- Marketing analytics
+- Supply chain analytics
 
 :::
 
-### Technical toolkit
+::: {.expertise-column}
 
-**SQL · Python · R · Data Visualization · Machine Learning · Experimentation**
+### Data Science
+
+- Machine learning
+- Experimentation
+- Causal inference
+- Predictive modeling
+
+:::
+
+::: {.expertise-column}
+
+### Analytics Leadership
+
+- Data and analytics strategy
+- Cross-functional team leadership
+- Executive communication
+- Measurement systems and governance
+
+:::
+
+:::
+
+<p class="technical-line"><strong>Technical foundation:</strong> Python · SQL · R · BigQuery · Databricks · Tableau · Power BI</p>
 
 ---
 
 ## Featured Case Studies
 
-::: {.grid}
+```{=html}
+<div class="case-grid">
 
-::: {.g-col-12 .g-col-md-6 .case-card}
-### Product Growth & Platform Analytics
+  <a href="projects/01-product-growth/" class="home-case-card">
+    <div class="case-icon">
+      <i class="bi bi-graph-up-arrow"></i>
+    </div>
 
-A product measurement and growth framework for identifying constraints,
-prioritizing opportunities and guiding investment decisions.
+    <h3>Product Growth &amp; Platform Analytics</h3>
 
-**Product analytics · SQL · Python · Experimentation**
-:::
+    <p>
+      A product measurement and growth framework for identifying constraints,
+      prioritizing opportunities and guiding investment decisions.
+    </p>
 
-::: {.g-col-12 .g-col-md-6 .case-card}
-### Commercial Analytics & Revenue Optimization
+    <div class="case-tags">
+      Product Analytics · SQL · Python · Experimentation
+    </div>
 
-A pricing, segmentation and opportunity-sizing framework designed to improve
-commercial performance and allocate investment more effectively.
+    <div class="case-link">
+      View case study <i class="bi bi-arrow-right"></i>
+    </div>
+  </a>
 
-**Commercial analytics · R · SQL · Data visualization**
-:::
+  <div class="home-case-card home-case-card-disabled">
+    <div class="case-icon">
+      <i class="bi bi-currency-dollar"></i>
+    </div>
 
-::: {.g-col-12 .g-col-md-6 .case-card}
-### Marketing Experimentation & Causal Measurement
+    <h3>Commercial Analytics &amp; Revenue Optimization</h3>
 
-An experimentation and causal-inference system for measuring incremental impact
-and improving marketing investment decisions.
+    <p>
+      A pricing, segmentation and opportunity-sizing framework designed to
+      improve commercial performance and allocate investment more effectively.
+    </p>
 
-**Experimentation · Causal inference · R · SQL**
-:::
+    <div class="case-tags">
+      Commercial Analytics · R · SQL · Data Visualization
+    </div>
 
-::: {.g-col-12 .g-col-md-6 .case-card}
-### Analytics Leadership & Operating Model
+    <div class="case-link case-link-muted">
+      Coming soon
+    </div>
+  </div>
 
-An operating model for scaling metric governance, team effectiveness,
-business reviews and analytical standards across an organization.
+  <div class="home-case-card home-case-card-disabled">
+    <div class="case-icon">
+      <i class="bi bi-flask"></i>
+    </div>
 
-**Data strategy · Leadership · Governance · Executive communication**
-:::
+    <h3>Marketing Experimentation &amp; Causal Measurement</h3>
 
-:::
+    <p>
+      An experimentation and causal-inference system for measuring incremental
+      impact and improving marketing investment decisions.
+    </p>
+
+    <div class="case-tags">
+      Experimentation · Causal Inference · Python · Measurement
+    </div>
+
+    <div class="case-link case-link-muted">
+      Coming soon
+    </div>
+  </div>
+
+  <div class="home-case-card home-case-card-disabled">
+    <div class="case-icon">
+      <i class="bi bi-diagram-3"></i>
+    </div>
+
+    <h3>Analytics Leadership &amp; Operating Model</h3>
+
+    <p>
+      An operating model for scaling metric governance, team effectiveness,
+      business reviews and analytical standards across an organization.
+    </p>
+
+    <div class="case-tags">
+      Analytics Leadership · Strategy · Governance
+    </div>
+
+    <div class="case-link case-link-muted">
+      Coming soon
+    </div>
+  </div>
+
+</div>
+```

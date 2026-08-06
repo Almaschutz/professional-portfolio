@@ -564,3 +564,237 @@ body.quarto-dark .case-tags {
   }
 }
 
+/* Featured case studies */
+
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.home-case-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 245px;
+  padding: 1.5rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 12px;
+  background: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+a.home-case-card:hover {
+  color: var(--bs-body-color);
+  text-decoration: none;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  border-color: var(--bs-primary);
+}
+
+.case-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--bs-primary) 12%, transparent);
+  color: var(--bs-primary);
+  font-size: 1.35rem;
+}
+
+.home-case-card h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.home-case-card p {
+  margin-bottom: 1rem;
+  color: var(--bs-secondary-color);
+  font-size: 0.93rem;
+  line-height: 1.55;
+}
+
+.case-tags {
+  margin-top: auto;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--bs-secondary-color);
+}
+
+.case-link {
+  margin-top: 1rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--bs-primary);
+}
+
+.home-case-card-disabled {
+  opacity: 0.82;
+}
+
+.home-case-card-disabled .case-link {
+  color: var(--bs-secondary-color);
+}
+
+@media (max-width: 768px) {
+  .case-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Improve blue contrast in dark mode */
+
+[data-bs-theme="dark"] .case-icon {
+  color: #6fb7ff;
+  background: rgba(111, 183, 255, 0.13);
+}
+
+[data-bs-theme="dark"] .case-link {
+  color: #72b7ff;
+}
+
+[data-bs-theme="dark"] a.home-case-card:hover {
+  border-color: #72b7ff;
+}
+
+[data-bs-theme="dark"] .home-case-card:first-child {
+  border-color: rgba(114, 183, 255, 0.65);
+}
+
+.case-link {
+  margin-top: 1rem;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+/* Blue accents in dark mode */
+
+.quarto-dark .case-icon,
+body.quarto-dark .case-icon {
+  color: #8ecbff !important;
+}
+
+.quarto-dark .case-link,
+body.quarto-dark .case-link,
+.quarto-dark .case-link .bi,
+body.quarto-dark .case-link .bi {
+  color: #8ecbff !important;
+}
+
+/* Compact homepage layout */
+
+.home-hero {
+  margin-top: 0.5rem;
+}
+
+.home-hero h1 {
+  margin-bottom: 0.1rem;
+  font-size: 2.35rem;
+}
+
+.home-role {
+  margin: 0 0 1rem;
+  color: var(--bs-secondary-color);
+  font-size: 1.1rem;
+}
+
+.home-hero h2 {
+  max-width: 980px;
+  margin: 0 0 1rem;
+  font-size: 1.45rem;
+  line-height: 1.35;
+}
+
+.home-hero > p:last-child {
+  max-width: 980px;
+  margin-bottom: 0;
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.impact-card {
+  padding: 1rem 1.1rem;
+  background: rgba(var(--bs-secondary-rgb), 0.06);
+}
+
+.impact-card h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.55rem;
+}
+
+.impact-card p {
+  margin: 0;
+  color: var(--bs-secondary-color);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.expertise-column h3 {
+  margin-bottom: 0.45rem;
+  font-size: 1rem;
+}
+
+.expertise-column ul {
+  margin-bottom: 0;
+  padding-left: 1.15rem;
+}
+
+.expertise-column li {
+  margin-bottom: 0.15rem;
+  color: var(--bs-secondary-color);
+  font-size: 0.9rem;
+}
+
+.technical-line {
+  margin: 1.35rem 0 0;
+  color: var(--bs-secondary-color);
+  font-size: 0.88rem;
+}
+
+@media (max-width: 900px) {
+  .impact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .expertise-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .impact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-hero h1 {
+    font-size: 2rem;
+  }
+
+  .home-hero h2 {
+    font-size: 1.25rem;
+  }
+}

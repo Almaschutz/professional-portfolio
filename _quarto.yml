@@ -45,6 +45,10 @@ format:
     code-tools: false
     smooth-scroll: true
     anchor-sections: false
+    include-in-header:
+      text: |
+        <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 execute:
   enabled: false
