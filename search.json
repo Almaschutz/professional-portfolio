@@ -1,0 +1,485 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I am a Data Science and Analytics Leader with 15+ years of experience building analytics capabilities, leading multidisciplinary teams and translating data into measurable business impact.\nMy background spans product analytics, commercial analytics, marketing measurement, experimentation and machine learning. I have worked across global organizations including PayPal, Philip Morris International and Accenture, helping teams improve products, identify growth opportunities and make better investment decisions."
+  },
+  {
+    "objectID": "about.html#i-turn-complex-data-into-clear-business-decisions.",
+    "href": "about.html#i-turn-complex-data-into-clear-business-decisions.",
+    "title": "About",
+    "section": "",
+    "text": "I am a Data Science and Analytics Leader with 15+ years of experience building analytics capabilities, leading multidisciplinary teams and translating data into measurable business impact.\nMy background spans product analytics, commercial analytics, marketing measurement, experimentation and machine learning. I have worked across global organizations including PayPal, Philip Morris International and Accenture, helping teams improve products, identify growth opportunities and make better investment decisions."
+  },
+  {
+    "objectID": "about.html#how-i-work",
+    "href": "about.html#how-i-work",
+    "title": "About",
+    "section": "How I work",
+    "text": "How I work\nI combine three perspectives that are often treated separately:\n\n\nBusiness strategy\nI begin with the business decision, not the model. I work with stakeholders to define the problem, clarify success metrics and identify where analytics can create meaningful value.\n\n\nData science\nI use experimentation, causal inference, predictive modeling and product analytics to turn complex data into practical and defensible recommendations.\n\n\nLeadership\nI build teams, operating models and measurement systems that allow analytics to scale beyond individual projects and become part of how an organization makes decisions."
+  },
+  {
+    "objectID": "about.html#career-highlights",
+    "href": "about.html#career-highlights",
+    "title": "About",
+    "section": "Career highlights",
+    "text": "Career highlights\n\n\nPayPal\nData Science Manager — Merchant Products\nLed product analytics and data science initiatives supporting large-scale merchant experiences and platform migration.\n\nContributed to growth from 1.2M to 1.7M monthly active users\nSupported migration and measurement for 1.5M+ merchants\nHelped improve conversion by 5% in a key payment experience\nBuilt KPI frameworks, business reviews and self-service measurement systems\n\n\n\nPhilip Morris International\nData Science Manager\nLed commercial analytics, experimentation and segmentation initiatives across international markets.\n\nGenerated approximately $4.2M in incremental business value\nBuilt experimentation and measurement frameworks\nDeveloped segmentation models used in production\nHelped establish a scalable data science operating model\n\n\n\nAccenture\nAnalytics and Data Science Consulting\nDelivered pricing, commercial and supply-chain analytics solutions for global consumer-goods organizations.\n\nLed multidisciplinary analytics teams\nDeveloped pricing and optimization models\nWorked with engineering teams to operationalize analytical solutions\nTranslated technical findings into executive recommendations"
+  },
+  {
+    "objectID": "about.html#what-i-bring",
+    "href": "about.html#what-i-bring",
+    "title": "About",
+    "section": "What I bring",
+    "text": "What I bring\n\nProduct, commercial and marketing analytics\nExperimentation and causal inference\nMachine learning and predictive modeling\nKPI design and measurement strategy\nAnalytics operating models and governance\nTeam leadership and stakeholder management\nExecutive communication and data storytelling"
+  },
+  {
+    "objectID": "about.html#current-focus",
+    "href": "about.html#current-focus",
+    "title": "About",
+    "section": "Current focus",
+    "text": "Current focus\nI am interested in leadership and senior individual-contributor opportunities where I can combine analytics strategy, technical depth and organizational influence.\nTarget roles: Staff Data Scientist, Lead Data Scientist, Principal Product Analyst, Product Analytics Lead and Analytics Leadership roles.\nDownload my Resume\nConnect on LinkedIn"
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Case Studies",
+    "section": "",
+    "text": "Each case study combines executive decision-making with a reproducible analytical walkthrough.\n\n\n\nCase study\nCore skills\nLanguages\n\n\n\n\nProduct Growth & Platform Analytics\nActivation, time to activation, cohort analysis, adoption measurement, opportunity sizing\nSQL, Python\n\n\nExperimentation Platform\nA/B testing, power, CUPED, guardrails, causal inference\nR, SQL\n\n\nRetention Risk System\nML, calibration, expected value, monitoring\nPython, SQL"
+  },
+  {
+    "objectID": "projects/01-product-growth/analysis.html",
+    "href": "projects/01-product-growth/analysis.html",
+    "title": "Analytical Walkthrough",
+    "section": "",
+    "text": "This walkthrough uses synthetic merchant data and independently written code to demonstrate an analytical approach inspired by my real product analytics work.\nThe analysis is intentionally simplified so the metric definitions, calculations, insights and decisions can be communicated clearly in a public and reproducible format.\nA production implementation would contain considerably more detail, including eligibility and exclusion rules, event-quality validation, merchant identity resolution, transaction reversals and refunds, market and product differences, rollout timing, cohort maturity, statistical uncertainty, operational constraints and financial impact.\nIt contains no confidential company data, proprietary metric definitions, internal dashboards or production code. All numerical findings are illustrative and should not be interpreted as actual company results."
+  },
+  {
+    "objectID": "projects/01-product-growth/analysis.html#analysis-summary",
+    "href": "projects/01-product-growth/analysis.html#analysis-summary",
+    "title": "Analytical Walkthrough",
+    "section": "Analysis summary",
+    "text": "Analysis summary\nThis synthetic replica evaluates three connected dimensions of merchant behavior:\n\nactivation through a first successful transaction;\nearly transaction depth during days 0–30;\nactivity during days 31–60.\n\n\nKey findings\n\nActivation: 6,673 of 10,000 eligible merchants complete a first successful transaction, an activation rate of 66.7%.\nActivation speed: The median activated merchant completes its first successful transaction in 11 days.\n30-Day Adoption: Among activated merchants with a complete 30-day observation window, 55.8% complete at least 10 successful transactions during days 0–30.\nLater activity: Among activated merchants with a complete 60-day observation window, 63.6% complete at least one successful transaction during days 31–60.\nLargest activation opportunity: The Small segment represents the largest directional activation opportunity.\nCohort variation: 30-Day Adoption ranges from 20.8% to 61.5% across mature synthetic activation cohorts."
+  },
+  {
+    "objectID": "projects/01-product-growth/analysis.html#recommended-decisions",
+    "href": "projects/01-product-growth/analysis.html#recommended-decisions",
+    "title": "Analytical Walkthrough",
+    "section": "Recommended decisions",
+    "text": "Recommended decisions\n\nAddress activation before focusing only on deeper usage.\nMerchants cannot develop repeated usage until they complete a first successful transaction.\nExamine activation speed as well as activation rate.\nDelayed activation may reveal friction even when merchants eventually activate.\nSeparate initial value from early transaction depth.\nOne successful transaction and 10 transactions during days 0–30 represent different product outcomes.\nMeasure later activity with a concrete observation window.\nLater active means at least one successful transaction during days 31–60.\nUse only mature cohorts.\nEach metric should include only merchants with a complete observation window.\nTreat relationships as descriptive unless incrementality is measured.\nStrong early adopters may already differ in readiness, demand, size or product fit.\n\nJump to activation analysis\nJump to 30-Day Adoption\nJump to later activity\nBack to the executive case study"
+  },
+  {
+    "objectID": "projects/01-product-growth/analysis.html#measurement-framework",
+    "href": "projects/01-product-growth/analysis.html#measurement-framework",
+    "title": "Analytical Walkthrough",
+    "section": "Measurement framework",
+    "text": "Measurement framework\nEligible\n   ↓\nActivated\n   = first successful new-platform transaction\n   ↓\n30-Day Adoption\n   = 10+ successful transactions during days 0–30\n   ↓\nLater active\n   = 1+ successful transaction during days 31–60\nThe analytical definitions are:\n\nEligible: The merchant belongs to the population able to use the new platform.\nActivated: The merchant completes its first successful new-platform transaction.\nTime to activation: Days between eligibility and activation.\n30-Day Adoption: At least 10 successful transactions during days 0–30 after activation.\nLater active: At least one successful transaction during days 31–60 after activation.\nActivation cohort: Month of the first successful transaction.\nMature 30-day merchant: Activation occurred at least 30 days before the analysis date.\nMature 60-day merchant: Activation occurred at least 60 days before the analysis date."
+  },
+  {
+    "objectID": "projects/01-product-growth/analysis.html#activation-analysis",
+    "href": "projects/01-product-growth/analysis.html#activation-analysis",
+    "title": "Analytical Walkthrough",
+    "section": "Activation analysis",
+    "text": "Activation analysis\nActivation measures whether eligible merchants complete a first successful transaction.\n\n\n\n\n\n\n\n\n\nMetric\nValue\n\n\n\n\n0\nEligible merchants\n10,000\n\n\n1\nActivated merchants\n6,673\n\n\n2\nActivation rate\n66.7%\n\n\n3\nMedian days to activation\n11\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSegment\nEligible\nActivated\nActivation rate\nMedian days to activation\n\n\n\n\n0\nEnterprise\n985\n805\n81.7%\n6\n\n\n1\nMid-Market\n2967\n2175\n73.3%\n10\n\n\n2\nSmall\n6048\n3693\n61.1%\n14\n\n\n\n\n\n\n\n\n\nShow code\nactivation_order = segment_summary.sort_values(\n    \"activation_rate\"\n)\n\nplt.figure(figsize=(8, 5))\n\nbars = plt.bar(\n    activation_order[\"segment\"],\n    activation_order[\"activation_rate\"]\n)\n\nplt.title(\"Activation Rate by Merchant Segment\")\nplt.xlabel(\"Merchant segment\")\nplt.ylabel(\"Activation rate\")\nplt.ylim(0, 1)\n\nfor bar, rate in zip(\n    bars,\n    activation_order[\"activation_rate\"]\n):\n    plt.text(\n        bar.get_x() + bar.get_width() / 2,\n        bar.get_height(),\n        f\"{rate:.1%}\",\n        ha=\"center\",\n        va=\"bottom\"\n    )\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nActivation rate by synthetic merchant segment\n\n\n\n\n\nInterpretation\nThe Small segment has the lowest activation rate at 61.1%, compared with 81.7% for the Enterprise segment.\nThe weakest percentage does not automatically represent the highest-value intervention. Population size, merchant value, addressability and implementation effort must also be considered."
+  },
+  {
+    "objectID": "projects/01-product-growth/analysis.html#time-to-activation",
+    "href": "projects/01-product-growth/analysis.html#time-to-activation",
+    "title": "Analytical Walkthrough",
+    "section": "Time to activation",
+    "text": "Time to activation\nActivation rate does not show how quickly merchants realize value.\n\n\nShow code\nactivated_merchants = merchant_data.loc[\n    merchant_data[\"activated\"]\n].copy()\n\nplt.figure(figsize=(9, 5))\n\nplt.hist(\n    activated_merchants[\"days_to_activation\"],\n    bins=25\n)\n\nplt.title(\"Time to First Successful Transaction\")\nplt.xlabel(\"Days from eligibility to activation\")\nplt.ylabel(\"Number of merchants\")\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nDays from eligibility to first successful transaction\n\n\n\n\n\n\nShow code\ntime_order = segment_summary.sort_values(\n    \"median_days_to_activation\"\n)\n\nplt.figure(figsize=(8, 5))\n\nbars = plt.bar(\n    time_order[\"segment\"],\n    time_order[\"median_days_to_activation\"]\n)\n\nplt.title(\"Median Days to Activation by Segment\")\nplt.xlabel(\"Merchant segment\")\nplt.ylabel(\"Median days\")\n\nfor bar, days in zip(\n    bars,\n    time_order[\"median_days_to_activation\"]\n):\n    plt.text(\n        bar.get_x() + bar.get_width() / 2,\n        bar.get_height(),\n        f\"{days:.0f}\",\n        ha=\"center\",\n        va=\"bottom\"\n    )\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nMedian time to activation by merchant segment\n\n\n\n\nLonger activation times may indicate onboarding friction, delayed integration, unclear value or merchant-readiness constraints.\nA production analysis would examine the full activation curve rather than relying only on a median."
+  },
+  {
+    "objectID": "projects/01-product-growth/analysis.html#day-adoption",
+    "href": "projects/01-product-growth/analysis.html#day-adoption",
+    "title": "Analytical Walkthrough",
+    "section": "30-Day Adoption",
+    "text": "30-Day Adoption\nActivation measures first value realization.\n30-Day Adoption measures whether that first transaction develops into meaningful early transaction depth.\n\n\n\n\n\n\n\n\n\nMetric\nValue\n\n\n\n\n0\nMature 30-day activated merchants\n6,673\n\n\n1\n30-Day adopters\n3,723\n\n\n2\n30-Day Adoption rate\n55.8%\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSegment\nMature activated merchants\n30-Day adopters\n30-Day Adoption rate\n\n\n\n\n0\nEnterprise\n805\n803\n99.8%\n\n\n1\nMid-Market\n2175\n1837\n84.5%\n\n\n2\nSmall\n3693\n1083\n29.3%\n\n\n\n\n\n\n\n\n\nShow code\nadoption_order = segment_summary.sort_values(\n    \"adoption_30d_rate\"\n)\n\nplt.figure(figsize=(8, 5))\n\nbars = plt.bar(\n    adoption_order[\"segment\"],\n    adoption_order[\"adoption_30d_rate\"]\n)\n\nplt.title(\"30-Day Adoption Rate by Merchant Segment\")\nplt.xlabel(\"Merchant segment\")\nplt.ylabel(\"30-Day Adoption rate\")\nplt.ylim(0, 1)\n\nfor bar, rate in zip(\n    bars,\n    adoption_order[\"adoption_30d_rate\"]\n):\n    plt.text(\n        bar.get_x() + bar.get_width() / 2,\n        bar.get_height(),\n        f\"{rate:.1%}\",\n        ha=\"center\",\n        va=\"bottom\"\n    )\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n30-Day Adoption among mature activated merchants\n\n\n\n\n\nInterpretation\nThe Small segment has the lowest 30-Day Adoption rate at 29.3%, compared with 99.8% for the Enterprise segment.\nThis is a descriptive comparison. It does not establish that segment causes the difference or that the full performance gap can be eliminated."
+  },
+  {
+    "objectID": "projects/01-product-growth/analysis.html#activation-cohort-analysis",
+    "href": "projects/01-product-growth/analysis.html#activation-cohort-analysis",
+    "title": "Analytical Walkthrough",
+    "section": "Activation-cohort analysis",
+    "text": "Activation-cohort analysis\nThe cohort is based on the month of the merchant’s first successful transaction.\nOnly merchants with a complete 30-day observation window are included.\n\n\n\n\n\n\n\n\n\nActivation month\nActivated merchants\n30-Day adopters\nMedian days to activation\n30-Day Adoption rate\n\n\n\n\n0\n2025-01\n642\n395\n8\n61.5%\n\n\n1\n2025-02\n1031\n576\n11\n55.9%\n\n\n2\n2025-03\n1122\n627\n12\n55.9%\n\n\n3\n2025-04\n1105\n602\n12\n54.5%\n\n\n4\n2025-05\n1188\n672\n11\n56.6%\n\n\n5\n2025-06\n1062\n606\n11\n57.1%\n\n\n6\n2025-07\n499\n240\n19\n48.1%\n\n\n7\n2025-08\n24\n5\n44\n20.8%\n\n\n\n\n\n\n\n\n\nShow code\nplt.figure(figsize=(9, 5))\n\nplt.plot(\n    cohort_summary[\"activation_month\"],\n    cohort_summary[\"adoption_30d_rate\"],\n    marker=\"o\"\n)\n\nplt.title(\"30-Day Adoption by Activation Cohort\")\nplt.xlabel(\"Month of first successful transaction\")\nplt.ylabel(\"30-Day Adoption rate\")\nplt.ylim(0, 1)\nplt.xticks(rotation=45)\n\nfor month, rate in zip(\n    cohort_summary[\"activation_month\"],\n    cohort_summary[\"adoption_30d_rate\"]\n):\n    plt.text(\n        month,\n        rate,\n        f\"{rate:.1%}\",\n        ha=\"center\",\n        va=\"bottom\"\n    )\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n30-Day Adoption by mature synthetic activation cohort\n\n\n\n\n\nInterpretation\n30-Day Adoption ranges from 20.8% in the 2025-08 cohort to 61.5% in the 2025-01 cohort.\nThe observed difference is 40.7%.\nThe equal observation window makes these cohorts structurally comparable. A production analysis would still require uncertainty estimates and adjustments for merchant mix, rollout timing and seasonality."
+  },
+  {
+    "objectID": "projects/01-product-growth/analysis.html#later-activity-during-days-3160",
+    "href": "projects/01-product-growth/analysis.html#later-activity-during-days-3160",
+    "title": "Analytical Walkthrough",
+    "section": "Later activity during days 31–60",
+    "text": "Later activity during days 31–60\nLater active is defined as completing at least one successful new-platform transaction during days 31–60 after activation.\nOnly merchants with a complete 60-day observation window are included.\n\n\n\n\n\n\n\n\n\nMetric\nValue\n\n\n\n\n0\nMature 60-day activated merchants\n6,653\n\n\n1\nLater-active merchants\n4,229\n\n\n2\nLater-activity rate\n63.6%\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEarly-adoption status\nMerchants\nLater-active merchants\nLater-activity rate\n\n\n\n\n0\nDid not reach 30-Day threshold\n2933\n1291\n44.0%\n\n\n1\nReached 30-Day threshold\n3720\n2938\n79.0%\n\n\n\n\n\n\n\n\n\nShow code\nplt.figure(figsize=(9, 5))\n\nbars = plt.bar(\n    later_activity_by_adoption[\"early_adoption_status\"],\n    later_activity_by_adoption[\"later_activity_rate\"]\n)\n\nplt.title(\"Later Activity by Early-Adoption Status\")\nplt.xlabel(\"30-Day Adoption outcome\")\nplt.ylabel(\"Later-activity rate\")\nplt.ylim(0, 1)\n\nfor bar, rate in zip(\n    bars,\n    later_activity_by_adoption[\"later_activity_rate\"]\n):\n    plt.text(\n        bar.get_x() + bar.get_width() / 2,\n        bar.get_height(),\n        f\"{rate:.1%}\",\n        ha=\"center\",\n        va=\"bottom\"\n    )\n\nplt.xticks(rotation=10)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nLater activity during days 31–60 by early-adoption status\n\n\n\n\n\nInterpretation\nMerchants reaching the 30-Day Adoption threshold are more likely, in this synthetic replica, to complete at least one transaction during days 31–60.\nThis evaluates early adoption as a possible leading indicator of later activity. It does not establish that reaching 10 transactions causes later activity.\nMerchants with stronger early usage may already differ in size, demand, readiness, integration quality or product fit.\nThe synthetic generator intentionally includes this relationship to demonstrate the analytical method. A production analysis would need to test whether the association remains after accounting for pre-existing differences."
+  },
+  {
+    "objectID": "projects/01-product-growth/analysis.html#opportunity-sizing",
+    "href": "projects/01-product-growth/analysis.html#opportunity-sizing",
+    "title": "Analytical Walkthrough",
+    "section": "Opportunity sizing",
+    "text": "Opportunity sizing\nThe analysis sizes two separate opportunities:\n\nincreasing activation among eligible merchants;\nincreasing early transaction depth among activated merchants.\n\n\nActivation opportunity\n\n\n\n\n\n\n\n\n\nSegment\nEligible merchants\nActivation rate\nGap to benchmark\nDirectional incremental activations\n\n\n\n\n0\nSmall\n6048\n61.1%\n20.7%\n1250\n\n\n1\nMid-Market\n2967\n73.3%\n8.4%\n250\n\n\n2\nEnterprise\n985\n81.7%\n0.0%\n0\n\n\n\n\n\n\n\n\n\nShow code\nplt.figure(figsize=(8, 5))\n\nbars = plt.bar(\n    activation_opportunity[\"segment\"],\n    activation_opportunity[\n        \"incremental_activations_if_gap_closed\"\n    ]\n)\n\nplt.title(\"Directional Activation Opportunity\")\nplt.xlabel(\"Merchant segment\")\nplt.ylabel(\"Potential incremental activations\")\n\nfor bar, opportunity in zip(\n    bars,\n    activation_opportunity[\n        \"incremental_activations_if_gap_closed\"\n    ]\n):\n    plt.text(\n        bar.get_x() + bar.get_width() / 2,\n        bar.get_height(),\n        f\"{opportunity:,}\",\n        ha=\"center\",\n        va=\"bottom\"\n    )\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\nDirectional incremental activation opportunity\n\n\n\n\n\n\nEarly-adoption opportunity\n\n\n\n\n\n\n\n\n\nSegment\nMature activated merchants\n30-Day Adoption rate\nGap to benchmark\nDirectional incremental adopters\n\n\n\n\n0\nSmall\n3693\n29.3%\n70.4%\n2601\n\n\n1\nMid-Market\n2175\n84.5%\n15.3%\n333\n\n\n2\nEnterprise\n805\n99.8%\n0.0%\n0\n\n\n\n\n\n\n\n\n\nInterpretation\nThe largest directional activation opportunity appears in the Small segment, representing approximately 1,250 additional activations if the observed benchmark gap were closed.\nThe largest directional early-adoption opportunity appears in the Small segment, representing approximately 2,601 additional 30-Day adopters.\nThese are benchmark scenarios, not causal forecasts. They help prioritize further investigation but do not prove that the full gaps are addressable."
+  },
+  {
+    "objectID": "projects/01-product-growth/analysis.html#decision-framework",
+    "href": "projects/01-product-growth/analysis.html#decision-framework",
+    "title": "Analytical Walkthrough",
+    "section": "Decision framework",
+    "text": "Decision framework\n\nEligible population: How many merchants are affected?\nActivation gap: How far is activation from a relevant benchmark?\nTime to activation: Where is value realization being delayed?\nEarly-adoption gap: How many activated merchants fail to develop meaningful transaction depth?\nLater-activity gap: How many mature merchants record no activity during days 31–60?\nExpected business value: What value could improved behavior create?\nAddressability: Is the gap likely to respond to a product intervention?\nImplementation effort: What engineering, design and operational work is required?\nMeasurement feasibility: Can the intervention be evaluated credibly?\n\nThe final prioritization should combine analytical opportunity with value, feasibility, strategic relevance and measurement quality."
+  },
+  {
+    "objectID": "projects/01-product-growth/analysis.html#synthetic-data-methodology",
+    "href": "projects/01-product-growth/analysis.html#synthetic-data-methodology",
+    "title": "Analytical Walkthrough",
+    "section": "Synthetic-data methodology",
+    "text": "Synthetic-data methodology\nThe dataset contains 10,000 fictional eligible merchants distributed across three segments, four markets and multiple eligibility dates.\nThe synthetic process generates:\n\nwhether each merchant activates;\ndays from eligibility to activation;\nsuccessful transactions during days 0–30;\nwhether the merchant reaches the 30-Day Adoption threshold;\nsuccessful transactions during days 31–60;\nwhether the merchant is later active.\n\n\n\n\n\n\n\n\n\n\nmerchant_id\nsegment\nmarket\neligible_date\nactivated\nactivation_date\ndays_to_activation\nsuccessful_transactions_days_0_30\nadopted_30d\nsuccessful_transactions_days_31_60\nlater_active\nmature_30d\nmature_60d\n\n\n\n\n0\n1\nMid-Market\nLatin America\n2025-06-12\nFalse\nNaT\nNaN\n0\nFalse\n0\nFalse\nFalse\nFalse\n\n\n1\n2\nSmall\nLatin America\n2025-05-15\nFalse\nNaT\nNaN\n0\nFalse\n0\nFalse\nFalse\nFalse\n\n\n2\n3\nMid-Market\nNorth America\n2025-02-07\nFalse\nNaT\nNaN\n0\nFalse\n0\nFalse\nFalse\nFalse\n\n\n3\n4\nMid-Market\nNorth America\n2025-06-30\nTrue\n2025-07-10\n10.00\n11\nTrue\n10\nTrue\nTrue\nTrue\n\n\n4\n5\nSmall\nNorth America\n2025-06-29\nTrue\n2025-07-05\n6.00\n9\nFalse\n0\nFalse\nTrue\nTrue\n\n\n5\n6\nEnterprise\nNorth America\n2025-01-08\nTrue\n2025-01-14\n6.00\n28\nTrue\n21\nTrue\nTrue\nTrue\n\n\n6\n7\nMid-Market\nEurope\n2025-01-05\nTrue\n2025-01-26\n21.00\n11\nTrue\n9\nTrue\nTrue\nTrue\n\n\n7\n8\nMid-Market\nAsia Pacific\n2025-02-14\nFalse\nNaT\nNaN\n0\nFalse\n0\nFalse\nFalse\nFalse\n\n\n8\n9\nSmall\nNorth America\n2025-05-24\nFalse\nNaT\nNaN\n0\nFalse\n0\nFalse\nFalse\nFalse\n\n\n9\n10\nSmall\nNorth America\n2025-04-19\nFalse\nNaT\nNaN\n0\nFalse\n0\nFalse\nFalse\nFalse\n\n\n\n\n\n\n\nThe differences across segments and early-adoption groups are intentionally encoded for demonstration.\nThe synthetic model is designed to demonstrate the analytical workflow, not to reproduce the full complexity of a production merchant platform."
+  },
+  {
+    "objectID": "projects/01-product-growth/analysis.html#data-quality-validation",
+    "href": "projects/01-product-growth/analysis.html#data-quality-validation",
+    "title": "Analytical Walkthrough",
+    "section": "Data-quality validation",
+    "text": "Data-quality validation\nBefore interpreting the results, the analysis checks that the derived dates, transaction metrics and merchant statuses follow the expected business logic.\nThe validation covers:\n\nactivated merchants must have an activation date;\nnon-activated merchants must not have an activation date;\na merchant cannot reach 30-Day Adoption without activating;\na merchant cannot be later active without activating;\na later-active merchant must have at least one successful transaction during days 31–60;\nmerchant IDs must be unique;\nactivation delays cannot be negative;\nactivation dates cannot occur before eligibility dates.\n\nThe following code runs those checks and counts the records that violate each rule.\n\n\nShow code\nvalidation_checks = pd.DataFrame({\n    \"Validation check\": [\n        \"Activated merchant without activation date\",\n        \"Non-activated merchant with activation date\",\n        \"30-Day adopter without activation\",\n        \"Later-active merchant without activation\",\n        \"Later-active merchant with zero transactions in days 31–60\",\n        \"Duplicate merchant ID\",\n        \"Negative activation delay\",\n        \"Activation date before eligibility date\"\n    ],\n    \"Invalid records\": [\n        (\n            merchant_data[\"activated\"]\n            & merchant_data[\"activation_date\"].isna()\n        ).sum(),\n\n        (\n            ~merchant_data[\"activated\"]\n            & merchant_data[\"activation_date\"].notna()\n        ).sum(),\n\n        (\n            merchant_data[\"adopted_30d\"]\n            & ~merchant_data[\"activated\"]\n        ).sum(),\n\n        (\n            merchant_data[\"later_active\"]\n            & ~merchant_data[\"activated\"]\n        ).sum(),\n\n        (\n            merchant_data[\"later_active\"]\n            & (\n                merchant_data[\n                    \"successful_transactions_days_31_60\"\n                ] == 0\n            )\n        ).sum(),\n\n        merchant_data[\"merchant_id\"]\n        .duplicated()\n        .sum(),\n\n        (\n            merchant_data[\"days_to_activation\"] &lt; 0\n        ).sum(),\n\n        (\n            merchant_data[\"activation_date\"]\n            &lt; merchant_data[\"eligible_date\"]\n        ).sum()\n    ]\n})\n\ntotal_invalid_records = int(\n    validation_checks[\"Invalid records\"].sum()\n)\n\ndisplay(validation_checks)\n\n\n\n\n\n\n\n\n\nValidation check\nInvalid records\n\n\n\n\n0\nActivated merchant without activation date\n0\n\n\n1\nNon-activated merchant with activation date\n0\n\n\n2\n30-Day adopter without activation\n0\n\n\n3\nLater-active merchant without activation\n0\n\n\n4\nLater-active merchant with zero transactions in days 31–60\n0\n\n\n5\nDuplicate merchant ID\n0\n\n\n6\nNegative activation delay\n0\n\n\n7\nActivation date before eligibility date\n0\n\n\n\n\n\n\n\nValidation result: All checks passed. No invalid activation sequences, transaction-derived flags, duplicate merchant IDs or inconsistent dates were detected."
+  },
+  {
+    "objectID": "projects/01-product-growth/analysis.html#illustrative-sql-implementation",
+    "href": "projects/01-product-growth/analysis.html#illustrative-sql-implementation",
+    "title": "Analytical Walkthrough",
+    "section": "Illustrative SQL implementation",
+    "text": "Illustrative SQL implementation\nThe following SQL illustrates how activation, 30-Day Adoption and later activity could be derived from eligibility and transaction tables.\nIt is not connected to a production database and does not reproduce proprietary company logic.\nWITH eligible_merchants AS (\n    SELECT\n        merchant_id,\n        eligible_date,\n        merchant_segment,\n        market\n    FROM merchant_eligibility\n),\n\nsuccessful_transactions AS (\n    SELECT\n        merchant_id,\n        transaction_timestamp\n    FROM transactions\n    WHERE platform = 'new_platform'\n      AND transaction_status = 'successful'\n),\n\nactivation AS (\n    SELECT\n        e.merchant_id,\n        e.eligible_date,\n        e.merchant_segment,\n        e.market,\n        MIN(t.transaction_timestamp)\n            AS activation_timestamp\n    FROM eligible_merchants AS e\n    LEFT JOIN successful_transactions AS t\n        ON e.merchant_id = t.merchant_id\n       AND t.transaction_timestamp &gt;= e.eligible_date\n    GROUP BY\n        e.merchant_id,\n        e.eligible_date,\n        e.merchant_segment,\n        e.market\n),\n\nbehavior_windows AS (\n    SELECT\n        a.merchant_id,\n        a.eligible_date,\n        a.merchant_segment,\n        a.market,\n        a.activation_timestamp,\n\n        DATE_DIFF(\n            DATE(a.activation_timestamp),\n            DATE(a.eligible_date),\n            DAY\n        ) AS days_to_activation,\n\n        COUNTIF(\n            t.transaction_timestamp\n                &gt;= a.activation_timestamp\n            AND t.transaction_timestamp\n                &lt; TIMESTAMP_ADD(\n                    a.activation_timestamp,\n                    INTERVAL 30 DAY\n                )\n        ) AS transactions_days_0_30,\n\n        COUNTIF(\n            t.transaction_timestamp\n                &gt;= TIMESTAMP_ADD(\n                    a.activation_timestamp,\n                    INTERVAL 30 DAY\n                )\n            AND t.transaction_timestamp\n                &lt; TIMESTAMP_ADD(\n                    a.activation_timestamp,\n                    INTERVAL 60 DAY\n                )\n        ) AS transactions_days_31_60\n\n    FROM activation AS a\n\n    LEFT JOIN successful_transactions AS t\n        ON a.merchant_id = t.merchant_id\n       AND t.transaction_timestamp\n            &gt;= a.activation_timestamp\n       AND t.transaction_timestamp\n            &lt; TIMESTAMP_ADD(\n                a.activation_timestamp,\n                INTERVAL 60 DAY\n            )\n\n    WHERE a.activation_timestamp IS NOT NULL\n\n    GROUP BY\n        a.merchant_id,\n        a.eligible_date,\n        a.merchant_segment,\n        a.market,\n        a.activation_timestamp\n),\n\nmerchant_metrics AS (\n    SELECT\n        *,\n\n        CASE\n            WHEN transactions_days_0_30 &gt;= 10\n            THEN 1\n            ELSE 0\n        END AS adopted_30d,\n\n        CASE\n            WHEN transactions_days_31_60 &gt;= 1\n            THEN 1\n            ELSE 0\n        END AS later_active\n\n    FROM behavior_windows\n)\n\nSELECT\n    DATE_TRUNC(\n        DATE(activation_timestamp),\n        MONTH\n    ) AS activation_month,\n\n    merchant_segment,\n\n    COUNT(*) AS activated_merchants,\n\n    COUNTIF(adopted_30d = 1)\n        AS adopted_30d_merchants,\n\n    SAFE_DIVIDE(\n        COUNTIF(adopted_30d = 1),\n        COUNT(*)\n    ) AS adoption_30d_rate,\n\n    COUNTIF(later_active = 1)\n        AS later_active_merchants,\n\n    SAFE_DIVIDE(\n        COUNTIF(later_active = 1),\n        COUNT(*)\n    ) AS later_activity_rate,\n\n    APPROX_QUANTILES(\n        days_to_activation,\n        2\n    )[OFFSET(1)] AS median_days_to_activation\n\nFROM merchant_metrics\n\nWHERE activation_timestamp\n    &lt;= TIMESTAMP_SUB(\n        CURRENT_TIMESTAMP(),\n        INTERVAL 60 DAY\n    )\n\nGROUP BY\n    activation_month,\n    merchant_segment\n\nORDER BY\n    activation_month,\n    merchant_segment;\nIn production, 30-Day Adoption could be reported after 30 days, while later activity requires 60 days of observation. These metrics would normally use separate maturity filters rather than forcing every output to use the stricter 60-day population."
+  },
+  {
+    "objectID": "projects/01-product-growth/analysis.html#limitations",
+    "href": "projects/01-product-growth/analysis.html#limitations",
+    "title": "Analytical Walkthrough",
+    "section": "Limitations",
+    "text": "Limitations\nThis public replica is intentionally simplified.\nA production analysis would also require:\n\nprecise eligibility and exclusion rules;\nmerchant identity resolution;\nfailed, reversed and refunded transaction handling;\nmultiple currencies and transaction types;\nexact boundary conventions for days 0, 30 and 60;\nexclusion of immature cohorts;\nconfidence intervals and statistical testing;\nadjustment for merchant mix, rollout timing and seasonality;\nmarket and product constraints;\nricher definitions of later activity;\nincremental-impact measurement;\nfinancial value and implementation-cost estimates;\nprivacy, legal and regulatory review."
+  },
+  {
+    "objectID": "projects/01-product-growth/analysis.html#what-this-walkthrough-demonstrates",
+    "href": "projects/01-product-growth/analysis.html#what-this-walkthrough-demonstrates",
+    "title": "Analytical Walkthrough",
+    "section": "What this walkthrough demonstrates",
+    "text": "What this walkthrough demonstrates\nThis public analysis demonstrates how I structure product-growth analytics:\n\ndefine activation through an observable value-generating event;\nanalyze activation rate and activation speed separately;\ndistinguish first use from meaningful transaction depth;\nuse fixed observation windows for cohort comparability;\ndefine later activity through a concrete transaction event;\ndistinguish association from causality;\nvalidate analytical data before interpreting results;\nsize activation and adoption opportunities separately;\ntranslate findings into product decisions.\n\nThe numerical findings are illustrative and are not actual company results.\n\nBack to the executive case study\nBack to Case Studies\nDownload Resume"
+  },
+  {
+    "objectID": "projects/03-retention-ml/index.html",
+    "href": "projects/03-retention-ml/index.html",
+    "title": "Retention Risk and Intervention System",
+    "section": "",
+    "text": "This project predicts churn risk, but its primary artifact is an intervention policy based on expected incremental value—not merely an AUC score."
+  },
+  {
+    "objectID": "projects/03-retention-ml/index.html#executive-summary",
+    "href": "projects/03-retention-ml/index.html#executive-summary",
+    "title": "Retention Risk and Intervention System",
+    "section": "",
+    "text": "This project predicts churn risk, but its primary artifact is an intervention policy based on expected incremental value—not merely an AUC score."
+  },
+  {
+    "objectID": "projects/03-retention-ml/index.html#python-modeling-pipeline",
+    "href": "projects/03-retention-ml/index.html#python-modeling-pipeline",
+    "title": "Retention Risk and Intervention System",
+    "section": "Python modeling pipeline",
+    "text": "Python modeling pipeline\n\n\nCode\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\nfrom sklearn.impute import SimpleImputer\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.metrics import roc_auc_score, average_precision_score\nimport pandas as pd\n\nnumeric_features = [\n    \"sessions_28d\", \"value_actions_28d\", \"days_since_last_active\",\n    \"support_contacts_90d\"\n]\ncategorical_features = [\"plan\", \"country\", \"acquisition_channel\"]\n\nnumeric_pipeline = Pipeline([\n    (\"impute\", SimpleImputer(strategy=\"median\")),\n    (\"scale\", StandardScaler())\n])\n\ncategorical_pipeline = Pipeline([\n    (\"impute\", SimpleImputer(strategy=\"most_frequent\")),\n    (\"encode\", OneHotEncoder(handle_unknown=\"ignore\"))\n])\n\npreprocess = ColumnTransformer([\n    (\"numeric\", numeric_pipeline, numeric_features),\n    (\"categorical\", categorical_pipeline, categorical_features)\n])\n\nmodel = Pipeline([\n    (\"preprocess\", preprocess),\n    (\"model\", LogisticRegression(max_iter=2000, class_weight=\"balanced\"))\n])\n\n# X_train, X_test, y_train and y_test should use a temporal split.\nmodel.fit(X_train, y_train)\npred = model.predict_proba(X_test)[:, 1]\n\nprint({\n    \"roc_auc\": roc_auc_score(y_test, pred),\n    \"average_precision\": average_precision_score(y_test, pred)\n})"
+  },
+  {
+    "objectID": "projects/03-retention-ml/index.html#expected-value-policy",
+    "href": "projects/03-retention-ml/index.html#expected-value-policy",
+    "title": "Retention Risk and Intervention System",
+    "section": "Expected-value policy",
+    "text": "Expected-value policy\ndef expected_intervention_value(\n    churn_probability: float,\n    treatment_uplift: float,\n    retained_value: float,\n    treatment_cost: float\n) -&gt; float:\n    return (\n        churn_probability\n        * treatment_uplift\n        * retained_value\n        - treatment_cost\n    )"
+  },
+  {
+    "objectID": "projects/03-retention-ml/index.html#monitoring",
+    "href": "projects/03-retention-ml/index.html#monitoring",
+    "title": "Retention Risk and Intervention System",
+    "section": "Monitoring",
+    "text": "Monitoring\nTrack feature drift, calibration, intervention rate, incremental retention, cost per saved user and subgroup performance."
+  },
+  {
+    "objectID": "leadership.html",
+    "href": "leadership.html",
+    "title": "Leadership",
+    "section": "",
+    "text": "I translate ambiguous product questions into measurable outcomes, analytical roadmaps and decision frameworks.\n\n\n\nI build reusable metric definitions, experimentation standards, self-service data products and review mechanisms that improve the work of multiple teams.\n\n\n\nI communicate uncertainty, trade-offs and recommendations to product, engineering, design and executive stakeholders.\n\n\n\nI establish standards for analytical validity, reproducibility, monitoring, documentation and responsible use of data."
+  },
+  {
+    "objectID": "leadership.html#how-i-operate-at-staff-lead-level",
+    "href": "leadership.html#how-i-operate-at-staff-lead-level",
+    "title": "Leadership",
+    "section": "",
+    "text": "I translate ambiguous product questions into measurable outcomes, analytical roadmaps and decision frameworks.\n\n\n\nI build reusable metric definitions, experimentation standards, self-service data products and review mechanisms that improve the work of multiple teams.\n\n\n\nI communicate uncertainty, trade-offs and recommendations to product, engineering, design and executive stakeholders.\n\n\n\nI establish standards for analytical validity, reproducibility, monitoring, documentation and responsible use of data."
+  },
+  {
+    "objectID": "projects/02-experimentation/index.html",
+    "href": "projects/02-experimentation/index.html",
+    "title": "Experimentation Decision System",
+    "section": "",
+    "text": "This case study demonstrates how I would design an experimentation system that helps product teams make faster decisions without sacrificing validity."
+  },
+  {
+    "objectID": "projects/02-experimentation/index.html#executive-summary",
+    "href": "projects/02-experimentation/index.html#executive-summary",
+    "title": "Experimentation Decision System",
+    "section": "",
+    "text": "This case study demonstrates how I would design an experimentation system that helps product teams make faster decisions without sacrificing validity."
+  },
+  {
+    "objectID": "projects/02-experimentation/index.html#r-sample-size-and-simulation",
+    "href": "projects/02-experimentation/index.html#r-sample-size-and-simulation",
+    "title": "Experimentation Decision System",
+    "section": "R: sample size and simulation",
+    "text": "R: sample size and simulation\n\n\nCode\nlibrary(tidyverse)\nlibrary(pwr)\n\nbaseline &lt;- 0.20\nrelative_mde &lt;- 0.05\ntreatment &lt;- baseline * (1 + relative_mde)\n\nh &lt;- ES.h(treatment, baseline)\n\nresult &lt;- tibble(\n  n_per_group = seq(1000, 30000, by = 1000),\n  power = map_dbl(\n    n_per_group,\n    ~ pwr.2p.test(\n        h = h,\n        n = .x,\n        sig.level = 0.05,\n        alternative = \"two.sided\"\n      )$power\n  )\n)\n\nggplot(result, aes(n_per_group, power)) +\n  geom_line(linewidth = 1) +\n  geom_hline(yintercept = 0.80, linetype = \"dashed\") +\n  scale_y_continuous(labels = scales::percent) +\n  labs(\n    title = \"Sample size required for reliable detection\",\n    x = \"Users per group\",\n    y = \"Statistical power\"\n  ) +\n  theme_minimal(base_size = 12)"
+  },
+  {
+    "objectID": "projects/02-experimentation/index.html#sql-experiment-readout",
+    "href": "projects/02-experimentation/index.html#sql-experiment-readout",
+    "title": "Experimentation Decision System",
+    "section": "SQL: experiment readout",
+    "text": "SQL: experiment readout\nWITH assignment AS (\n    SELECT user_id, variant, assigned_at\n    FROM experimentation.assignments\n    WHERE experiment_id = 'onboarding_v2'\n),\noutcomes AS (\n    SELECT\n        a.user_id,\n        a.variant,\n        MAX(CASE WHEN e.event_name = 'activation_completed' THEN 1 ELSE 0 END)\n          AS activated,\n        SUM(CASE WHEN e.event_name = 'purchase' THEN e.revenue ELSE 0 END)\n          AS revenue\n    FROM assignment a\n    LEFT JOIN analytics.events e\n      ON a.user_id = e.user_id\n     AND e.event_at &gt;= a.assigned_at\n     AND e.event_at &lt; a.assigned_at + INTERVAL '14 day'\n    GROUP BY 1, 2\n)\nSELECT\n    variant,\n    COUNT(*) AS users,\n    AVG(activated * 1.0) AS activation_rate,\n    AVG(revenue) AS revenue_per_user\nFROM outcomes\nGROUP BY 1;"
+  },
+  {
+    "objectID": "projects/02-experimentation/index.html#decision-framework",
+    "href": "projects/02-experimentation/index.html#decision-framework",
+    "title": "Experimentation Decision System",
+    "section": "Decision framework",
+    "text": "Decision framework\nShip only when: 1. The primary metric clears the practical decision threshold. 2. Guardrails show no material harm. 3. Instrumentation and randomization checks pass. 4. Results are robust to pre-specified sensitivity analyses."
+  },
+  {
+    "objectID": "projects/01-product-growth/index.html",
+    "href": "projects/01-product-growth/index.html",
+    "title": "Product Growth & Platform Analytics",
+    "section": "",
+    "text": "A global merchant platform was expanding across markets and merchant segments.\nThe central measurement challenge was not simply determining which merchants could access the platform. The organization needed to understand which merchants completed a first successful transaction, how quickly they activated, whether they developed meaningful early usage and whether they remained active during a later observation period.\nI led analytics supporting the platform, helping teams establish shared metric definitions, diagnose growth constraints and connect merchant behavior with product and investment decisions.\n\nRole: Data Science Manager — Merchant Products\nOrganization: PayPal\nScope: Global merchant platform\nMethods: Product analytics, KPI design, behavioral analysis, experimentation and executive reporting"
+  },
+  {
+    "objectID": "projects/01-product-growth/index.html#from-platform-availability-to-meaningful-merchant-behavior",
+    "href": "projects/01-product-growth/index.html#from-platform-availability-to-meaningful-merchant-behavior",
+    "title": "Product Growth & Platform Analytics",
+    "section": "",
+    "text": "A global merchant platform was expanding across markets and merchant segments.\nThe central measurement challenge was not simply determining which merchants could access the platform. The organization needed to understand which merchants completed a first successful transaction, how quickly they activated, whether they developed meaningful early usage and whether they remained active during a later observation period.\nI led analytics supporting the platform, helping teams establish shared metric definitions, diagnose growth constraints and connect merchant behavior with product and investment decisions.\n\nRole: Data Science Manager — Merchant Products\nOrganization: PayPal\nScope: Global merchant platform\nMethods: Product analytics, KPI design, behavioral analysis, experimentation and executive reporting"
+  },
+  {
+    "objectID": "projects/01-product-growth/index.html#executive-summary",
+    "href": "projects/01-product-growth/index.html#executive-summary",
+    "title": "Product Growth & Platform Analytics",
+    "section": "Executive summary",
+    "text": "Executive summary\nThe measurement framework begins with the merchant’s first observable value-generating behavior.\nActivation is defined as the first successful transaction on the new platform.\nThe framework then evaluates:\n\nhow many eligible merchants activate;\nhow long activation takes;\nwhether activated merchants develop meaningful transaction depth;\nhow outcomes vary across merchant segments and activation cohorts;\nwhether merchants record activity during a later observation period.\n\nThe public analytical replica uses two post-activation outcomes:\n\n30-Day Adoption: At least 10 successful transactions during days 0–30 after activation.\n\n\nLater active: At least one successful transaction during days 31–60 after activation.\n\nThese metrics answer different questions. The first measures early transaction depth; the second measures whether the merchant records activity in the following period.\nView the analytical walkthrough\nDownload Resume"
+  },
+  {
+    "objectID": "projects/01-product-growth/index.html#real-world-impact",
+    "href": "projects/01-product-growth/index.html#real-world-impact",
+    "title": "Product Growth & Platform Analytics",
+    "section": "Real-world impact",
+    "text": "Real-world impact\n\n\n+30%\nExceeded the Full Stack Monthly Active Users target in 2024.\n\n\n1.2M → 1.7M\nSupported growth in Monthly Active Users during 2025.\n\n\n1.5M+\nEnabled analytics and decision support for a global merchant-platform migration.\n\n\n+5%\nSupported conversion improvement in a key payment experience.\n\n\nThe broader analytics capability also helped:\n\nscale self-service KPI reporting;\nimprove visibility into merchant behavior;\ninform product and commercial leadership;\nsupport roadmap expansion for more than 30 global alternative payment methods;\nestablish shared product-outcome definitions across teams."
+  },
+  {
+    "objectID": "projects/01-product-growth/index.html#key-takeaway",
+    "href": "projects/01-product-growth/index.html#key-takeaway",
+    "title": "Product Growth & Platform Analytics",
+    "section": "Key takeaway",
+    "text": "Key takeaway\nPlatform growth cannot be understood through availability or top-line activity alone.\nThe useful analytical journey is:\nEligible merchant\n        ↓\nActivated\n= first successful transaction\n        ↓\n30-Day Adoption\n= 10+ transactions during days 0–30\n        ↓\nLater active\n= 1+ transaction during days 31–60\n        ↓\nProduct and investment decisions\nActivation identifies initial value realization.\n30-Day Adoption distinguishes one-time use from meaningful early transaction depth.\nLater activity provides a concrete view of whether merchants transact during the following observation period.\n\n\nAbout this public case study\nThis case study is a confidentiality-safe analytical replica inspired by my real work leading product analytics for a large-scale global merchant platform.\nThe business context, measurement challenges and leadership responsibilities reflect the type of work I performed. The public implementation uses synthetic data, simplified public-safe definitions and independently written code.\nThe model is intentionally simplified so the analytical logic, insights and decision process can be explained clearly and reproduced publicly. A production implementation would include substantially more complexity, including eligibility and exclusion rules, event-quality validation, identity resolution, transaction exceptions, market differences, rollout timing, cohort maturity, statistical uncertainty and operational constraints.\nNo confidential company data, proprietary metric definitions, internal dashboards or production code are included. The results generated in the analytical walkthrough are illustrative and should not be interpreted as actual company results.\nOpen the public analytical replica"
+  },
+  {
+    "objectID": "projects/01-product-growth/index.html#business-context",
+    "href": "projects/01-product-growth/index.html#business-context",
+    "title": "Product Growth & Platform Analytics",
+    "section": "Business context",
+    "text": "Business context\nThe organization was expanding a new merchant platform across a large global merchant population.\nProduct and commercial teams needed to understand:\n\nHow many eligible merchants completed a first successful transaction?\nHow quickly did merchants activate after becoming eligible?\nWhat proportion developed meaningful transaction depth during their first 30 days?\nWhat proportion recorded activity during days 31–60?\nHow did behavior differ across merchant segments and activation cohorts?\nWhich populations represented the largest growth opportunities?\n\nA single top-line metric could not answer all of these questions.\nThe analytics function needed a measurement system that connected merchant behavior with product decisions, roadmap priorities and leadership reviews."
+  },
+  {
+    "objectID": "projects/01-product-growth/index.html#measurement-framework",
+    "href": "projects/01-product-growth/index.html#measurement-framework",
+    "title": "Product Growth & Platform Analytics",
+    "section": "Measurement framework",
+    "text": "Measurement framework\nThe framework separates initial value realization, early transaction depth and later activity.\nEligible\n   ↓\nActivated\n   = first successful new-platform transaction\n   ↓\n30-Day Adoption\n   = 10+ successful transactions during days 0–30\n   ↓\nLater active\n   = 1+ successful transaction during days 31–60\nThe public replica uses the following definitions:\n\nEligible: The merchant belongs to the population able to use the new platform.\nActivated: The merchant completes its first successful transaction on the new platform.\nTime to activation: The number of days between eligibility and activation.\n30-Day Adoption: The merchant completes at least 10 successful transactions during days 0–30 after activation.\nLater active: The merchant completes at least one successful transaction during days 31–60 after activation.\nActivation cohort: The month of the merchant’s first successful transaction.\n\nOnly merchants with a complete 30-day observation window are included in 30-Day Adoption metrics.\nOnly merchants with a complete 60-day observation window are included in later-activity metrics.\nThese maturity rules prevent recent cohorts from appearing artificially weaker simply because they have had less time to accumulate observable behavior."
+  },
+  {
+    "objectID": "projects/01-product-growth/index.html#the-analytical-challenge",
+    "href": "projects/01-product-growth/index.html#the-analytical-challenge",
+    "title": "Product Growth & Platform Analytics",
+    "section": "The analytical challenge",
+    "text": "The analytical challenge\n\n1. Was platform availability translating into activation?\nAn eligible merchant could remain inactive.\nThe first analytical layer measured:\n\nactivation rate;\ntime to activation;\ndifferences across segments and cohorts.\n\n\n\n2. Was first use translating into meaningful early adoption?\nOne successful transaction represented initial value realization, but not necessarily repeated usage.\nThe 30-Day Adoption metric introduced a consistent behavioral threshold:\nAt least 10 successful transactions\nduring days 0–30 after activation\n\n\n3. Were merchants active during the following period?\nLater activity was defined concretely as:\nAt least one successful transaction\nduring days 31–60 after activation\nThis avoids vague concepts such as “sustained usage” without an explicit observation period.\n\n\n4. Where should product teams intervene?\nPerformance gaps alone were insufficient.\nPrioritization also needed to consider:\n\nmerchant population;\nexpected business value;\naddressability of the gap;\nproduct and engineering effort;\nmarket constraints;\nmeasurement feasibility."
+  },
+  {
+    "objectID": "projects/01-product-growth/index.html#my-role",
+    "href": "projects/01-product-growth/index.html#my-role",
+    "title": "Product Growth & Platform Analytics",
+    "section": "My role",
+    "text": "My role\nI owned analytics for the Latest Merchant Platform, including product outcomes and technical metric definitions.\nMy responsibilities included:\n\ndefining and governing core product metrics;\nmeasuring activation, adoption and platform growth;\nidentifying merchant behavioral patterns and growth opportunities;\nsupporting product launches and roadmap decisions;\npartnering with Product, Engineering, Research, Legal, Communications and Commercial teams;\nleading BI work to automate reporting and expand self-service analytics;\npresenting findings and recommendations to product and commercial leadership."
+  },
+  {
+    "objectID": "projects/01-product-growth/index.html#analytical-approach",
+    "href": "projects/01-product-growth/index.html#analytical-approach",
+    "title": "Product Growth & Platform Analytics",
+    "section": "Analytical approach",
+    "text": "Analytical approach\n\n1. Establish shared metric definitions\nI worked with product and technical stakeholders to translate broad goals such as platform growth and merchant adoption into observable product behaviors.\nDefinitions needed to be:\n\ntechnically implementable;\nstable enough for longitudinal reporting;\ninterpreted consistently across functions;\nuseful for product decisions;\nunderstandable to senior leadership.\n\n\n\n2. Define activation through value realization\nThe first successful transaction represented the first observable point at which a merchant realized value from the platform.\nThis was more meaningful than defining activation through a login, account view or configuration event.\n\n\n3. Measure activation speed\nActivation rate alone could conceal friction.\nTwo groups might eventually reach similar activation rates while taking very different amounts of time to get there.\nTime-to-activation analysis helped identify:\n\nonboarding friction;\ndelayed technical integration;\nunclear product value;\nsegment-specific merchant needs.\n\n\n\n4. Measure early transaction depth\n30-Day Adoption distinguished one-time use from repeated early behavior.\nThe fixed observation window allowed mature activation cohorts to be compared consistently.\n\n\n5. Measure later activity separately\nLater activity evaluated whether a merchant recorded at least one successful transaction during days 31–60.\nA merchant could fail to reach the early-adoption threshold and still transact later. For this reason, later activity was treated as a separate outcome rather than the next mandatory funnel stage.\n\n\n6. Size opportunities before recommending solutions\nPerformance gaps were evaluated alongside population size and product feasibility.\nThe goal was not simply to find the weakest percentage, but to identify opportunities with meaningful expected value.\n\n\n7. Operationalize the measurement system\nThe work extended beyond one-time analyses.\nI led the development of automated reporting and self-service KPI frameworks supporting:\n\nregular business reviews;\nactivation monitoring;\ntime-to-activation analysis;\nearly-adoption tracking;\ncohort comparisons;\nlater-activity measurement;\nproduct launch evaluation;\nroadmap prioritization;\nleadership communication."
+  },
+  {
+    "objectID": "projects/01-product-growth/index.html#illustrative-measurement-architecture",
+    "href": "projects/01-product-growth/index.html#illustrative-measurement-architecture",
+    "title": "Product Growth & Platform Analytics",
+    "section": "Illustrative measurement architecture",
+    "text": "Illustrative measurement architecture\nBecause the underlying company data and metric definitions are confidential, this represents a general analytical structure rather than a proprietary implementation.\nMerchant eligibility records\n             +\nNew-platform transaction events\n             ↓\nStandardized successful-transaction definitions\n             ↓\nFirst successful transaction\n             ↓\nActivation date and time to activation\n             ↓\nTransactions during days 0–30\n             ↓\nTransactions during days 31–60\n             ↓\nSegment and activation-cohort analysis\n             ↓\nProduct dashboards and business reviews\n             ↓\nRoadmap and investment decisions"
+  },
+  {
+    "objectID": "projects/01-product-growth/index.html#leadership-and-collaboration",
+    "href": "projects/01-product-growth/index.html#leadership-and-collaboration",
+    "title": "Product Growth & Platform Analytics",
+    "section": "Leadership and collaboration",
+    "text": "Leadership and collaboration\nThis work required more than technical analysis.\nI coordinated across functions to ensure that metrics were technically valid, consistently interpreted and useful for decisions.\nKey leadership contributions included:\n\naligning stakeholders around shared product definitions;\nconnecting technical events with meaningful product outcomes;\ntranslating analytical findings for executive audiences;\nprioritizing analytical work according to expected product value;\nleading BI resources and reporting automation;\nconnecting product performance with commercial context;\nhelping teams move from descriptive reporting to decision-oriented analytics."
+  },
+  {
+    "objectID": "projects/01-product-growth/index.html#tools-and-methods",
+    "href": "projects/01-product-growth/index.html#tools-and-methods",
+    "title": "Product Growth & Platform Analytics",
+    "section": "Tools and methods",
+    "text": "Tools and methods\n\nData and analytics\n\nSQL\nPython\nActivation analysis\nTime-to-event analysis\nCohort analysis\nMerchant segmentation\nBehavioral modeling\nKPI design\nDashboarding and visualization\nOpportunity sizing\n\n\n\nProduct and leadership\n\nProduct measurement strategy\nMetric governance\nCross-functional stakeholder management\nBusiness reviews\nExecutive communication\nRoadmap decision support\nExperimentation and causal-measurement planning"
+  },
+  {
+    "objectID": "projects/01-product-growth/index.html#what-i-would-measure-next",
+    "href": "projects/01-product-growth/index.html#what-i-would-measure-next",
+    "title": "Product Growth & Platform Analytics",
+    "section": "What I would measure next",
+    "text": "What I would measure next\nA production measurement system could extend this framework through:\n\nactivation curves by time since eligibility;\nreasons for delayed or failed activation;\ntransaction quality and merchant value;\nalternative 7-, 60- and 90-day adoption definitions;\ntransaction frequency during later periods;\nmovement between transaction-depth bands;\nearly-warning indicators for declining usage;\nincremental impact of individual product capabilities;\nlong-term merchant value by activation path;\nexperimentation for onboarding and product interventions;\ncausal measurement of roadmap changes.\n\n\nView the analytical walkthrough\nBack to Case Studies\nDownload Resume"
+  },
+  {
+    "objectID": "projects/01-product-growth/product_growth_analytics_walkthrough.html",
+    "href": "projects/01-product-growth/product_growth_analytics_walkthrough.html",
+    "title": "Product Growth Analytics Walkthrough",
+    "section": "",
+    "text": "This notebook is a public, confidentiality-safe analytical replica inspired by real product analytics work on a large-scale merchant platform.\nIt uses entirely synthetic data and independently written code. The model is intentionally simplified so the metric definitions, calculations, insights, and decision process can be explained clearly and reproduced publicly.\n\n\n\nEligible: merchant belongs to the population able to use the platform.\nActivated: merchant completes a first successful transaction.\nTime to activation: days between eligibility and activation.\n30-Day Adoption: at least 10 successful transactions during days 0–30 after activation.\nLater active: at least one successful transaction during days 31–60 after activation.\nActivation cohort: month of the first successful transaction.\n\nA production implementation would include additional complexity such as eligibility rules, event-quality controls, identity resolution, refunds and reversals, market differences, rollout timing, statistical uncertainty, operational constraints, and financial impact."
+  },
+  {
+    "objectID": "projects/01-product-growth/product_growth_analytics_walkthrough.html#activation-30-day-adoption-and-later-activity",
+    "href": "projects/01-product-growth/product_growth_analytics_walkthrough.html#activation-30-day-adoption-and-later-activity",
+    "title": "Product Growth Analytics Walkthrough",
+    "section": "",
+    "text": "This notebook is a public, confidentiality-safe analytical replica inspired by real product analytics work on a large-scale merchant platform.\nIt uses entirely synthetic data and independently written code. The model is intentionally simplified so the metric definitions, calculations, insights, and decision process can be explained clearly and reproduced publicly.\n\n\n\nEligible: merchant belongs to the population able to use the platform.\nActivated: merchant completes a first successful transaction.\nTime to activation: days between eligibility and activation.\n30-Day Adoption: at least 10 successful transactions during days 0–30 after activation.\nLater active: at least one successful transaction during days 31–60 after activation.\nActivation cohort: month of the first successful transaction.\n\nA production implementation would include additional complexity such as eligibility rules, event-quality controls, identity resolution, refunds and reversals, market differences, rollout timing, statistical uncertainty, operational constraints, and financial impact."
+  },
+  {
+    "objectID": "projects/01-product-growth/product_growth_analytics_walkthrough.html#setup",
+    "href": "projects/01-product-growth/product_growth_analytics_walkthrough.html#setup",
+    "title": "Product Growth Analytics Walkthrough",
+    "section": "1. Setup",
+    "text": "1. Setup\n\n\nCode\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nrng = np.random.default_rng(42)\n\npd.set_option(\"display.max_columns\", None)\npd.set_option(\"display.max_colwidth\", None)\npd.set_option(\"display.float_format\", lambda value: f\"{value:,.2f}\")\n\nN_MERCHANTS = 10_000\nANALYSIS_DATE = pd.Timestamp(\"2025-09-30\")"
+  },
+  {
+    "objectID": "projects/01-product-growth/product_growth_analytics_walkthrough.html#generate-synthetic-merchant-data",
+    "href": "projects/01-product-growth/product_growth_analytics_walkthrough.html#generate-synthetic-merchant-data",
+    "title": "Product Growth Analytics Walkthrough",
+    "section": "2. Generate synthetic merchant data",
+    "text": "2. Generate synthetic merchant data\nThe synthetic population includes three merchant segments, four markets, eligibility dates, activation behavior, early transaction depth, and later activity.\n\n\nCode\nsegments = rng.choice(\n    [\"Small\", \"Mid-Market\", \"Enterprise\"],\n    size=N_MERCHANTS,\n    p=[0.60, 0.30, 0.10]\n)\n\nmarkets = rng.choice(\n    [\"North America\", \"Europe\", \"Latin America\", \"Asia Pacific\"],\n    size=N_MERCHANTS,\n    p=[0.35, 0.30, 0.20, 0.15]\n)\n\neligible_dates = pd.to_datetime(\n    rng.choice(\n        pd.date_range(\"2025-01-01\", \"2025-06-30\", freq=\"D\"),\n        size=N_MERCHANTS\n    )\n)\n\nmerchant_data = pd.DataFrame({\n    \"merchant_id\": np.arange(1, N_MERCHANTS + 1),\n    \"segment\": segments,\n    \"market\": markets,\n    \"eligible_date\": eligible_dates\n})\n\nactivation_probability = {\n    \"Small\": 0.61,\n    \"Mid-Market\": 0.73,\n    \"Enterprise\": 0.82\n}\n\nmerchant_data[\"activated\"] = [\n    rng.random() &lt; activation_probability[segment]\n    for segment in merchant_data[\"segment\"]\n]\n\nactivation_delay_mean = {\n    \"Small\": 18,\n    \"Mid-Market\": 12,\n    \"Enterprise\": 8\n}\n\ndays_to_activation = []\n\nfor activated, segment in zip(\n    merchant_data[\"activated\"],\n    merchant_data[\"segment\"]\n):\n    if activated:\n        delay = int(\n            max(\n                0,\n                rng.gamma(\n                    shape=2.0,\n                    scale=activation_delay_mean[segment] / 2\n                )\n            )\n        )\n        days_to_activation.append(delay)\n    else:\n        days_to_activation.append(np.nan)\n\nmerchant_data[\"days_to_activation\"] = days_to_activation\nmerchant_data[\"activation_date\"] = pd.NaT\n\nactivated_mask = merchant_data[\"activated\"]\n\nmerchant_data.loc[activated_mask, \"activation_date\"] = (\n    merchant_data.loc[activated_mask, \"eligible_date\"]\n    + pd.to_timedelta(\n        merchant_data.loc[activated_mask, \"days_to_activation\"],\n        unit=\"D\"\n    )\n)\n\nmerchant_data[\"activation_month\"] = (\n    merchant_data[\"activation_date\"]\n    .dt.to_period(\"M\")\n    .astype(\"string\")\n)\n\ntransactions_0_30_mean = {\n    \"Small\": 8,\n    \"Mid-Market\": 13,\n    \"Enterprise\": 20\n}\n\nmerchant_data[\"successful_transactions_days_0_30\"] = [\n    max(1, int(rng.poisson(transactions_0_30_mean[segment])))\n    if activated else 0\n    for activated, segment in zip(\n        merchant_data[\"activated\"],\n        merchant_data[\"segment\"]\n    )\n]\n\nmerchant_data[\"adopted_30d\"] = (\n    merchant_data[\"successful_transactions_days_0_30\"] &gt;= 10\n)\n\nlater_activity_probability = {\n    \"Small\": {False: 0.42, True: 0.72},\n    \"Mid-Market\": {False: 0.52, True: 0.81},\n    \"Enterprise\": {False: 0.62, True: 0.88}\n}\n\nlater_transaction_mean = {\n    \"Small\": 5,\n    \"Mid-Market\": 9,\n    \"Enterprise\": 15\n}\n\ntransactions_31_60 = []\n\nfor activated, adopted_30d, segment in zip(\n    merchant_data[\"activated\"],\n    merchant_data[\"adopted_30d\"],\n    merchant_data[\"segment\"]\n):\n    if not activated:\n        transactions_31_60.append(0)\n        continue\n\n    is_later_active = (\n        rng.random()\n        &lt; later_activity_probability[segment][adopted_30d]\n    )\n\n    if not is_later_active:\n        transactions_31_60.append(0)\n        continue\n\n    expected_transactions = later_transaction_mean[segment]\n\n    if adopted_30d:\n        expected_transactions *= 1.35\n\n    transactions_31_60.append(\n        max(1, int(rng.poisson(expected_transactions)))\n    )\n\nmerchant_data[\"successful_transactions_days_31_60\"] = (\n    transactions_31_60\n)\n\nmerchant_data[\"later_active\"] = (\n    merchant_data[\"successful_transactions_days_31_60\"] &gt;= 1\n)\n\nmerchant_data[\"mature_30d\"] = (\n    merchant_data[\"activated\"]\n    & (\n        merchant_data[\"activation_date\"]\n        &lt;= ANALYSIS_DATE - pd.Timedelta(days=30)\n    )\n)\n\nmerchant_data[\"mature_60d\"] = (\n    merchant_data[\"activated\"]\n    & (\n        merchant_data[\"activation_date\"]\n        &lt;= ANALYSIS_DATE - pd.Timedelta(days=60)\n    )\n)\n\nmerchant_data.head()\n\n\n\n\n\n\n\n\n\nmerchant_id\nsegment\nmarket\neligible_date\nactivated\ndays_to_activation\nactivation_date\nactivation_month\nsuccessful_transactions_days_0_30\nadopted_30d\nsuccessful_transactions_days_31_60\nlater_active\nmature_30d\nmature_60d\n\n\n\n\n0\n1\nMid-Market\nLatin America\n2025-06-12\nFalse\nNaN\nNaT\n&lt;NA&gt;\n0\nFalse\n0\nFalse\nFalse\nFalse\n\n\n1\n2\nSmall\nLatin America\n2025-05-15\nFalse\nNaN\nNaT\n&lt;NA&gt;\n0\nFalse\n0\nFalse\nFalse\nFalse\n\n\n2\n3\nMid-Market\nNorth America\n2025-02-07\nFalse\nNaN\nNaT\n&lt;NA&gt;\n0\nFalse\n0\nFalse\nFalse\nFalse\n\n\n3\n4\nMid-Market\nNorth America\n2025-06-30\nTrue\n10.00\n2025-07-10\n2025-07\n11\nTrue\n10\nTrue\nTrue\nTrue\n\n\n4\n5\nSmall\nNorth America\n2025-06-29\nTrue\n6.00\n2025-07-05\n2025-07\n9\nFalse\n0\nFalse\nTrue\nTrue"
+  },
+  {
+    "objectID": "projects/01-product-growth/product_growth_analytics_walkthrough.html#data-quality-validation",
+    "href": "projects/01-product-growth/product_growth_analytics_walkthrough.html#data-quality-validation",
+    "title": "Product Growth Analytics Walkthrough",
+    "section": "3. Data-quality validation",
+    "text": "3. Data-quality validation\n\n\nCode\nvalidation_checks = pd.DataFrame({\n    \"Validation check\": [\n        \"Activated merchant without activation date\",\n        \"Non-activated merchant with activation date\",\n        \"30-Day adopter without activation\",\n        \"Later-active merchant without activation\",\n        \"Later-active merchant with zero transactions in days 31–60\",\n        \"Duplicate merchant ID\",\n        \"Negative activation delay\",\n        \"Activation date before eligibility date\"\n    ],\n    \"Invalid records\": [\n        (\n            merchant_data[\"activated\"]\n            & merchant_data[\"activation_date\"].isna()\n        ).sum(),\n        (\n            ~merchant_data[\"activated\"]\n            & merchant_data[\"activation_date\"].notna()\n        ).sum(),\n        (\n            merchant_data[\"adopted_30d\"]\n            & ~merchant_data[\"activated\"]\n        ).sum(),\n        (\n            merchant_data[\"later_active\"]\n            & ~merchant_data[\"activated\"]\n        ).sum(),\n        (\n            merchant_data[\"later_active\"]\n            & (\n                merchant_data[\n                    \"successful_transactions_days_31_60\"\n                ] == 0\n            )\n        ).sum(),\n        merchant_data[\"merchant_id\"].duplicated().sum(),\n        (merchant_data[\"days_to_activation\"] &lt; 0).sum(),\n        (\n            merchant_data[\"activation_date\"]\n            &lt; merchant_data[\"eligible_date\"]\n        ).sum()\n    ]\n})\n\nvalidation_checks\n\n\n\n\n\n\n\n\n\nValidation check\nInvalid records\n\n\n\n\n0\nActivated merchant without activation date\n0\n\n\n1\nNon-activated merchant with activation date\n0\n\n\n2\n30-Day adopter without activation\n0\n\n\n3\nLater-active merchant without activation\n0\n\n\n4\nLater-active merchant with zero transactions in days 31–60\n0\n\n\n5\nDuplicate merchant ID\n0\n\n\n6\nNegative activation delay\n0\n\n\n7\nActivation date before eligibility date\n0"
+  },
+  {
+    "objectID": "projects/01-product-growth/product_growth_analytics_walkthrough.html#executive-summary",
+    "href": "projects/01-product-growth/product_growth_analytics_walkthrough.html#executive-summary",
+    "title": "Product Growth Analytics Walkthrough",
+    "section": "4. Executive summary",
+    "text": "4. Executive summary\n\n\nCode\neligible_count = len(merchant_data)\nactivated_count = int(merchant_data[\"activated\"].sum())\nmature_30d_count = int(merchant_data[\"mature_30d\"].sum())\nmature_60d_count = int(merchant_data[\"mature_60d\"].sum())\n\nadopted_30d_count = int(\n    merchant_data.loc[\n        merchant_data[\"mature_30d\"],\n        \"adopted_30d\"\n    ].sum()\n)\n\nlater_active_count = int(\n    merchant_data.loc[\n        merchant_data[\"mature_60d\"],\n        \"later_active\"\n    ].sum()\n)\n\nactivation_rate = activated_count / eligible_count\nadoption_30d_rate = adopted_30d_count / mature_30d_count\nlater_activity_rate = later_active_count / mature_60d_count\n\nmedian_days_to_activation = (\n    merchant_data.loc[\n        merchant_data[\"activated\"],\n        \"days_to_activation\"\n    ].median()\n)\n\nsummary = pd.DataFrame({\n    \"Metric\": [\n        \"Eligible merchants\",\n        \"Activated merchants\",\n        \"Activation rate\",\n        \"Median days to activation\",\n        \"Mature 30-day merchants\",\n        \"30-Day Adoption rate\",\n        \"Mature 60-day merchants\",\n        \"Later-activity rate\"\n    ],\n    \"Value\": [\n        f\"{eligible_count:,}\",\n        f\"{activated_count:,}\",\n        f\"{activation_rate:.1%}\",\n        f\"{median_days_to_activation:.0f}\",\n        f\"{mature_30d_count:,}\",\n        f\"{adoption_30d_rate:.1%}\",\n        f\"{mature_60d_count:,}\",\n        f\"{later_activity_rate:.1%}\"\n    ]\n})\n\nsummary\n\n\n\n\n\n\n\n\n\nMetric\nValue\n\n\n\n\n0\nEligible merchants\n10,000\n\n\n1\nActivated merchants\n6,673\n\n\n2\nActivation rate\n66.7%\n\n\n3\nMedian days to activation\n11\n\n\n4\nMature 30-day merchants\n6,673\n\n\n5\n30-Day Adoption rate\n55.8%\n\n\n6\nMature 60-day merchants\n6,653\n\n\n7\nLater-activity rate\n63.6%"
+  },
+  {
+    "objectID": "projects/01-product-growth/product_growth_analytics_walkthrough.html#activation-analysis",
+    "href": "projects/01-product-growth/product_growth_analytics_walkthrough.html#activation-analysis",
+    "title": "Product Growth Analytics Walkthrough",
+    "section": "5. Activation analysis",
+    "text": "5. Activation analysis\n\n\nCode\nsegment_summary = (\n    merchant_data\n    .groupby(\"segment\", observed=True)\n    .agg(\n        eligible=(\"merchant_id\", \"count\"),\n        activated=(\"activated\", \"sum\"),\n        mature_30d=(\"mature_30d\", \"sum\"),\n        mature_60d=(\"mature_60d\", \"sum\"),\n        median_days_to_activation=(\"days_to_activation\", \"median\")\n    )\n    .reset_index()\n)\n\nsegment_adoption = (\n    merchant_data.loc[merchant_data[\"mature_30d\"]]\n    .groupby(\"segment\", observed=True)[\"adopted_30d\"]\n    .sum()\n)\n\nsegment_later_activity = (\n    merchant_data.loc[merchant_data[\"mature_60d\"]]\n    .groupby(\"segment\", observed=True)[\"later_active\"]\n    .sum()\n)\n\nsegment_summary[\"adopted_30d\"] = (\n    segment_summary[\"segment\"]\n    .map(segment_adoption)\n    .fillna(0)\n    .astype(int)\n)\n\nsegment_summary[\"later_active\"] = (\n    segment_summary[\"segment\"]\n    .map(segment_later_activity)\n    .fillna(0)\n    .astype(int)\n)\n\nsegment_summary[\"activation_rate\"] = (\n    segment_summary[\"activated\"] / segment_summary[\"eligible\"]\n)\n\nsegment_summary[\"adoption_30d_rate\"] = (\n    segment_summary[\"adopted_30d\"] / segment_summary[\"mature_30d\"]\n)\n\nsegment_summary[\"later_activity_rate\"] = (\n    segment_summary[\"later_active\"] / segment_summary[\"mature_60d\"]\n)\n\nsegment_summary\n\n\n\n\n\n\n\n\n\nsegment\neligible\nactivated\nmature_30d\nmature_60d\nmedian_days_to_activation\nadopted_30d\nlater_active\nactivation_rate\nadoption_30d_rate\nlater_activity_rate\n\n\n\n\n0\nEnterprise\n985\n805\n805\n805\n6.00\n803\n699\n0.82\n1.00\n0.87\n\n\n1\nMid-Market\n2967\n2175\n2175\n2174\n10.00\n1837\n1663\n0.73\n0.84\n0.76\n\n\n2\nSmall\n6048\n3693\n3693\n3674\n14.00\n1083\n1867\n0.61\n0.29\n0.51\n\n\n\n\n\n\n\n\n\nCode\nactivation_order = segment_summary.sort_values(\"activation_rate\")\n\nplt.figure(figsize=(8, 5))\nbars = plt.bar(\n    activation_order[\"segment\"],\n    activation_order[\"activation_rate\"]\n)\nplt.title(\"Activation Rate by Merchant Segment\")\nplt.xlabel(\"Merchant segment\")\nplt.ylabel(\"Activation rate\")\nplt.ylim(0, 1)\n\nfor bar, rate in zip(\n    bars,\n    activation_order[\"activation_rate\"]\n):\n    plt.text(\n        bar.get_x() + bar.get_width() / 2,\n        bar.get_height(),\n        f\"{rate:.1%}\",\n        ha=\"center\",\n        va=\"bottom\"\n    )\n\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "projects/01-product-growth/product_growth_analytics_walkthrough.html#time-to-activation",
+    "href": "projects/01-product-growth/product_growth_analytics_walkthrough.html#time-to-activation",
+    "title": "Product Growth Analytics Walkthrough",
+    "section": "6. Time to activation",
+    "text": "6. Time to activation\n\n\nCode\nactivated_merchants = merchant_data.loc[\n    merchant_data[\"activated\"]\n].copy()\n\nplt.figure(figsize=(9, 5))\nplt.hist(\n    activated_merchants[\"days_to_activation\"],\n    bins=25\n)\nplt.title(\"Time to First Successful Transaction\")\nplt.xlabel(\"Days from eligibility to activation\")\nplt.ylabel(\"Number of merchants\")\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "projects/01-product-growth/product_growth_analytics_walkthrough.html#day-adoption",
+    "href": "projects/01-product-growth/product_growth_analytics_walkthrough.html#day-adoption",
+    "title": "Product Growth Analytics Walkthrough",
+    "section": "7. 30-Day Adoption",
+    "text": "7. 30-Day Adoption\n\n\nCode\nadoption_order = segment_summary.sort_values(\n    \"adoption_30d_rate\"\n)\n\nplt.figure(figsize=(8, 5))\nbars = plt.bar(\n    adoption_order[\"segment\"],\n    adoption_order[\"adoption_30d_rate\"]\n)\nplt.title(\"30-Day Adoption Rate by Merchant Segment\")\nplt.xlabel(\"Merchant segment\")\nplt.ylabel(\"30-Day Adoption rate\")\nplt.ylim(0, 1)\n\nfor bar, rate in zip(\n    bars,\n    adoption_order[\"adoption_30d_rate\"]\n):\n    plt.text(\n        bar.get_x() + bar.get_width() / 2,\n        bar.get_height(),\n        f\"{rate:.1%}\",\n        ha=\"center\",\n        va=\"bottom\"\n    )\n\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "projects/01-product-growth/product_growth_analytics_walkthrough.html#activation-cohort-analysis",
+    "href": "projects/01-product-growth/product_growth_analytics_walkthrough.html#activation-cohort-analysis",
+    "title": "Product Growth Analytics Walkthrough",
+    "section": "8. Activation-cohort analysis",
+    "text": "8. Activation-cohort analysis\n\n\nCode\ncohort_summary = (\n    merchant_data.loc[merchant_data[\"mature_30d\"]]\n    .groupby(\"activation_month\", observed=True)\n    .agg(\n        activated_merchants=(\"merchant_id\", \"count\"),\n        adopted_30d=(\"adopted_30d\", \"sum\"),\n        median_days_to_activation=(\"days_to_activation\", \"median\")\n    )\n    .reset_index()\n    .sort_values(\"activation_month\")\n)\n\ncohort_summary[\"adoption_30d_rate\"] = (\n    cohort_summary[\"adopted_30d\"]\n    / cohort_summary[\"activated_merchants\"]\n)\n\ncohort_summary\n\n\n\n\n\n\n\n\n\nactivation_month\nactivated_merchants\nadopted_30d\nmedian_days_to_activation\nadoption_30d_rate\n\n\n\n\n0\n2025-01\n642\n395\n8.00\n0.62\n\n\n1\n2025-02\n1031\n576\n11.00\n0.56\n\n\n2\n2025-03\n1122\n627\n12.00\n0.56\n\n\n3\n2025-04\n1105\n602\n12.00\n0.54\n\n\n4\n2025-05\n1188\n672\n11.00\n0.57\n\n\n5\n2025-06\n1062\n606\n11.00\n0.57\n\n\n6\n2025-07\n499\n240\n19.00\n0.48\n\n\n7\n2025-08\n24\n5\n43.50\n0.21\n\n\n\n\n\n\n\n\n\nCode\nplt.figure(figsize=(9, 5))\nplt.plot(\n    cohort_summary[\"activation_month\"],\n    cohort_summary[\"adoption_30d_rate\"],\n    marker=\"o\"\n)\nplt.title(\"30-Day Adoption by Activation Cohort\")\nplt.xlabel(\"Month of first successful transaction\")\nplt.ylabel(\"30-Day Adoption rate\")\nplt.ylim(0, 1)\nplt.xticks(rotation=45)\n\nfor month, rate in zip(\n    cohort_summary[\"activation_month\"],\n    cohort_summary[\"adoption_30d_rate\"]\n):\n    plt.text(\n        month,\n        rate,\n        f\"{rate:.1%}\",\n        ha=\"center\",\n        va=\"bottom\"\n    )\n\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "projects/01-product-growth/product_growth_analytics_walkthrough.html#later-activity-during-days-3160",
+    "href": "projects/01-product-growth/product_growth_analytics_walkthrough.html#later-activity-during-days-3160",
+    "title": "Product Growth Analytics Walkthrough",
+    "section": "9. Later activity during days 31–60",
+    "text": "9. Later activity during days 31–60\n\n\nCode\nlater_activity_by_adoption = (\n    merchant_data.loc[merchant_data[\"mature_60d\"]]\n    .groupby(\"adopted_30d\", observed=True)\n    .agg(\n        merchants=(\"merchant_id\", \"count\"),\n        later_active_merchants=(\"later_active\", \"sum\")\n    )\n    .reset_index()\n)\n\nlater_activity_by_adoption[\"later_activity_rate\"] = (\n    later_activity_by_adoption[\"later_active_merchants\"]\n    / later_activity_by_adoption[\"merchants\"]\n)\n\nlater_activity_by_adoption[\"early_adoption_status\"] = (\n    later_activity_by_adoption[\"adopted_30d\"]\n    .map({\n        False: \"Did not reach 30-Day threshold\",\n        True: \"Reached 30-Day threshold\"\n    })\n)\n\nlater_activity_by_adoption\n\n\n\n\n\n\n\n\n\nadopted_30d\nmerchants\nlater_active_merchants\nlater_activity_rate\nearly_adoption_status\n\n\n\n\n0\nFalse\n2933\n1291\n0.44\nDid not reach 30-Day threshold\n\n\n1\nTrue\n3720\n2938\n0.79\nReached 30-Day threshold\n\n\n\n\n\n\n\n\n\nCode\nplt.figure(figsize=(9, 5))\nbars = plt.bar(\n    later_activity_by_adoption[\"early_adoption_status\"],\n    later_activity_by_adoption[\"later_activity_rate\"]\n)\nplt.title(\"Later Activity by Early-Adoption Status\")\nplt.xlabel(\"30-Day Adoption outcome\")\nplt.ylabel(\"Later-activity rate\")\nplt.ylim(0, 1)\n\nfor bar, rate in zip(\n    bars,\n    later_activity_by_adoption[\"later_activity_rate\"]\n):\n    plt.text(\n        bar.get_x() + bar.get_width() / 2,\n        bar.get_height(),\n        f\"{rate:.1%}\",\n        ha=\"center\",\n        va=\"bottom\"\n    )\n\nplt.xticks(rotation=10)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\n\nInterpretation\nMerchants reaching the 30-Day Adoption threshold are more likely, in this synthetic replica, to complete at least one transaction during days 31–60.\nThis is descriptive, not causal. The synthetic generator intentionally includes this relationship to demonstrate the method. In production, the analysis would need to account for merchant size, transaction demand, readiness, integration quality, market, and product fit."
+  },
+  {
+    "objectID": "projects/01-product-growth/product_growth_analytics_walkthrough.html#opportunity-sizing",
+    "href": "projects/01-product-growth/product_growth_analytics_walkthrough.html#opportunity-sizing",
+    "title": "Product Growth Analytics Walkthrough",
+    "section": "10. Opportunity sizing",
+    "text": "10. Opportunity sizing\n\n\nCode\nbest_activation_rate = segment_summary[\"activation_rate\"].max()\n\nactivation_opportunity = segment_summary[\n    [\"segment\", \"eligible\", \"activation_rate\"]\n].copy()\n\nactivation_opportunity[\"activation_gap\"] = (\n    best_activation_rate\n    - activation_opportunity[\"activation_rate\"]\n)\n\nactivation_opportunity[\n    \"incremental_activations_if_gap_closed\"\n] = (\n    activation_opportunity[\"eligible\"]\n    * activation_opportunity[\"activation_gap\"]\n).round().astype(int)\n\nactivation_opportunity.sort_values(\n    \"incremental_activations_if_gap_closed\",\n    ascending=False\n)\n\n\n\n\n\n\n\n\n\nsegment\neligible\nactivation_rate\nactivation_gap\nincremental_activations_if_gap_closed\n\n\n\n\n2\nSmall\n6048\n0.61\n0.21\n1250\n\n\n1\nMid-Market\n2967\n0.73\n0.08\n250\n\n\n0\nEnterprise\n985\n0.82\n0.00\n0\n\n\n\n\n\n\n\n\n\nCode\nbest_adoption_rate = segment_summary[\"adoption_30d_rate\"].max()\n\nadoption_opportunity = segment_summary[\n    [\"segment\", \"mature_30d\", \"adoption_30d_rate\"]\n].copy()\n\nadoption_opportunity[\"adoption_gap\"] = (\n    best_adoption_rate\n    - adoption_opportunity[\"adoption_30d_rate\"]\n)\n\nadoption_opportunity[\n    \"incremental_adopters_if_gap_closed\"\n] = (\n    adoption_opportunity[\"mature_30d\"]\n    * adoption_opportunity[\"adoption_gap\"]\n).round().astype(int)\n\nadoption_opportunity.sort_values(\n    \"incremental_adopters_if_gap_closed\",\n    ascending=False\n)\n\n\n\n\n\n\n\n\n\nsegment\nmature_30d\nadoption_30d_rate\nadoption_gap\nincremental_adopters_if_gap_closed\n\n\n\n\n2\nSmall\n3693\n0.29\n0.70\n2601\n\n\n1\nMid-Market\n2175\n0.84\n0.15\n333\n\n\n0\nEnterprise\n805\n1.00\n0.00\n0"
+  },
+  {
+    "objectID": "projects/01-product-growth/product_growth_analytics_walkthrough.html#decision-framework",
+    "href": "projects/01-product-growth/product_growth_analytics_walkthrough.html#decision-framework",
+    "title": "Product Growth Analytics Walkthrough",
+    "section": "11. Decision framework",
+    "text": "11. Decision framework\nA product opportunity should not be prioritized from a rate alone. The decision should consider:\n\naffected merchant population;\ngap to a relevant benchmark;\ntime to activation;\nexpected business value;\naddressability;\nimplementation effort;\nmarket and operational constraints;\nmeasurement feasibility."
+  },
+  {
+    "objectID": "projects/01-product-growth/product_growth_analytics_walkthrough.html#limitations",
+    "href": "projects/01-product-growth/product_growth_analytics_walkthrough.html#limitations",
+    "title": "Product Growth Analytics Walkthrough",
+    "section": "12. Limitations",
+    "text": "12. Limitations\nThis notebook is intentionally simplified. A production analysis would require:\n\nprecise eligibility and exclusion rules;\nmerchant identity resolution;\nfailed, reversed, and refunded transaction handling;\nexact day-window boundary conventions;\nexclusion of immature cohorts;\nconfidence intervals and statistical testing;\nadjustment for merchant mix, rollout timing, and seasonality;\nincremental-impact measurement;\nfinancial value and implementation-cost estimates;\nprivacy, legal, and regulatory review."
+  },
+  {
+    "objectID": "projects/01-product-growth/product_growth_analytics_walkthrough.html#what-this-notebook-demonstrates",
+    "href": "projects/01-product-growth/product_growth_analytics_walkthrough.html#what-this-notebook-demonstrates",
+    "title": "Product Growth Analytics Walkthrough",
+    "section": "What this notebook demonstrates",
+    "text": "What this notebook demonstrates\n\ndefining activation through an observable value-generating event;\nanalyzing activation rate and activation speed separately;\ndistinguishing first use from meaningful transaction depth;\nusing fixed windows for cohort comparability;\ndefining later activity through a concrete event;\ndistinguishing association from causality;\nvalidating analytical data;\nsizing opportunities before recommending action."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Alma Schutz",
+    "section": "",
+    "text": "Data Science & Analytics Leader\n\n\n\nMy work spans problem framing, measurement design, modeling, implementation and executive decision support across global analytics and data science initiatives."
+  },
+  {
+    "objectID": "index.html#i-bridge-business-strategy-and-technical-analytics-to-turn-complex-problems-into-clear-decisions-scalable-solutions-and-measurable-growth.",
+    "href": "index.html#i-bridge-business-strategy-and-technical-analytics-to-turn-complex-problems-into-clear-decisions-scalable-solutions-and-measurable-growth.",
+    "title": "Alma Schutz",
+    "section": "",
+    "text": "My work spans problem framing, measurement design, modeling, implementation and executive decision support across global analytics and data science initiatives."
+  },
+  {
+    "objectID": "index.html#business-impact-at-scale",
+    "href": "index.html#business-impact-at-scale",
+    "title": "Alma Schutz",
+    "section": "Business Impact at Scale",
+    "text": "Business Impact at Scale\n\n\n+30%\nExceeded the annual active-user growth target.\n\n\n1.5M+\nMerchants supported through global platform migration and adoption.\n\n\n+5%\nConversion uplift in a key digital payment journey.\n\n\n$4.2M\nIncremental marginal contribution generated through experimentation."
+  },
+  {
+    "objectID": "index.html#areas-of-expertise",
+    "href": "index.html#areas-of-expertise",
+    "title": "Alma Schutz",
+    "section": "Areas of Expertise",
+    "text": "Areas of Expertise\n\n\nBusiness Analytics\n\nProduct analytics\nCommercial analytics\nMarketing analytics\nSupply chain analytics\n\n\n\nData Science\n\nMachine learning\nExperimentation\nCausal inference\nPredictive modeling\n\n\n\nAnalytics Leadership\n\nData and analytics strategy\nCross-functional team leadership\nExecutive communication\nMeasurement systems and governance\n\n\n\n\nTechnical foundation: Python · SQL · R · BigQuery · Databricks · Tableau · Power BI"
+  },
+  {
+    "objectID": "index.html#featured-case-studies",
+    "href": "index.html#featured-case-studies",
+    "title": "Alma Schutz",
+    "section": "Featured Case Studies",
+    "text": "Featured Case Studies\n\n\n  \n    \n      \n    \n\n    Product Growth & Platform Analytics\n\n    \n      A product measurement and growth framework for identifying constraints,\n      prioritizing opportunities and guiding investment decisions.\n    \n\n    \n      Product Analytics · SQL · Python · Experimentation\n    \n\n    \n      View case study \n    \n  \n\n  \n    \n      \n    \n\n    Commercial Analytics & Revenue Optimization\n\n    \n      A pricing, segmentation and opportunity-sizing framework designed to\n      improve commercial performance and allocate investment more effectively.\n    \n\n    \n      Commercial Analytics · R · SQL · Data Visualization\n    \n\n    \n      Coming soon\n    \n  \n\n  \n    \n      \n    \n\n    Marketing Experimentation & Causal Measurement\n\n    \n      An experimentation and causal-inference system for measuring incremental\n      impact and improving marketing investment decisions.\n    \n\n    \n      Experimentation · Causal Inference · Python · Measurement\n    \n\n    \n      Coming soon\n    \n  \n\n  \n    \n      \n    \n\n    Analytics Leadership & Operating Model\n\n    \n      An operating model for scaling metric governance, team effectiveness,\n      business reviews and analytical standards across an organization.\n    \n\n    \n      Analytics Leadership · Strategy · Governance\n    \n\n    \n      Coming soon"
+  }
+]
