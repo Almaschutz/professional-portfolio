@@ -1,0 +1,12 @@
+---
+title: "Case Studies"
+page-layout: article
+---
+
+Each case study combines executive decision-making with a reproducible analytical walkthrough.
+
+| Case study | Core skills | Languages |
+|---|---|---|
+| [Product Growth & Platform Analytics](projects/01-product-growth/index.qmd) | Activation, time to activation, cohort analysis, adoption measurement, opportunity sizing | SQL, Python |
+| [Experimentation Platform](projects/02-experimentation/index.qmd) | A/B testing, power, CUPED, guardrails, causal inference | R, SQL |
+| [Retention Risk System](projects/03-retention-ml/index.qmd) | ML, calibration, expected value, monitoring | Python, SQL |

@@ -1,0 +1,124 @@
+---
+title: "Alma Schutz"
+subtitle: "Data Science & Analytics Leader"
+page-layout: full
+toc: false
+---
+
+## 15+ years turning data into strategy, growth and mesuarable business impact.
+
+I lead analytics, machine learning and data science initiatives across
+Product, Commercial, Marketing and Operations.
+
+My work combines business strategy, technical depth and organizational
+leadership to build analytics capabilities, lead multidisciplinary teams and
+create measurable business impact.
+
+---
+
+## Selected Impact
+
+::: {.grid .impact-grid}
+
+::: {.g-col-12 .g-col-sm-6 .g-col-lg-3 .impact-card}
+### +30%
+
+Growth in Monthly Active Users
+:::
+
+::: {.g-col-12 .g-col-sm-6 .g-col-lg-3 .impact-card}
+### 1.5M+
+
+Merchants supported through product analytics
+:::
+
+::: {.g-col-12 .g-col-sm-6 .g-col-lg-3 .impact-card}
+### +5%
+
+Conversion improvement in a key payment experience
+:::
+
+::: {.g-col-12 .g-col-sm-6 .g-col-lg-3 .impact-card}
+### $4.2M
+
+Incremental marginal contribution generated through experimentation
+:::
+
+:::
+
+---
+
+## Areas of Expertise
+
+::: {layout-ncol=3}
+
+### Business Analytics
+
+- Product Analytics
+- Commercial Analytics
+- Marketing Analytics
+- Supply Chain Analytics
+
+### Data Science
+
+- Machine Learning
+- Experimentation
+- Causal Inference
+- Predictive Modeling
+
+### Analytics Leadership
+
+- Data Strategy
+- Team Leadership
+- Executive Communication
+- Measurement Systems
+
+:::
+
+### Technical toolkit
+
+**SQL · Python · R · Data Visualization · Machine Learning · Experimentation**
+
+---
+
+## Featured Case Studies
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-6 .case-card}
+### Product Growth & Platform Analytics
+
+A product measurement and growth framework for identifying constraints,
+prioritizing opportunities and guiding investment decisions.
+
+**Product analytics · SQL · Python · Experimentation**
+:::
+
+::: {.g-col-12 .g-col-md-6 .case-card}
+### Commercial Analytics & Revenue Optimization
+
+A pricing, segmentation and opportunity-sizing framework designed to improve
+commercial performance and allocate investment more effectively.
+
+**Commercial analytics · R · SQL · Data visualization**
+:::
+
+::: {.g-col-12 .g-col-md-6 .case-card}
+### Marketing Experimentation & Causal Measurement
+
+An experimentation and causal-inference system for measuring incremental impact
+and improving marketing investment decisions.
+
+**Experimentation · Causal inference · R · SQL**
+:::
+
+::: {.g-col-12 .g-col-md-6 .case-card}
+### Analytics Leadership & Operating Model
+
+An operating model for scaling metric governance, team effectiveness,
+business reviews and analytical standards across an organization.
+
+**Data strategy · Leadership · Governance · Executive communication**
+:::
+
+:::

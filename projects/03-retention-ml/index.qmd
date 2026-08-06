@@ -1,0 +1,79 @@
+---
+title: "Retention Risk and Intervention System"
+subtitle: "Prediction is useful only when it changes a decision"
+---
+
+## Executive summary
+
+This project predicts churn risk, but its primary artifact is an intervention
+policy based on expected incremental value—not merely an AUC score.
+
+## Python modeling pipeline
+
+```{python}
+#| label: retention-model
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.impute import SimpleImputer
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score, average_precision_score
+import pandas as pd
+
+numeric_features = [
+    "sessions_28d", "value_actions_28d", "days_since_last_active",
+    "support_contacts_90d"
+]
+categorical_features = ["plan", "country", "acquisition_channel"]
+
+numeric_pipeline = Pipeline([
+    ("impute", SimpleImputer(strategy="median")),
+    ("scale", StandardScaler())
+])
+
+categorical_pipeline = Pipeline([
+    ("impute", SimpleImputer(strategy="most_frequent")),
+    ("encode", OneHotEncoder(handle_unknown="ignore"))
+])
+
+preprocess = ColumnTransformer([
+    ("numeric", numeric_pipeline, numeric_features),
+    ("categorical", categorical_pipeline, categorical_features)
+])
+
+model = Pipeline([
+    ("preprocess", preprocess),
+    ("model", LogisticRegression(max_iter=2000, class_weight="balanced"))
+])
+
+# X_train, X_test, y_train and y_test should use a temporal split.
+model.fit(X_train, y_train)
+pred = model.predict_proba(X_test)[:, 1]
+
+print({
+    "roc_auc": roc_auc_score(y_test, pred),
+    "average_precision": average_precision_score(y_test, pred)
+})
+```
+
+## Expected-value policy
+
+```python
+def expected_intervention_value(
+    churn_probability: float,
+    treatment_uplift: float,
+    retained_value: float,
+    treatment_cost: float
+) -> float:
+    return (
+        churn_probability
+        * treatment_uplift
+        * retained_value
+        - treatment_cost
+    )
+```
+
+## Monitoring
+
+Track feature drift, calibration, intervention rate, incremental retention,
+cost per saved user and subgroup performance.

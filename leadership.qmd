@@ -1,0 +1,21 @@
+---
+title: "Leadership"
+---
+
+## How I operate at Staff / Lead level
+
+### Direction
+I translate ambiguous product questions into measurable outcomes, analytical
+roadmaps and decision frameworks.
+
+### Leverage
+I build reusable metric definitions, experimentation standards, self-service
+data products and review mechanisms that improve the work of multiple teams.
+
+### Influence
+I communicate uncertainty, trade-offs and recommendations to product,
+engineering, design and executive stakeholders.
+
+### Quality
+I establish standards for analytical validity, reproducibility, monitoring,
+documentation and responsible use of data.

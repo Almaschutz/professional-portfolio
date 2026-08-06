@@ -1,0 +1,1675 @@
+---
+title: "Analytical Walkthrough"
+subtitle: "Activation, 30-Day Adoption and later activity using synthetic merchant data"
+description: "A reproducible public replica using synthetic data and independently written Python and SQL."
+page-layout: full
+format:
+  html:
+    code-fold: true
+    code-summary: "Show code"
+    code-tools: true
+    toc: true
+    toc-depth: 2
+execute:
+  enabled: true
+  echo: true
+  warning: false
+  message: false
+jupyter: python3
+---
+
+::: {.replica-note}
+
+### About this analytical replica
+
+This walkthrough uses synthetic merchant data and independently written code to demonstrate an analytical approach inspired by my real product analytics work.
+
+The analysis is intentionally simplified so the metric definitions, calculations, insights and decisions can be communicated clearly in a public and reproducible format.
+
+A production implementation would contain considerably more detail, including eligibility and exclusion rules, event-quality validation, merchant identity resolution, transaction reversals and refunds, market and product differences, rollout timing, cohort maturity, statistical uncertainty, operational constraints and financial impact.
+
+It contains no confidential company data, proprietary metric definitions, internal dashboards or production code. All numerical findings are illustrative and should not be interpreted as actual company results.
+
+:::
+
+```{python}
+#| label: hidden-analysis-setup
+#| include: false
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from IPython.display import display, Markdown
+
+rng = np.random.default_rng(42)
+
+pd.set_option("display.max_columns", None)
+pd.set_option("display.max_colwidth", None)
+pd.set_option(
+    "display.float_format",
+    lambda value: f"{value:,.2f}"
+)
+
+N_MERCHANTS = 10_000
+ANALYSIS_DATE = pd.Timestamp("2025-09-30")
+
+segments = rng.choice(
+    ["Small", "Mid-Market", "Enterprise"],
+    size=N_MERCHANTS,
+    p=[0.60, 0.30, 0.10]
+)
+
+markets = rng.choice(
+    [
+        "North America",
+        "Europe",
+        "Latin America",
+        "Asia Pacific"
+    ],
+    size=N_MERCHANTS,
+    p=[0.35, 0.30, 0.20, 0.15]
+)
+
+eligible_dates = pd.to_datetime(
+    rng.choice(
+        pd.date_range(
+            start="2025-01-01",
+            end="2025-06-30",
+            freq="D"
+        ),
+        size=N_MERCHANTS
+    )
+)
+
+merchant_data = pd.DataFrame({
+    "merchant_id": np.arange(1, N_MERCHANTS + 1),
+    "segment": segments,
+    "market": markets,
+    "eligible_date": eligible_dates
+})
+
+activation_probability = {
+    "Small": 0.61,
+    "Mid-Market": 0.73,
+    "Enterprise": 0.82
+}
+
+merchant_data["activated"] = [
+    rng.random() < activation_probability[segment]
+    for segment in merchant_data["segment"]
+]
+
+activation_delay_mean = {
+    "Small": 18,
+    "Mid-Market": 12,
+    "Enterprise": 8
+}
+
+days_to_activation = []
+
+for activated, segment in zip(
+    merchant_data["activated"],
+    merchant_data["segment"]
+):
+    if activated:
+        delay = int(
+            max(
+                0,
+                rng.gamma(
+                    shape=2.0,
+                    scale=activation_delay_mean[segment] / 2
+                )
+            )
+        )
+        days_to_activation.append(delay)
+    else:
+        days_to_activation.append(np.nan)
+
+merchant_data["days_to_activation"] = days_to_activation
+merchant_data["activation_date"] = pd.NaT
+
+activated_mask = merchant_data["activated"]
+
+merchant_data.loc[
+    activated_mask,
+    "activation_date"
+] = (
+    merchant_data.loc[
+        activated_mask,
+        "eligible_date"
+    ]
+    + pd.to_timedelta(
+        merchant_data.loc[
+            activated_mask,
+            "days_to_activation"
+        ],
+        unit="D"
+    )
+)
+
+merchant_data["activation_month"] = (
+    merchant_data["activation_date"]
+    .dt.to_period("M")
+    .astype("string")
+)
+
+transactions_0_30_mean = {
+    "Small": 8,
+    "Mid-Market": 13,
+    "Enterprise": 20
+}
+
+transactions_0_30 = []
+
+for activated, segment in zip(
+    merchant_data["activated"],
+    merchant_data["segment"]
+):
+    if activated:
+        count = max(
+            1,
+            int(
+                rng.poisson(
+                    transactions_0_30_mean[segment]
+                )
+            )
+        )
+        transactions_0_30.append(count)
+    else:
+        transactions_0_30.append(0)
+
+merchant_data[
+    "successful_transactions_days_0_30"
+] = transactions_0_30
+
+merchant_data["adopted_30d"] = (
+    merchant_data[
+        "successful_transactions_days_0_30"
+    ] >= 10
+)
+
+later_activity_probability = {
+    "Small": {
+        False: 0.42,
+        True: 0.72
+    },
+    "Mid-Market": {
+        False: 0.52,
+        True: 0.81
+    },
+    "Enterprise": {
+        False: 0.62,
+        True: 0.88
+    }
+}
+
+later_transaction_mean = {
+    "Small": 5,
+    "Mid-Market": 9,
+    "Enterprise": 15
+}
+
+transactions_31_60 = []
+
+for activated, adopted_30d, segment in zip(
+    merchant_data["activated"],
+    merchant_data["adopted_30d"],
+    merchant_data["segment"]
+):
+    if not activated:
+        transactions_31_60.append(0)
+        continue
+
+    is_later_active = (
+        rng.random()
+        < later_activity_probability[segment][adopted_30d]
+    )
+
+    if not is_later_active:
+        transactions_31_60.append(0)
+        continue
+
+    expected_transactions = later_transaction_mean[segment]
+
+    if adopted_30d:
+        expected_transactions *= 1.35
+
+    transactions_31_60.append(
+        max(
+            1,
+            int(rng.poisson(expected_transactions))
+        )
+    )
+
+merchant_data[
+    "successful_transactions_days_31_60"
+] = transactions_31_60
+
+merchant_data["later_active"] = (
+    merchant_data[
+        "successful_transactions_days_31_60"
+    ] >= 1
+)
+
+merchant_data["mature_30d"] = (
+    merchant_data["activated"]
+    & (
+        merchant_data["activation_date"]
+        <= ANALYSIS_DATE - pd.Timedelta(days=30)
+    )
+)
+
+merchant_data["mature_60d"] = (
+    merchant_data["activated"]
+    & (
+        merchant_data["activation_date"]
+        <= ANALYSIS_DATE - pd.Timedelta(days=60)
+    )
+)
+
+eligible_count = len(merchant_data)
+activated_count = int(
+    merchant_data["activated"].sum()
+)
+
+mature_30d_count = int(
+    merchant_data["mature_30d"].sum()
+)
+
+adopted_30d_count = int(
+    merchant_data.loc[
+        merchant_data["mature_30d"],
+        "adopted_30d"
+    ].sum()
+)
+
+mature_60d_count = int(
+    merchant_data["mature_60d"].sum()
+)
+
+later_active_count = int(
+    merchant_data.loc[
+        merchant_data["mature_60d"],
+        "later_active"
+    ].sum()
+)
+
+activation_rate = (
+    activated_count / eligible_count
+)
+
+adoption_30d_rate = (
+    adopted_30d_count / mature_30d_count
+)
+
+later_activity_rate = (
+    later_active_count / mature_60d_count
+)
+
+median_days_to_activation = (
+    merchant_data.loc[
+        merchant_data["activated"],
+        "days_to_activation"
+    ].median()
+)
+
+segment_base = (
+    merchant_data
+    .groupby(
+        "segment",
+        observed=True
+    )
+    .agg(
+        eligible=("merchant_id", "count"),
+        activated=("activated", "sum"),
+        mature_30d=("mature_30d", "sum"),
+        mature_60d=("mature_60d", "sum"),
+        median_days_to_activation=(
+            "days_to_activation",
+            "median"
+        )
+    )
+    .reset_index()
+)
+
+segment_adoption = (
+    merchant_data.loc[
+        merchant_data["mature_30d"]
+    ]
+    .groupby(
+        "segment",
+        observed=True
+    )["adopted_30d"]
+    .sum()
+)
+
+segment_later_activity = (
+    merchant_data.loc[
+        merchant_data["mature_60d"]
+    ]
+    .groupby(
+        "segment",
+        observed=True
+    )["later_active"]
+    .sum()
+)
+
+segment_summary = segment_base.copy()
+
+segment_summary["adopted_30d"] = (
+    segment_summary["segment"]
+    .map(segment_adoption)
+    .fillna(0)
+    .astype(int)
+)
+
+segment_summary["later_active"] = (
+    segment_summary["segment"]
+    .map(segment_later_activity)
+    .fillna(0)
+    .astype(int)
+)
+
+segment_summary["activation_rate"] = (
+    segment_summary["activated"]
+    / segment_summary["eligible"]
+)
+
+segment_summary["adoption_30d_rate"] = (
+    segment_summary["adopted_30d"]
+    / segment_summary["mature_30d"]
+)
+
+segment_summary["later_activity_rate"] = (
+    segment_summary["later_active"]
+    / segment_summary["mature_60d"]
+)
+
+weakest_activation_segment = segment_summary.loc[
+    segment_summary["activation_rate"].idxmin()
+]
+
+strongest_activation_segment = segment_summary.loc[
+    segment_summary["activation_rate"].idxmax()
+]
+
+weakest_adoption_segment = segment_summary.loc[
+    segment_summary["adoption_30d_rate"].idxmin()
+]
+
+strongest_adoption_segment = segment_summary.loc[
+    segment_summary["adoption_30d_rate"].idxmax()
+]
+
+cohort_summary = (
+    merchant_data.loc[
+        merchant_data["mature_30d"]
+    ]
+    .groupby(
+        "activation_month",
+        observed=True
+    )
+    .agg(
+        activated_merchants=("merchant_id", "count"),
+        adopted_30d=("adopted_30d", "sum"),
+        median_days_to_activation=(
+            "days_to_activation",
+            "median"
+        )
+    )
+    .reset_index()
+    .sort_values("activation_month")
+)
+
+cohort_summary["adoption_30d_rate"] = (
+    cohort_summary["adopted_30d"]
+    / cohort_summary["activated_merchants"]
+)
+
+best_cohort = cohort_summary.loc[
+    cohort_summary["adoption_30d_rate"].idxmax()
+]
+
+weakest_cohort = cohort_summary.loc[
+    cohort_summary["adoption_30d_rate"].idxmin()
+]
+
+cohort_range = (
+    best_cohort["adoption_30d_rate"]
+    - weakest_cohort["adoption_30d_rate"]
+)
+
+later_activity_by_adoption = (
+    merchant_data.loc[
+        merchant_data["mature_60d"]
+    ]
+    .groupby(
+        "adopted_30d",
+        observed=True
+    )
+    .agg(
+        merchants=("merchant_id", "count"),
+        later_active_merchants=("later_active", "sum")
+    )
+    .reset_index()
+)
+
+later_activity_by_adoption[
+    "later_activity_rate"
+] = (
+    later_activity_by_adoption[
+        "later_active_merchants"
+    ]
+    / later_activity_by_adoption["merchants"]
+)
+
+later_activity_by_adoption[
+    "early_adoption_status"
+] = (
+    later_activity_by_adoption["adopted_30d"]
+    .map({
+        False: "Did not reach 30-Day threshold",
+        True: "Reached 30-Day threshold"
+    })
+)
+
+best_activation_rate = (
+    segment_summary["activation_rate"].max()
+)
+
+segment_summary["activation_gap"] = (
+    best_activation_rate
+    - segment_summary["activation_rate"]
+)
+
+segment_summary[
+    "incremental_activations_if_gap_closed"
+] = (
+    segment_summary["eligible"]
+    * segment_summary["activation_gap"]
+).round().astype(int)
+
+activation_opportunity = (
+    segment_summary[
+        [
+            "segment",
+            "eligible",
+            "activation_rate",
+            "activation_gap",
+            "incremental_activations_if_gap_closed"
+        ]
+    ]
+    .sort_values(
+        "incremental_activations_if_gap_closed",
+        ascending=False
+    )
+    .reset_index(drop=True)
+)
+
+top_activation_opportunity = (
+    activation_opportunity.iloc[0]
+)
+
+best_adoption_rate = (
+    segment_summary["adoption_30d_rate"].max()
+)
+
+segment_summary["adoption_gap"] = (
+    best_adoption_rate
+    - segment_summary["adoption_30d_rate"]
+)
+
+segment_summary[
+    "incremental_adopters_if_gap_closed"
+] = (
+    segment_summary["mature_30d"]
+    * segment_summary["adoption_gap"]
+).round().astype(int)
+
+adoption_opportunity = (
+    segment_summary[
+        [
+            "segment",
+            "mature_30d",
+            "adoption_30d_rate",
+            "adoption_gap",
+            "incremental_adopters_if_gap_closed"
+        ]
+    ]
+    .sort_values(
+        "incremental_adopters_if_gap_closed",
+        ascending=False
+    )
+    .reset_index(drop=True)
+)
+
+top_adoption_opportunity = (
+    adoption_opportunity.iloc[0]
+)
+```
+
+## Analysis summary
+
+This synthetic replica evaluates three connected dimensions of merchant behavior:
+
+1. activation through a first successful transaction;
+2. early transaction depth during days 0–30;
+3. activity during days 31–60.
+
+```{python}
+#| label: analysis-summary
+#| echo: false
+#| output: asis
+
+display(Markdown(
+    f"""
+### Key findings
+
+- **Activation:** **{activated_count:,} of {eligible_count:,} eligible
+  merchants** complete a first successful transaction, an activation rate of
+  **{activation_rate:.1%}**.
+
+- **Activation speed:** The median activated merchant completes its first
+  successful transaction in **{median_days_to_activation:.0f} days**.
+
+- **30-Day Adoption:** Among activated merchants with a complete 30-day
+  observation window, **{adoption_30d_rate:.1%}** complete at least
+  10 successful transactions during days 0–30.
+
+- **Later activity:** Among activated merchants with a complete 60-day
+  observation window, **{later_activity_rate:.1%}** complete at least one
+  successful transaction during days 31–60.
+
+- **Largest activation opportunity:** The
+  **{top_activation_opportunity['segment']} segment** represents the largest
+  directional activation opportunity.
+
+- **Cohort variation:** 30-Day Adoption ranges from
+  **{weakest_cohort['adoption_30d_rate']:.1%}** to
+  **{best_cohort['adoption_30d_rate']:.1%}** across mature synthetic
+  activation cohorts.
+"""
+))
+```
+
+## Recommended decisions
+
+1. **Address activation before focusing only on deeper usage.**  
+   Merchants cannot develop repeated usage until they complete a first successful transaction.
+
+2. **Examine activation speed as well as activation rate.**  
+   Delayed activation may reveal friction even when merchants eventually activate.
+
+3. **Separate initial value from early transaction depth.**  
+   One successful transaction and 10 transactions during days 0–30 represent different product outcomes.
+
+4. **Measure later activity with a concrete observation window.**  
+   Later active means at least one successful transaction during days 31–60.
+
+5. **Use only mature cohorts.**  
+   Each metric should include only merchants with a complete observation window.
+
+6. **Treat relationships as descriptive unless incrementality is measured.**  
+   Strong early adopters may already differ in readiness, demand, size or product fit.
+
+[Jump to activation analysis](#activation-analysis){.btn .btn-primary}
+
+[Jump to 30-Day Adoption](#30-day-adoption){.btn .btn-outline-primary}
+
+[Jump to later activity](#later-activity-during-days-31-60){.btn .btn-outline-primary}
+
+[Back to the executive case study](index.qmd){.btn .btn-outline-primary}
+
+---
+
+## Measurement framework
+
+```text
+Eligible
+   ↓
+Activated
+   = first successful new-platform transaction
+   ↓
+30-Day Adoption
+   = 10+ successful transactions during days 0–30
+   ↓
+Later active
+   = 1+ successful transaction during days 31–60
+```
+
+The analytical definitions are:
+
+- **Eligible:** The merchant belongs to the population able to use the new platform.
+- **Activated:** The merchant completes its first successful new-platform transaction.
+- **Time to activation:** Days between eligibility and activation.
+- **30-Day Adoption:** At least 10 successful transactions during days 0–30 after activation.
+- **Later active:** At least one successful transaction during days 31–60 after activation.
+- **Activation cohort:** Month of the first successful transaction.
+- **Mature 30-day merchant:** Activation occurred at least 30 days before the analysis date.
+- **Mature 60-day merchant:** Activation occurred at least 60 days before the analysis date.
+
+---
+
+## Activation analysis
+
+Activation measures whether eligible merchants complete a first successful transaction.
+
+```{python}
+#| label: activation-overview
+#| echo: false
+
+activation_overview = pd.DataFrame({
+    "Metric": [
+        "Eligible merchants",
+        "Activated merchants",
+        "Activation rate",
+        "Median days to activation"
+    ],
+    "Value": [
+        f"{eligible_count:,}",
+        f"{activated_count:,}",
+        f"{activation_rate:.1%}",
+        f"{median_days_to_activation:.0f}"
+    ]
+})
+
+display(activation_overview)
+```
+
+```{python}
+#| label: activation-by-segment-table
+#| echo: false
+
+activation_segment_display = segment_summary[
+    [
+        "segment",
+        "eligible",
+        "activated",
+        "activation_rate",
+        "median_days_to_activation"
+    ]
+].copy()
+
+activation_segment_display["activation_rate"] = (
+    activation_segment_display["activation_rate"]
+    .map(lambda value: f"{value:.1%}")
+)
+
+activation_segment_display[
+    "median_days_to_activation"
+] = (
+    activation_segment_display[
+        "median_days_to_activation"
+    ]
+    .map(lambda value: f"{value:.0f}")
+)
+
+activation_segment_display.columns = [
+    "Segment",
+    "Eligible",
+    "Activated",
+    "Activation rate",
+    "Median days to activation"
+]
+
+display(activation_segment_display)
+```
+
+```{python}
+#| label: activation-chart
+#| fig-cap: "Activation rate by synthetic merchant segment"
+
+activation_order = segment_summary.sort_values(
+    "activation_rate"
+)
+
+plt.figure(figsize=(8, 5))
+
+bars = plt.bar(
+    activation_order["segment"],
+    activation_order["activation_rate"]
+)
+
+plt.title("Activation Rate by Merchant Segment")
+plt.xlabel("Merchant segment")
+plt.ylabel("Activation rate")
+plt.ylim(0, 1)
+
+for bar, rate in zip(
+    bars,
+    activation_order["activation_rate"]
+):
+    plt.text(
+        bar.get_x() + bar.get_width() / 2,
+        bar.get_height(),
+        f"{rate:.1%}",
+        ha="center",
+        va="bottom"
+    )
+
+plt.tight_layout()
+plt.show()
+```
+
+### Interpretation
+
+```{python}
+#| label: activation-interpretation
+#| echo: false
+#| output: asis
+
+display(Markdown(
+    f"""
+The **{weakest_activation_segment['segment']} segment** has the lowest
+activation rate at
+**{weakest_activation_segment['activation_rate']:.1%}**, compared with
+**{strongest_activation_segment['activation_rate']:.1%}** for the
+**{strongest_activation_segment['segment']} segment**.
+
+The weakest percentage does not automatically represent the highest-value
+intervention. Population size, merchant value, addressability and
+implementation effort must also be considered.
+"""
+))
+```
+
+---
+
+## Time to activation
+
+Activation rate does not show how quickly merchants realize value.
+
+```{python}
+#| label: activation-time-histogram
+#| fig-cap: "Days from eligibility to first successful transaction"
+
+activated_merchants = merchant_data.loc[
+    merchant_data["activated"]
+].copy()
+
+plt.figure(figsize=(9, 5))
+
+plt.hist(
+    activated_merchants["days_to_activation"],
+    bins=25
+)
+
+plt.title("Time to First Successful Transaction")
+plt.xlabel("Days from eligibility to activation")
+plt.ylabel("Number of merchants")
+
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+#| label: activation-time-by-segment
+#| fig-cap: "Median time to activation by merchant segment"
+
+time_order = segment_summary.sort_values(
+    "median_days_to_activation"
+)
+
+plt.figure(figsize=(8, 5))
+
+bars = plt.bar(
+    time_order["segment"],
+    time_order["median_days_to_activation"]
+)
+
+plt.title("Median Days to Activation by Segment")
+plt.xlabel("Merchant segment")
+plt.ylabel("Median days")
+
+for bar, days in zip(
+    bars,
+    time_order["median_days_to_activation"]
+):
+    plt.text(
+        bar.get_x() + bar.get_width() / 2,
+        bar.get_height(),
+        f"{days:.0f}",
+        ha="center",
+        va="bottom"
+    )
+
+plt.tight_layout()
+plt.show()
+```
+
+Longer activation times may indicate onboarding friction, delayed integration, unclear value or merchant-readiness constraints.
+
+A production analysis would examine the full activation curve rather than relying only on a median.
+
+---
+
+## 30-Day Adoption
+
+Activation measures first value realization.
+
+30-Day Adoption measures whether that first transaction develops into meaningful early transaction depth.
+
+```{python}
+#| label: adoption-overview
+#| echo: false
+
+adoption_overview = pd.DataFrame({
+    "Metric": [
+        "Mature 30-day activated merchants",
+        "30-Day adopters",
+        "30-Day Adoption rate"
+    ],
+    "Value": [
+        f"{mature_30d_count:,}",
+        f"{adopted_30d_count:,}",
+        f"{adoption_30d_rate:.1%}"
+    ]
+})
+
+display(adoption_overview)
+```
+
+```{python}
+#| label: adoption-by-segment-table
+#| echo: false
+
+adoption_segment_display = segment_summary[
+    [
+        "segment",
+        "mature_30d",
+        "adopted_30d",
+        "adoption_30d_rate"
+    ]
+].copy()
+
+adoption_segment_display["adoption_30d_rate"] = (
+    adoption_segment_display["adoption_30d_rate"]
+    .map(lambda value: f"{value:.1%}")
+)
+
+adoption_segment_display.columns = [
+    "Segment",
+    "Mature activated merchants",
+    "30-Day adopters",
+    "30-Day Adoption rate"
+]
+
+display(adoption_segment_display)
+```
+
+```{python}
+#| label: adoption-chart
+#| fig-cap: "30-Day Adoption among mature activated merchants"
+
+adoption_order = segment_summary.sort_values(
+    "adoption_30d_rate"
+)
+
+plt.figure(figsize=(8, 5))
+
+bars = plt.bar(
+    adoption_order["segment"],
+    adoption_order["adoption_30d_rate"]
+)
+
+plt.title("30-Day Adoption Rate by Merchant Segment")
+plt.xlabel("Merchant segment")
+plt.ylabel("30-Day Adoption rate")
+plt.ylim(0, 1)
+
+for bar, rate in zip(
+    bars,
+    adoption_order["adoption_30d_rate"]
+):
+    plt.text(
+        bar.get_x() + bar.get_width() / 2,
+        bar.get_height(),
+        f"{rate:.1%}",
+        ha="center",
+        va="bottom"
+    )
+
+plt.tight_layout()
+plt.show()
+```
+
+### Interpretation
+
+```{python}
+#| label: adoption-interpretation
+#| echo: false
+#| output: asis
+
+display(Markdown(
+    f"""
+The **{weakest_adoption_segment['segment']} segment** has the lowest
+30-Day Adoption rate at
+**{weakest_adoption_segment['adoption_30d_rate']:.1%}**, compared with
+**{strongest_adoption_segment['adoption_30d_rate']:.1%}** for the
+**{strongest_adoption_segment['segment']} segment**.
+
+This is a descriptive comparison. It does not establish that segment causes
+the difference or that the full performance gap can be eliminated.
+"""
+))
+```
+
+---
+
+## Activation-cohort analysis
+
+The cohort is based on the month of the merchant’s first successful transaction.
+
+Only merchants with a complete 30-day observation window are included.
+
+```{python}
+#| label: cohort-table
+#| echo: false
+
+cohort_display = cohort_summary.copy()
+
+cohort_display["adoption_30d_rate"] = (
+    cohort_display["adoption_30d_rate"]
+    .map(lambda value: f"{value:.1%}")
+)
+
+cohort_display["median_days_to_activation"] = (
+    cohort_display["median_days_to_activation"]
+    .map(lambda value: f"{value:.0f}")
+)
+
+cohort_display.columns = [
+    "Activation month",
+    "Activated merchants",
+    "30-Day adopters",
+    "Median days to activation",
+    "30-Day Adoption rate"
+]
+
+display(cohort_display)
+```
+
+```{python}
+#| label: cohort-chart
+#| fig-cap: "30-Day Adoption by mature synthetic activation cohort"
+
+plt.figure(figsize=(9, 5))
+
+plt.plot(
+    cohort_summary["activation_month"],
+    cohort_summary["adoption_30d_rate"],
+    marker="o"
+)
+
+plt.title("30-Day Adoption by Activation Cohort")
+plt.xlabel("Month of first successful transaction")
+plt.ylabel("30-Day Adoption rate")
+plt.ylim(0, 1)
+plt.xticks(rotation=45)
+
+for month, rate in zip(
+    cohort_summary["activation_month"],
+    cohort_summary["adoption_30d_rate"]
+):
+    plt.text(
+        month,
+        rate,
+        f"{rate:.1%}",
+        ha="center",
+        va="bottom"
+    )
+
+plt.tight_layout()
+plt.show()
+```
+
+### Interpretation
+
+```{python}
+#| label: cohort-interpretation
+#| echo: false
+#| output: asis
+
+display(Markdown(
+    f"""
+30-Day Adoption ranges from
+**{weakest_cohort['adoption_30d_rate']:.1%}** in the
+**{weakest_cohort['activation_month']}** cohort to
+**{best_cohort['adoption_30d_rate']:.1%}** in the
+**{best_cohort['activation_month']}** cohort.
+
+The observed difference is **{cohort_range:.1%}**.
+
+The equal observation window makes these cohorts structurally comparable.
+A production analysis would still require uncertainty estimates and
+adjustments for merchant mix, rollout timing and seasonality.
+"""
+))
+```
+
+---
+
+## Later activity during days 31–60
+
+Later active is defined as completing at least one successful new-platform transaction during days 31–60 after activation.
+
+Only merchants with a complete 60-day observation window are included.
+
+```{python}
+#| label: later-activity-overview
+#| echo: false
+
+later_activity_overview = pd.DataFrame({
+    "Metric": [
+        "Mature 60-day activated merchants",
+        "Later-active merchants",
+        "Later-activity rate"
+    ],
+    "Value": [
+        f"{mature_60d_count:,}",
+        f"{later_active_count:,}",
+        f"{later_activity_rate:.1%}"
+    ]
+})
+
+display(later_activity_overview)
+```
+
+```{python}
+#| label: later-activity-comparison-table
+#| echo: false
+
+later_activity_display = (
+    later_activity_by_adoption[
+        [
+            "early_adoption_status",
+            "merchants",
+            "later_active_merchants",
+            "later_activity_rate"
+        ]
+    ]
+    .copy()
+)
+
+later_activity_display["later_activity_rate"] = (
+    later_activity_display["later_activity_rate"]
+    .map(lambda value: f"{value:.1%}")
+)
+
+later_activity_display.columns = [
+    "Early-adoption status",
+    "Merchants",
+    "Later-active merchants",
+    "Later-activity rate"
+]
+
+display(later_activity_display)
+```
+
+```{python}
+#| label: later-activity-chart
+#| fig-cap: "Later activity during days 31–60 by early-adoption status"
+
+plt.figure(figsize=(9, 5))
+
+bars = plt.bar(
+    later_activity_by_adoption["early_adoption_status"],
+    later_activity_by_adoption["later_activity_rate"]
+)
+
+plt.title("Later Activity by Early-Adoption Status")
+plt.xlabel("30-Day Adoption outcome")
+plt.ylabel("Later-activity rate")
+plt.ylim(0, 1)
+
+for bar, rate in zip(
+    bars,
+    later_activity_by_adoption["later_activity_rate"]
+):
+    plt.text(
+        bar.get_x() + bar.get_width() / 2,
+        bar.get_height(),
+        f"{rate:.1%}",
+        ha="center",
+        va="bottom"
+    )
+
+plt.xticks(rotation=10)
+plt.tight_layout()
+plt.show()
+```
+
+### Interpretation
+
+Merchants reaching the 30-Day Adoption threshold are more likely, in this synthetic replica, to complete at least one transaction during days 31–60.
+
+This evaluates early adoption as a possible leading indicator of later activity. It does not establish that reaching 10 transactions causes later activity.
+
+Merchants with stronger early usage may already differ in size, demand, readiness, integration quality or product fit.
+
+The synthetic generator intentionally includes this relationship to demonstrate the analytical method. A production analysis would need to test whether the association remains after accounting for pre-existing differences.
+
+---
+
+## Opportunity sizing
+
+The analysis sizes two separate opportunities:
+
+1. increasing activation among eligible merchants;
+2. increasing early transaction depth among activated merchants.
+
+### Activation opportunity
+
+```{python}
+#| label: activation-opportunity-table
+#| echo: false
+
+activation_opportunity_display = (
+    activation_opportunity.copy()
+)
+
+activation_opportunity_display["activation_rate"] = (
+    activation_opportunity_display["activation_rate"]
+    .map(lambda value: f"{value:.1%}")
+)
+
+activation_opportunity_display["activation_gap"] = (
+    activation_opportunity_display["activation_gap"]
+    .map(lambda value: f"{value:.1%}")
+)
+
+activation_opportunity_display.columns = [
+    "Segment",
+    "Eligible merchants",
+    "Activation rate",
+    "Gap to benchmark",
+    "Directional incremental activations"
+]
+
+display(activation_opportunity_display)
+```
+
+```{python}
+#| label: activation-opportunity-chart
+#| fig-cap: "Directional incremental activation opportunity"
+
+plt.figure(figsize=(8, 5))
+
+bars = plt.bar(
+    activation_opportunity["segment"],
+    activation_opportunity[
+        "incremental_activations_if_gap_closed"
+    ]
+)
+
+plt.title("Directional Activation Opportunity")
+plt.xlabel("Merchant segment")
+plt.ylabel("Potential incremental activations")
+
+for bar, opportunity in zip(
+    bars,
+    activation_opportunity[
+        "incremental_activations_if_gap_closed"
+    ]
+):
+    plt.text(
+        bar.get_x() + bar.get_width() / 2,
+        bar.get_height(),
+        f"{opportunity:,}",
+        ha="center",
+        va="bottom"
+    )
+
+plt.tight_layout()
+plt.show()
+```
+
+### Early-adoption opportunity
+
+```{python}
+#| label: adoption-opportunity-table
+#| echo: false
+
+adoption_opportunity_display = (
+    adoption_opportunity.copy()
+)
+
+adoption_opportunity_display["adoption_30d_rate"] = (
+    adoption_opportunity_display["adoption_30d_rate"]
+    .map(lambda value: f"{value:.1%}")
+)
+
+adoption_opportunity_display["adoption_gap"] = (
+    adoption_opportunity_display["adoption_gap"]
+    .map(lambda value: f"{value:.1%}")
+)
+
+adoption_opportunity_display.columns = [
+    "Segment",
+    "Mature activated merchants",
+    "30-Day Adoption rate",
+    "Gap to benchmark",
+    "Directional incremental adopters"
+]
+
+display(adoption_opportunity_display)
+```
+
+### Interpretation
+
+```{python}
+#| label: opportunity-interpretation
+#| echo: false
+#| output: asis
+
+display(Markdown(
+    f"""
+The largest directional activation opportunity appears in the
+**{top_activation_opportunity['segment']} segment**, representing
+approximately
+**{int(top_activation_opportunity['incremental_activations_if_gap_closed']):,}
+additional activations** if the observed benchmark gap were closed.
+
+The largest directional early-adoption opportunity appears in the
+**{top_adoption_opportunity['segment']} segment**, representing approximately
+**{int(top_adoption_opportunity['incremental_adopters_if_gap_closed']):,}
+additional 30-Day adopters**.
+
+These are benchmark scenarios, not causal forecasts. They help prioritize
+further investigation but do not prove that the full gaps are addressable.
+"""
+))
+```
+
+---
+
+## Decision framework
+
+- **Eligible population:** How many merchants are affected?
+- **Activation gap:** How far is activation from a relevant benchmark?
+- **Time to activation:** Where is value realization being delayed?
+- **Early-adoption gap:** How many activated merchants fail to develop meaningful transaction depth?
+- **Later-activity gap:** How many mature merchants record no activity during days 31–60?
+- **Expected business value:** What value could improved behavior create?
+- **Addressability:** Is the gap likely to respond to a product intervention?
+- **Implementation effort:** What engineering, design and operational work is required?
+- **Measurement feasibility:** Can the intervention be evaluated credibly?
+
+The final prioritization should combine analytical opportunity with value, feasibility, strategic relevance and measurement quality.
+
+---
+
+# Technical appendix
+
+## Synthetic-data methodology
+
+The dataset contains 10,000 fictional eligible merchants distributed across three segments, four markets and multiple eligibility dates.
+
+The synthetic process generates:
+
+- whether each merchant activates;
+- days from eligibility to activation;
+- successful transactions during days 0–30;
+- whether the merchant reaches the 30-Day Adoption threshold;
+- successful transactions during days 31–60;
+- whether the merchant is later active.
+
+```{python}
+#| label: synthetic-data-preview
+#| echo: false
+
+display(
+    merchant_data[
+        [
+            "merchant_id",
+            "segment",
+            "market",
+            "eligible_date",
+            "activated",
+            "activation_date",
+            "days_to_activation",
+            "successful_transactions_days_0_30",
+            "adopted_30d",
+            "successful_transactions_days_31_60",
+            "later_active",
+            "mature_30d",
+            "mature_60d"
+        ]
+    ].head(10)
+)
+```
+
+The differences across segments and early-adoption groups are intentionally encoded for demonstration.
+
+The synthetic model is designed to demonstrate the analytical workflow, not to reproduce the full complexity of a production merchant platform.
+
+---
+
+## Data-quality validation
+
+Before interpreting the results, the analysis checks that the derived dates, transaction metrics and merchant statuses follow the expected business logic.
+
+The validation covers:
+
+- activated merchants must have an activation date;
+- non-activated merchants must not have an activation date;
+- a merchant cannot reach 30-Day Adoption without activating;
+- a merchant cannot be later active without activating;
+- a later-active merchant must have at least one successful transaction during days 31–60;
+- merchant IDs must be unique;
+- activation delays cannot be negative;
+- activation dates cannot occur before eligibility dates.
+
+The following code runs those checks and counts the records that violate each rule.
+
+```{python}
+#| label: run-validation-checks
+#| echo: true
+
+validation_checks = pd.DataFrame({
+    "Validation check": [
+        "Activated merchant without activation date",
+        "Non-activated merchant with activation date",
+        "30-Day adopter without activation",
+        "Later-active merchant without activation",
+        "Later-active merchant with zero transactions in days 31–60",
+        "Duplicate merchant ID",
+        "Negative activation delay",
+        "Activation date before eligibility date"
+    ],
+    "Invalid records": [
+        (
+            merchant_data["activated"]
+            & merchant_data["activation_date"].isna()
+        ).sum(),
+
+        (
+            ~merchant_data["activated"]
+            & merchant_data["activation_date"].notna()
+        ).sum(),
+
+        (
+            merchant_data["adopted_30d"]
+            & ~merchant_data["activated"]
+        ).sum(),
+
+        (
+            merchant_data["later_active"]
+            & ~merchant_data["activated"]
+        ).sum(),
+
+        (
+            merchant_data["later_active"]
+            & (
+                merchant_data[
+                    "successful_transactions_days_31_60"
+                ] == 0
+            )
+        ).sum(),
+
+        merchant_data["merchant_id"]
+        .duplicated()
+        .sum(),
+
+        (
+            merchant_data["days_to_activation"] < 0
+        ).sum(),
+
+        (
+            merchant_data["activation_date"]
+            < merchant_data["eligible_date"]
+        ).sum()
+    ]
+})
+
+total_invalid_records = int(
+    validation_checks["Invalid records"].sum()
+)
+
+display(validation_checks)
+```
+
+```{python}
+#| label: validation-result
+#| echo: false
+#| output: asis
+
+if total_invalid_records == 0:
+    display(Markdown(
+        """
+**Validation result:** All checks passed. No invalid activation sequences,
+transaction-derived flags, duplicate merchant IDs or inconsistent dates
+were detected.
+"""
+    ))
+else:
+    display(Markdown(
+        f"""
+**Validation result:** **{total_invalid_records:,} records** require
+investigation before the analysis can be used for decisions.
+"""
+    ))
+```
+
+---
+
+## Illustrative SQL implementation
+
+The following SQL illustrates how activation, 30-Day Adoption and later activity could be derived from eligibility and transaction tables.
+
+It is not connected to a production database and does not reproduce proprietary company logic.
+
+```sql
+WITH eligible_merchants AS (
+    SELECT
+        merchant_id,
+        eligible_date,
+        merchant_segment,
+        market
+    FROM merchant_eligibility
+),
+
+successful_transactions AS (
+    SELECT
+        merchant_id,
+        transaction_timestamp
+    FROM transactions
+    WHERE platform = 'new_platform'
+      AND transaction_status = 'successful'
+),
+
+activation AS (
+    SELECT
+        e.merchant_id,
+        e.eligible_date,
+        e.merchant_segment,
+        e.market,
+        MIN(t.transaction_timestamp)
+            AS activation_timestamp
+    FROM eligible_merchants AS e
+    LEFT JOIN successful_transactions AS t
+        ON e.merchant_id = t.merchant_id
+       AND t.transaction_timestamp >= e.eligible_date
+    GROUP BY
+        e.merchant_id,
+        e.eligible_date,
+        e.merchant_segment,
+        e.market
+),
+
+behavior_windows AS (
+    SELECT
+        a.merchant_id,
+        a.eligible_date,
+        a.merchant_segment,
+        a.market,
+        a.activation_timestamp,
+
+        DATE_DIFF(
+            DATE(a.activation_timestamp),
+            DATE(a.eligible_date),
+            DAY
+        ) AS days_to_activation,
+
+        COUNTIF(
+            t.transaction_timestamp
+                >= a.activation_timestamp
+            AND t.transaction_timestamp
+                < TIMESTAMP_ADD(
+                    a.activation_timestamp,
+                    INTERVAL 30 DAY
+                )
+        ) AS transactions_days_0_30,
+
+        COUNTIF(
+            t.transaction_timestamp
+                >= TIMESTAMP_ADD(
+                    a.activation_timestamp,
+                    INTERVAL 30 DAY
+                )
+            AND t.transaction_timestamp
+                < TIMESTAMP_ADD(
+                    a.activation_timestamp,
+                    INTERVAL 60 DAY
+                )
+        ) AS transactions_days_31_60
+
+    FROM activation AS a
+
+    LEFT JOIN successful_transactions AS t
+        ON a.merchant_id = t.merchant_id
+       AND t.transaction_timestamp
+            >= a.activation_timestamp
+       AND t.transaction_timestamp
+            < TIMESTAMP_ADD(
+                a.activation_timestamp,
+                INTERVAL 60 DAY
+            )
+
+    WHERE a.activation_timestamp IS NOT NULL
+
+    GROUP BY
+        a.merchant_id,
+        a.eligible_date,
+        a.merchant_segment,
+        a.market,
+        a.activation_timestamp
+),
+
+merchant_metrics AS (
+    SELECT
+        *,
+
+        CASE
+            WHEN transactions_days_0_30 >= 10
+            THEN 1
+            ELSE 0
+        END AS adopted_30d,
+
+        CASE
+            WHEN transactions_days_31_60 >= 1
+            THEN 1
+            ELSE 0
+        END AS later_active
+
+    FROM behavior_windows
+)
+
+SELECT
+    DATE_TRUNC(
+        DATE(activation_timestamp),
+        MONTH
+    ) AS activation_month,
+
+    merchant_segment,
+
+    COUNT(*) AS activated_merchants,
+
+    COUNTIF(adopted_30d = 1)
+        AS adopted_30d_merchants,
+
+    SAFE_DIVIDE(
+        COUNTIF(adopted_30d = 1),
+        COUNT(*)
+    ) AS adoption_30d_rate,
+
+    COUNTIF(later_active = 1)
+        AS later_active_merchants,
+
+    SAFE_DIVIDE(
+        COUNTIF(later_active = 1),
+        COUNT(*)
+    ) AS later_activity_rate,
+
+    APPROX_QUANTILES(
+        days_to_activation,
+        2
+    )[OFFSET(1)] AS median_days_to_activation
+
+FROM merchant_metrics
+
+WHERE activation_timestamp
+    <= TIMESTAMP_SUB(
+        CURRENT_TIMESTAMP(),
+        INTERVAL 60 DAY
+    )
+
+GROUP BY
+    activation_month,
+    merchant_segment
+
+ORDER BY
+    activation_month,
+    merchant_segment;
+```
+
+In production, 30-Day Adoption could be reported after 30 days, while later activity requires 60 days of observation. These metrics would normally use separate maturity filters rather than forcing every output to use the stricter 60-day population.
+
+---
+
+## Limitations
+
+This public replica is intentionally simplified.
+
+A production analysis would also require:
+
+- precise eligibility and exclusion rules;
+- merchant identity resolution;
+- failed, reversed and refunded transaction handling;
+- multiple currencies and transaction types;
+- exact boundary conventions for days 0, 30 and 60;
+- exclusion of immature cohorts;
+- confidence intervals and statistical testing;
+- adjustment for merchant mix, rollout timing and seasonality;
+- market and product constraints;
+- richer definitions of later activity;
+- incremental-impact measurement;
+- financial value and implementation-cost estimates;
+- privacy, legal and regulatory review.
+
+---
+
+## What this walkthrough demonstrates
+
+This public analysis demonstrates how I structure product-growth analytics:
+
+- define activation through an observable value-generating event;
+- analyze activation rate and activation speed separately;
+- distinguish first use from meaningful transaction depth;
+- use fixed observation windows for cohort comparability;
+- define later activity through a concrete transaction event;
+- distinguish association from causality;
+- validate analytical data before interpreting results;
+- size activation and adoption opportunities separately;
+- translate findings into product decisions.
+
+The numerical findings are illustrative and are not actual company results.
+
+---
+
+[Back to the executive case study](index.qmd){.btn .btn-primary}
+
+[Back to Case Studies](../../projects.qmd){.btn .btn-outline-primary}
+
+[Download Resume](../../Resume-Alma-Schutz.pdf){.btn .btn-outline-primary}

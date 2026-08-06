@@ -1,0 +1,443 @@
+---
+title: "Product Growth & Platform Analytics"
+subtitle: "Measuring activation, adoption depth and later activity on a global merchant platform"
+description: "A product analytics case study focused on activation, transaction depth, cohort measurement and executive decision-making."
+categories:
+  - Product Analytics
+  - Growth
+  - KPI Strategy
+  - SQL
+  - Python
+  - Experimentation
+page-layout: full
+---
+
+::: {.case-hero}
+
+## From platform availability to meaningful merchant behavior
+
+A global merchant platform was expanding across markets and merchant segments.
+
+The central measurement challenge was not simply determining which merchants could access the platform. The organization needed to understand which merchants completed a first successful transaction, how quickly they activated, whether they developed meaningful early usage and whether they remained active during a later observation period.
+
+I led analytics supporting the platform, helping teams establish shared metric definitions, diagnose growth constraints and connect merchant behavior with product and investment decisions.
+
+::: {.case-meta}
+
+**Role:** Data Science Manager — Merchant Products  
+**Organization:** PayPal  
+**Scope:** Global merchant platform  
+**Methods:** Product analytics, KPI design, behavioral analysis, experimentation and executive reporting
+
+:::
+
+:::
+
+---
+
+## Executive summary
+
+The measurement framework begins with the merchant’s first observable value-generating behavior.
+
+**Activation is defined as the first successful transaction on the new platform.**
+
+The framework then evaluates:
+
+- how many eligible merchants activate;
+- how long activation takes;
+- whether activated merchants develop meaningful transaction depth;
+- how outcomes vary across merchant segments and activation cohorts;
+- whether merchants record activity during a later observation period.
+
+The public analytical replica uses two post-activation outcomes:
+
+> **30-Day Adoption:** At least 10 successful transactions during days 0–30 after activation.
+
+> **Later active:** At least one successful transaction during days 31–60 after activation.
+
+These metrics answer different questions. The first measures early transaction depth; the second measures whether the merchant records activity in the following period.
+
+[View the analytical walkthrough](analysis.qmd){.btn .btn-primary}
+
+[Download Resume](../../Resume-Alma-Schutz.pdf){.btn .btn-outline-primary}
+
+---
+
+## Real-world impact
+
+::: {.impact-grid}
+
+::: {.impact-card}
+
+### +30%
+
+Exceeded the Full Stack Monthly Active Users target in 2024.
+
+:::
+
+::: {.impact-card}
+
+### 1.2M → 1.7M
+
+Supported growth in Monthly Active Users during 2025.
+
+:::
+
+::: {.impact-card}
+
+### 1.5M+
+
+Enabled analytics and decision support for a global merchant-platform migration.
+
+:::
+
+::: {.impact-card}
+
+### +5%
+
+Supported conversion improvement in a key payment experience.
+
+:::
+
+:::
+
+The broader analytics capability also helped:
+
+- scale self-service KPI reporting;
+- improve visibility into merchant behavior;
+- inform product and commercial leadership;
+- support roadmap expansion for more than 30 global alternative payment methods;
+- establish shared product-outcome definitions across teams.
+
+---
+
+## Key takeaway
+
+Platform growth cannot be understood through availability or top-line activity alone.
+
+The useful analytical journey is:
+
+```text
+Eligible merchant
+        ↓
+Activated
+= first successful transaction
+        ↓
+30-Day Adoption
+= 10+ transactions during days 0–30
+        ↓
+Later active
+= 1+ transaction during days 31–60
+        ↓
+Product and investment decisions
+```
+
+Activation identifies initial value realization.
+
+30-Day Adoption distinguishes one-time use from meaningful early transaction depth.
+
+Later activity provides a concrete view of whether merchants transact during the following observation period.
+
+---
+
+::: {.replica-note}
+
+### About this public case study
+
+This case study is a confidentiality-safe analytical replica inspired by my real work leading product analytics for a large-scale global merchant platform.
+
+The business context, measurement challenges and leadership responsibilities reflect the type of work I performed. The public implementation uses synthetic data, simplified public-safe definitions and independently written code.
+
+The model is intentionally simplified so the analytical logic, insights and decision process can be explained clearly and reproduced publicly. A production implementation would include substantially more complexity, including eligibility and exclusion rules, event-quality validation, identity resolution, transaction exceptions, market differences, rollout timing, cohort maturity, statistical uncertainty and operational constraints.
+
+No confidential company data, proprietary metric definitions, internal dashboards or production code are included. The results generated in the analytical walkthrough are illustrative and should not be interpreted as actual company results.
+
+[Open the public analytical replica](analysis.qmd){.btn .btn-primary}
+
+:::
+
+---
+
+## Business context
+
+The organization was expanding a new merchant platform across a large global merchant population.
+
+Product and commercial teams needed to understand:
+
+- How many eligible merchants completed a first successful transaction?
+- How quickly did merchants activate after becoming eligible?
+- What proportion developed meaningful transaction depth during their first 30 days?
+- What proportion recorded activity during days 31–60?
+- How did behavior differ across merchant segments and activation cohorts?
+- Which populations represented the largest growth opportunities?
+
+A single top-line metric could not answer all of these questions.
+
+The analytics function needed a measurement system that connected merchant behavior with product decisions, roadmap priorities and leadership reviews.
+
+---
+
+## Measurement framework
+
+The framework separates initial value realization, early transaction depth and later activity.
+
+```text
+Eligible
+   ↓
+Activated
+   = first successful new-platform transaction
+   ↓
+30-Day Adoption
+   = 10+ successful transactions during days 0–30
+   ↓
+Later active
+   = 1+ successful transaction during days 31–60
+```
+
+The public replica uses the following definitions:
+
+- **Eligible:** The merchant belongs to the population able to use the new platform.
+- **Activated:** The merchant completes its first successful transaction on the new platform.
+- **Time to activation:** The number of days between eligibility and activation.
+- **30-Day Adoption:** The merchant completes at least 10 successful transactions during days 0–30 after activation.
+- **Later active:** The merchant completes at least one successful transaction during days 31–60 after activation.
+- **Activation cohort:** The month of the merchant’s first successful transaction.
+
+Only merchants with a complete 30-day observation window are included in 30-Day Adoption metrics.
+
+Only merchants with a complete 60-day observation window are included in later-activity metrics.
+
+These maturity rules prevent recent cohorts from appearing artificially weaker simply because they have had less time to accumulate observable behavior.
+
+---
+
+## The analytical challenge
+
+### 1. Was platform availability translating into activation?
+
+An eligible merchant could remain inactive.
+
+The first analytical layer measured:
+
+- activation rate;
+- time to activation;
+- differences across segments and cohorts.
+
+### 2. Was first use translating into meaningful early adoption?
+
+One successful transaction represented initial value realization, but not necessarily repeated usage.
+
+The 30-Day Adoption metric introduced a consistent behavioral threshold:
+
+```text
+At least 10 successful transactions
+during days 0–30 after activation
+```
+
+### 3. Were merchants active during the following period?
+
+Later activity was defined concretely as:
+
+```text
+At least one successful transaction
+during days 31–60 after activation
+```
+
+This avoids vague concepts such as “sustained usage” without an explicit observation period.
+
+### 4. Where should product teams intervene?
+
+Performance gaps alone were insufficient.
+
+Prioritization also needed to consider:
+
+- merchant population;
+- expected business value;
+- addressability of the gap;
+- product and engineering effort;
+- market constraints;
+- measurement feasibility.
+
+---
+
+## My role
+
+I owned analytics for the Latest Merchant Platform, including product outcomes and technical metric definitions.
+
+My responsibilities included:
+
+- defining and governing core product metrics;
+- measuring activation, adoption and platform growth;
+- identifying merchant behavioral patterns and growth opportunities;
+- supporting product launches and roadmap decisions;
+- partnering with Product, Engineering, Research, Legal, Communications and Commercial teams;
+- leading BI work to automate reporting and expand self-service analytics;
+- presenting findings and recommendations to product and commercial leadership.
+
+---
+
+## Analytical approach
+
+### 1. Establish shared metric definitions
+
+I worked with product and technical stakeholders to translate broad goals such as platform growth and merchant adoption into observable product behaviors.
+
+Definitions needed to be:
+
+- technically implementable;
+- stable enough for longitudinal reporting;
+- interpreted consistently across functions;
+- useful for product decisions;
+- understandable to senior leadership.
+
+### 2. Define activation through value realization
+
+The first successful transaction represented the first observable point at which a merchant realized value from the platform.
+
+This was more meaningful than defining activation through a login, account view or configuration event.
+
+### 3. Measure activation speed
+
+Activation rate alone could conceal friction.
+
+Two groups might eventually reach similar activation rates while taking very different amounts of time to get there.
+
+Time-to-activation analysis helped identify:
+
+- onboarding friction;
+- delayed technical integration;
+- unclear product value;
+- segment-specific merchant needs.
+
+### 4. Measure early transaction depth
+
+30-Day Adoption distinguished one-time use from repeated early behavior.
+
+The fixed observation window allowed mature activation cohorts to be compared consistently.
+
+### 5. Measure later activity separately
+
+Later activity evaluated whether a merchant recorded at least one successful transaction during days 31–60.
+
+A merchant could fail to reach the early-adoption threshold and still transact later. For this reason, later activity was treated as a separate outcome rather than the next mandatory funnel stage.
+
+### 6. Size opportunities before recommending solutions
+
+Performance gaps were evaluated alongside population size and product feasibility.
+
+The goal was not simply to find the weakest percentage, but to identify opportunities with meaningful expected value.
+
+### 7. Operationalize the measurement system
+
+The work extended beyond one-time analyses.
+
+I led the development of automated reporting and self-service KPI frameworks supporting:
+
+- regular business reviews;
+- activation monitoring;
+- time-to-activation analysis;
+- early-adoption tracking;
+- cohort comparisons;
+- later-activity measurement;
+- product launch evaluation;
+- roadmap prioritization;
+- leadership communication.
+
+---
+
+## Illustrative measurement architecture
+
+Because the underlying company data and metric definitions are confidential, this represents a general analytical structure rather than a proprietary implementation.
+
+```text
+Merchant eligibility records
+             +
+New-platform transaction events
+             ↓
+Standardized successful-transaction definitions
+             ↓
+First successful transaction
+             ↓
+Activation date and time to activation
+             ↓
+Transactions during days 0–30
+             ↓
+Transactions during days 31–60
+             ↓
+Segment and activation-cohort analysis
+             ↓
+Product dashboards and business reviews
+             ↓
+Roadmap and investment decisions
+```
+
+---
+
+## Leadership and collaboration
+
+This work required more than technical analysis.
+
+I coordinated across functions to ensure that metrics were technically valid, consistently interpreted and useful for decisions.
+
+Key leadership contributions included:
+
+- aligning stakeholders around shared product definitions;
+- connecting technical events with meaningful product outcomes;
+- translating analytical findings for executive audiences;
+- prioritizing analytical work according to expected product value;
+- leading BI resources and reporting automation;
+- connecting product performance with commercial context;
+- helping teams move from descriptive reporting to decision-oriented analytics.
+
+---
+
+## Tools and methods
+
+### Data and analytics
+
+- SQL
+- Python
+- Activation analysis
+- Time-to-event analysis
+- Cohort analysis
+- Merchant segmentation
+- Behavioral modeling
+- KPI design
+- Dashboarding and visualization
+- Opportunity sizing
+
+### Product and leadership
+
+- Product measurement strategy
+- Metric governance
+- Cross-functional stakeholder management
+- Business reviews
+- Executive communication
+- Roadmap decision support
+- Experimentation and causal-measurement planning
+
+---
+
+## What I would measure next
+
+A production measurement system could extend this framework through:
+
+- activation curves by time since eligibility;
+- reasons for delayed or failed activation;
+- transaction quality and merchant value;
+- alternative 7-, 60- and 90-day adoption definitions;
+- transaction frequency during later periods;
+- movement between transaction-depth bands;
+- early-warning indicators for declining usage;
+- incremental impact of individual product capabilities;
+- long-term merchant value by activation path;
+- experimentation for onboarding and product interventions;
+- causal measurement of roadmap changes.
+
+---
+
+[View the analytical walkthrough](analysis.qmd){.btn .btn-primary}
+
+[Back to Case Studies](../../projects.qmd){.btn .btn-outline-primary}
+
+[Download Resume](../../Resume-Alma-Schutz.pdf){.btn .btn-outline-primary}

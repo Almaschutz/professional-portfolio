@@ -1,0 +1,89 @@
+---
+title: "Experimentation Decision System"
+subtitle: "Power, guardrails, variance reduction and decision quality"
+---
+
+## Executive summary
+
+This case study demonstrates how I would design an experimentation system that
+helps product teams make faster decisions without sacrificing validity.
+
+## R: sample size and simulation
+
+```{r}
+#| label: experiment-power
+#| fig-cap: "Power across candidate sample sizes"
+
+library(tidyverse)
+library(pwr)
+
+baseline <- 0.20
+relative_mde <- 0.05
+treatment <- baseline * (1 + relative_mde)
+
+h <- ES.h(treatment, baseline)
+
+result <- tibble(
+  n_per_group = seq(1000, 30000, by = 1000),
+  power = map_dbl(
+    n_per_group,
+    ~ pwr.2p.test(
+        h = h,
+        n = .x,
+        sig.level = 0.05,
+        alternative = "two.sided"
+      )$power
+  )
+)
+
+ggplot(result, aes(n_per_group, power)) +
+  geom_line(linewidth = 1) +
+  geom_hline(yintercept = 0.80, linetype = "dashed") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Sample size required for reliable detection",
+    x = "Users per group",
+    y = "Statistical power"
+  ) +
+  theme_minimal(base_size = 12)
+```
+
+## SQL: experiment readout
+
+```sql
+WITH assignment AS (
+    SELECT user_id, variant, assigned_at
+    FROM experimentation.assignments
+    WHERE experiment_id = 'onboarding_v2'
+),
+outcomes AS (
+    SELECT
+        a.user_id,
+        a.variant,
+        MAX(CASE WHEN e.event_name = 'activation_completed' THEN 1 ELSE 0 END)
+          AS activated,
+        SUM(CASE WHEN e.event_name = 'purchase' THEN e.revenue ELSE 0 END)
+          AS revenue
+    FROM assignment a
+    LEFT JOIN analytics.events e
+      ON a.user_id = e.user_id
+     AND e.event_at >= a.assigned_at
+     AND e.event_at < a.assigned_at + INTERVAL '14 day'
+    GROUP BY 1, 2
+)
+SELECT
+    variant,
+    COUNT(*) AS users,
+    AVG(activated * 1.0) AS activation_rate,
+    AVG(revenue) AS revenue_per_user
+FROM outcomes
+GROUP BY 1;
+```
+
+## Decision framework
+
+Ship only when:
+1. The primary metric clears the practical decision threshold.
+2. Guardrails show no material harm.
+3. Instrumentation and randomization checks pass.
+4. Results are robust to pre-specified sensitivity analyses.

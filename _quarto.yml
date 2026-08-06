@@ -1,0 +1,62 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Alma Schutz | Data Science & Analytics Leader"
+
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+
+      - href: projects.qmd
+        text: Case Studies
+
+      - href: leadership.qmd
+        text: Leadership
+
+      - href: about.qmd
+        text: About
+
+    right:
+      - icon: github
+        href: https://github.com/Almaschutz
+        aria-label: GitHub
+
+      - icon: linkedin
+        href: https://www.linkedin.com/in/almaschutz
+        aria-label: LinkedIn
+
+  page-footer:
+    left: "© 2026 Alma Schutz"
+    right: "Built with Quarto"
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+
+    css: styles/styles.css
+
+    toc: false
+    code-fold: true
+    code-tools: false
+    smooth-scroll: true
+    anchor-sections: false
+
+execute:
+  enabled: false
+
+  navbar:
+  title: "Alma Schutz"
+  right:
+    - href: index.qmd
+      text: Home
+    - href: about.qmd
+      text: About
+    - href: projects.qmd
+      text: Projects
+    - href: Resume-Alma-Schutz.pdf
+      text: Resume

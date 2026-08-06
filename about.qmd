@@ -1,0 +1,113 @@
+---
+title: "About"
+page-layout: full
+---
+
+<div class="about-intro">
+
+## I turn complex data into clear business decisions.
+
+I am a Data Science and Analytics Leader with 15+ years of experience building analytics capabilities, leading multidisciplinary teams and translating data into measurable business impact.
+
+My background spans product analytics, commercial analytics, marketing measurement, experimentation and machine learning. I have worked across global organizations including PayPal, Philip Morris International and Accenture, helping teams improve products, identify growth opportunities and make better investment decisions.
+
+</div>
+
+---
+
+## How I work
+
+I combine three perspectives that are often treated separately:
+
+::: {.about-grid}
+
+::: {.about-card}
+### Business strategy
+
+I begin with the business decision, not the model. I work with stakeholders to define the problem, clarify success metrics and identify where analytics can create meaningful value.
+:::
+
+::: {.about-card}
+### Data science
+
+I use experimentation, causal inference, predictive modeling and product analytics to turn complex data into practical and defensible recommendations.
+:::
+
+::: {.about-card}
+### Leadership
+
+I build teams, operating models and measurement systems that allow analytics to scale beyond individual projects and become part of how an organization makes decisions.
+:::
+
+:::
+
+---
+
+## Career highlights
+
+::: {.timeline}
+
+::: {.timeline-item}
+### PayPal
+
+**Data Science Manager — Merchant Products**
+
+Led product analytics and data science initiatives supporting large-scale merchant experiences and platform migration.
+
+- Contributed to growth from **1.2M to 1.7M monthly active users**
+- Supported migration and measurement for **1.5M+ merchants**
+- Helped improve conversion by **5%** in a key payment experience
+- Built KPI frameworks, business reviews and self-service measurement systems
+:::
+
+::: {.timeline-item}
+### Philip Morris International
+
+**Data Science Manager**
+
+Led commercial analytics, experimentation and segmentation initiatives across international markets.
+
+- Generated approximately **$4.2M in incremental business value**
+- Built experimentation and measurement frameworks
+- Developed segmentation models used in production
+- Helped establish a scalable data science operating model
+:::
+
+::: {.timeline-item}
+### Accenture
+
+**Analytics and Data Science Consulting**
+
+Delivered pricing, commercial and supply-chain analytics solutions for global consumer-goods organizations.
+
+- Led multidisciplinary analytics teams
+- Developed pricing and optimization models
+- Worked with engineering teams to operationalize analytical solutions
+- Translated technical findings into executive recommendations
+:::
+
+:::
+
+---
+
+## What I bring
+
+- Product, commercial and marketing analytics
+- Experimentation and causal inference
+- Machine learning and predictive modeling
+- KPI design and measurement strategy
+- Analytics operating models and governance
+- Team leadership and stakeholder management
+- Executive communication and data storytelling
+
+---
+
+## Current focus
+
+I am interested in leadership and senior individual-contributor opportunities where I can combine analytics strategy, technical depth and organizational influence.
+
+**Target roles:** Staff Data Scientist, Lead Data Scientist, Principal Product Analyst, Product Analytics Lead and Analytics Leadership roles.
+
+[Download my Resume](Resume-Alma-Schutz.pdf){.btn .btn-primary}
+
+[Connect on LinkedIn](https://www.linkedin.com/){.btn .btn-outline-primary}
