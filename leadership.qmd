@@ -1,21 +1,81 @@
 ---
-title: "Leadership"
+title: ""
+page-layout: article
 ---
 
-## How I operate at Staff / Lead level
+# Leadership
 
-### Direction
-I translate ambiguous product questions into measurable outcomes, analytical
-roadmaps and decision frameworks.
+## How I lead analytics teams and decisions at scale
 
-### Leverage
-I build reusable metric definitions, experimentation standards, self-service
-data products and review mechanisms that improve the work of multiple teams.
+My role as a leader is to create clarity: define the right problem, align people around the outcome and make sure the team can deliver work that changes a decision.
 
-### Influence
-I communicate uncertainty, trade-offs and recommendations to product,
-engineering, design and executive stakeholders.
+I combine business context, analytical rigor and practical execution. I am comfortable taking accountability for results while giving people the space to challenge ideas, apply their strengths and develop new capabilities.
 
-### Quality
-I establish standards for analytical validity, reproducibility, monitoring,
-documentation and responsible use of data.
+---
+
+## Direction
+
+I turn ambiguous business needs into well-defined problems, measurable outcomes and prioritized analytical roadmaps.
+
+I use design-thinking principles to understand user and stakeholder needs, test assumptions and avoid building solutions before the problem is clear.
+
+In fast-moving environments where every request appears urgent, I negotiate trade-offs, prioritize according to expected business value and align stakeholders on scope, sequencing, ownership and decision criteria.
+
+**In practice:** I have aligned Product, Commercial, Engineering, BI and Analytics teams around shared metrics, growth priorities and executive review mechanisms.
+
+---
+
+## Team management
+
+I take accountability for team outcomes while creating the conditions for people to do their best work.
+
+I assign responsibilities with individual strengths and development goals in mind. I set clear expectations, provide context and remove obstacles, without prescribing every step of the solution.
+
+I value professional relationships in which people can disagree directly and respectfully. The quality of an idea should matter more than the seniority of the person proposing it, and learning should flow in every direction.
+
+**In practice:** I have led multidisciplinary data science and analytics teams, balancing delivery, individual development and shared responsibility for business outcomes.
+
+---
+
+## Leverage
+
+I look for ways to turn one analysis into a reusable capability.
+
+This may involve standardized metric definitions, experimentation frameworks, automated reporting, self-service data products or recurring business-review mechanisms.
+
+I use Agile and Scrum practices selectively to improve transparency, clarify ownership, manage dependencies and maintain delivery momentum. The methodology serves the work; it is not the objective.
+
+**In practice:** I have scaled KPI reporting, led BI automation and established analytical processes used across multiple teams.
+
+---
+
+## Influence
+
+A technically correct analysis has limited value if stakeholders cannot understand it or act on it.
+
+I translate business questions into analytical work and translate analytical findings back into clear choices, implications and recommendations. I communicate uncertainty and trade-offs directly rather than presenting false precision.
+
+I adapt the level of detail to the audience while keeping the underlying reasoning consistent across technical teams, product partners and executives.
+
+**In practice:** I have supported weekly executive reviews, roadmap decisions, global platform initiatives and cross-functional product launches.
+
+---
+
+## Quality
+
+I establish clear standards for analytical validity, reproducibility, documentation and governance.
+
+I expect teams to understand the limitations of the data, validate definitions, distinguish correlation from causation and make assumptions visible. I also encourage proportionate rigor: the analytical approach should match the importance and reversibility of the decision.
+
+**In practice:** I have defined shared measurement systems, experimentation standards, product-outcome metrics and analytics operating models.
+
+---
+
+## What teams can expect from me
+
+- Clear priorities and decision rights
+- Accountability without micromanagement
+- Direct, respectful feedback
+- Space to challenge assumptions and propose better approaches
+- Work aligned with individual strengths and development goals
+- A strong connection between analytical quality and business value
