@@ -798,3 +798,102 @@ body.quarto-dark .case-link .bi {
     font-size: 1.25rem;
   }
 }
+/* Leadership page */
+
+.leadership-intro {
+  max-width: 1100px;
+  margin: 0 auto 1.4rem;
+}
+
+.leadership-intro h1 {
+  margin-bottom: 0.8rem;
+}
+
+.leadership-intro h2 {
+  margin-bottom: 0.9rem;
+  font-size: 1.45rem;
+  line-height: 1.35;
+}
+
+.leadership-intro p {
+  max-width: 980px;
+}
+
+.leadership-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.leadership-card {
+  padding: 1.25rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 10px;
+  background: rgba(var(--bs-secondary-rgb), 0.035);
+}
+
+.leadership-card h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.2rem;
+}
+
+.leadership-card p {
+  margin-bottom: 0.8rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.leadership-card p:last-child {
+  margin-bottom: 0;
+}
+
+.leadership-card-wide {
+  grid-column: 1 / -1;
+}
+
+.team-expectations {
+  max-width: 1100px;
+  margin: 1.25rem auto 2rem;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 10px;
+  background: rgba(var(--bs-secondary-rgb), 0.025);
+}
+
+.team-expectations h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+.team-expectations ul {
+  columns: 2;
+  margin-bottom: 0;
+}
+
+.team-expectations li {
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 800px) {
+  .leadership-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .leadership-card-wide {
+    grid-column: auto;
+  }
+
+  .team-expectations ul {
+    columns: 1;
+  }
+}
+
+.leadership-card-wide {
+  grid-column: 1 / -1;
+  max-width: calc(50% - 0.55rem);
+  width: 100%;
+  justify-self: center;
+}

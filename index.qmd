@@ -9,9 +9,9 @@ page-layout: full
 
 <p class="home-role">Data Science & Analytics Leader</p>
 
-## I bridge business strategy and technical analytics to turn complex problems into clear decisions, scalable solutions and measurable growth.
+## I turn complex business questions into clear decisions, scalable analytical solutions and measurable growth.
 
-My work spans problem framing, measurement design, modeling, implementation and executive decision support across global analytics and data science initiatives.
+My work combines business judgment, analytical depth and cross-functional leadership across measurement, experimentation, modeling and executive decision support.
 
 :::
 
@@ -22,23 +22,35 @@ My work spans problem framing, measurement design, modeling, implementation and 
 ::: {.impact-grid}
 
 ::: {.impact-card}
+
 ### +30%
+
 Exceeded the annual active-user growth target.
+
 :::
 
 ::: {.impact-card}
+
 ### 1.5M+
+
 Merchants supported through global platform migration and adoption.
+
 :::
 
 ::: {.impact-card}
+
 ### +5%
+
 Conversion uplift in a key digital payment journey.
+
 :::
 
 ::: {.impact-card}
+
 ### $4.2M
+
 Incremental marginal contribution generated through experimentation.
+
 :::
 
 :::
@@ -50,34 +62,35 @@ Incremental marginal contribution generated through experimentation.
 ::: {.expertise-grid}
 
 ::: {.expertise-column}
-### Business Analytics
 
-- Product analytics
-- Commercial analytics
-- Marketing analytics
+### Applied Analytics
+
+- Product and growth analytics
+- Commercial and marketing analytics
 - Supply chain analytics
+- KPI design and opportunity sizing
 
 :::
 
 ::: {.expertise-column}
 
-### Data Science
+### Data Science & Experimentation
 
 - Machine learning
+- Predictive modeling
 - Experimentation
 - Causal inference
-- Predictive modeling
 
 :::
 
 ::: {.expertise-column}
 
-### Analytics Leadership
+### Leadership & Scale
 
-- Data and analytics strategy
-- Cross-functional team leadership
+- Cross-functional leadership
 - Executive communication
-- Measurement systems and governance
+- Team and stakeholder leadership
+- Measurement governance and self-service analytics
 
 :::
 
@@ -93,6 +106,7 @@ Incremental marginal contribution generated through experimentation.
 <div class="case-grid">
 
   <a href="projects/01-product-growth/" class="home-case-card">
+
     <div class="case-icon">
       <i class="bi bi-graph-up-arrow"></i>
     </div>
@@ -100,80 +114,64 @@ Incremental marginal contribution generated through experimentation.
     <h3>Product Growth &amp; Platform Analytics</h3>
 
     <p>
-      A product measurement and growth framework for identifying constraints,
-      prioritizing opportunities and guiding investment decisions.
+      A global measurement system for diagnosing adoption,
+      sizing growth opportunities and informing product and investment decisions.
     </p>
 
     <div class="case-tags">
-      Product Analytics · SQL · Python · Experimentation
+      Product Analytics · KPI Strategy · SQL · Python
     </div>
 
     <div class="case-link">
       View case study <i class="bi bi-arrow-right"></i>
     </div>
+
   </a>
 
   <div class="home-case-card home-case-card-disabled">
-    <div class="case-icon">
-      <i class="bi bi-currency-dollar"></i>
-    </div>
 
-    <h3>Commercial Analytics &amp; Revenue Optimization</h3>
-
-    <p>
-      A pricing, segmentation and opportunity-sizing framework designed to
-      improve commercial performance and allocate investment more effectively.
-    </p>
-
-    <div class="case-tags">
-      Commercial Analytics · R · SQL · Data Visualization
-    </div>
-
-    <div class="case-link case-link-muted">
-      Coming soon
-    </div>
-  </div>
-
-  <div class="home-case-card home-case-card-disabled">
     <div class="case-icon">
       <i class="bi bi-flask"></i>
     </div>
 
-    <h3>Marketing Experimentation &amp; Causal Measurement</h3>
+    <h3>Experimentation Platform</h3>
 
     <p>
-      An experimentation and causal-inference system for measuring incremental
-      impact and improving marketing investment decisions.
+      A scalable experimentation framework for designing rigorous tests,
+      improving precision and supporting confident decisions.
     </p>
 
     <div class="case-tags">
-      Experimentation · Causal Inference · Python · Measurement
+      Experimentation · Causal Inference · R · SQL
     </div>
 
     <div class="case-link case-link-muted">
       Coming soon
     </div>
+
   </div>
 
   <div class="home-case-card home-case-card-disabled">
+
     <div class="case-icon">
       <i class="bi bi-diagram-3"></i>
     </div>
 
-    <h3>Analytics Leadership &amp; Operating Model</h3>
+    <h3>Retention Risk System</h3>
 
     <p>
-      An operating model for scaling metric governance, team effectiveness,
-      business reviews and analytical standards across an organization.
+      A predictive decision system combining retention risk,
+      model calibration and expected value to prioritize intervention.
     </p>
 
     <div class="case-tags">
-      Analytics Leadership · Strategy · Governance
+      Machine Learning · Decision Systems · Python · SQL
     </div>
 
     <div class="case-link case-link-muted">
       Coming soon
     </div>
+
   </div>
 
 </div>

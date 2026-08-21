@@ -1,12 +1,57 @@
 ---
 title: "Case Studies"
+subtitle: "Selected work in product analytics, experimentation and applied machine learning"
+description: "Case studies showing how I frame ambiguous problems, build rigorous analytical approaches and translate findings into business decisions."
 page-layout: article
 ---
 
-Each case study combines executive decision-making with a reproducible analytical walkthrough.
+These case studies show how I approach different classes of data science problems: define the decision, choose the right analytical method, evaluate the evidence and translate results into action.
 
-| Case study | Core skills | Languages |
-|---|---|---|
-| [Product Growth & Platform Analytics](projects/01-product-growth/index.qmd) | Activation, time to activation, cohort analysis, adoption measurement, opportunity sizing | SQL, Python |
-| [Experimentation Platform](projects/02-experimentation/index.qmd) | A/B testing, power, CUPED, guardrails, causal inference | R, SQL |
-| [Retention Risk System](projects/03-retention-ml/index.qmd) | ML, calibration, expected value, monitoring | Python, SQL |
+Each project includes an executive case study and a reproducible analytical walkthrough.
+
+---
+
+## Product Growth & Platform Analytics
+
+### Turning merchant behavior into product and investment decisions
+
+How do you determine whether access to a platform is translating into meaningful adoption — and where intervention can create the most value?
+
+This case study shows how I structured a global merchant measurement system around activation, time to activation, early transaction depth and later activity, then used those signals to identify and size growth opportunities.
+
+**Demonstrates:** Product analytics · KPI strategy · Cohort analysis · Opportunity sizing · Executive decision support · SQL · Python
+
+[View case study](projects/01-product-growth/index.qmd){.btn .btn-primary}
+
+[View analytical walkthrough](projects/01-product-growth/analysis.qmd){.btn .btn-outline-primary}
+
+---
+
+## Experimentation Platform
+
+### Building reliable evidence for product decisions
+
+How do you design experiments that support confident product decisions rather than simply report whether a metric moved?
+
+This case study focuses on experiment design, statistical power, variance reduction, guardrails and causal interpretation in a scalable experimentation framework.
+
+**Demonstrates:** Experiment design · A/B testing · Statistical power · CUPED · Guardrails · Causal inference · R · SQL
+
+[View case study](projects/02-experimentation/index.qmd){.btn .btn-primary}
+
+---
+
+## Retention Risk System
+
+### Prioritizing intervention with predictive risk and expected value
+
+A high-performing model is not automatically a useful decision system.
+
+This case study shows how predictive modeling can identify retention risk while incorporating calibration, intervention economics and monitoring to determine which predictions are actionable.
+
+**Demonstrates:** Machine learning · Predictive modeling · Calibration · Expected value · Model monitoring · Decision systems · Python · SQL
+
+[View case study](projects/03-retention-ml/index.qmd){.btn .btn-primary}
+
+---
+

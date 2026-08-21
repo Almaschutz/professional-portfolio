@@ -1,81 +1,157 @@
 ---
 title: ""
-page-layout: article
+page-layout: full
 ---
 
-# Leadership
+```{=html}
+<div class="leadership-intro">
 
-## How I lead analytics teams and decisions at scale
+  <h1>Leadership</h1>
 
-My role as a leader is to create clarity: define the right problem, align people around the outcome and make sure the team can deliver work that changes a decision.
+  <h2>How I lead analytics teams and decisions at scale</h2>
 
-I combine business context, analytical rigor and practical execution. I am comfortable taking accountability for results while giving people the space to challenge ideas, apply their strengths and develop new capabilities.
+  <p>
+    I create clarity: frame the problem, align people around the outcome and
+    enable teams to deliver work that improves decisions and business results.
+  </p>
 
----
+  <p>
+    I combine business context, analytical judgment and practical execution.
+    I take accountability for outcomes while giving people the trust, context
+    and space to contribute their expertise and grow.
+  </p>
 
-## Direction
+</div>
 
-I turn ambiguous business needs into well-defined problems, measurable outcomes and prioritized analytical roadmaps.
+<div class="leadership-grid">
 
-I use design-thinking principles to understand user and stakeholder needs, test assumptions and avoid building solutions before the problem is clear.
+  <section class="leadership-card">
+    <h2>Direction</h2>
 
-In fast-moving environments where every request appears urgent, I negotiate trade-offs, prioritize according to expected business value and align stakeholders on scope, sequencing, ownership and decision criteria.
+    <p>
+      I turn ambiguous business needs into clear problem frames, measurable
+      outcomes and prioritized analytical roadmaps.
+    </p>
 
-**In practice:** I have aligned Product, Commercial, Engineering, BI and Analytics teams around shared metrics, growth priorities and executive review mechanisms.
+    <p>
+      In fast-moving environments, I test assumptions early, negotiate
+      trade-offs and align stakeholders on scope, priorities, ownership and
+      decision criteria. I also reuse proven approaches, existing assets and
+      prior learning when they can accelerate progress.
+    </p>
 
----
+    <p>
+      <strong>In practice:</strong> I have aligned Product, Commercial,
+      Engineering, BI and Analytics stakeholders around shared metrics,
+      priorities, delivery plans and executive review mechanisms.
+    </p>
+  </section>
 
-## Team management
+  <section class="leadership-card">
+    <h2>Team management</h2>
 
-I take accountability for team outcomes while creating the conditions for people to do their best work.
+    <p>
+      I take accountability for team outcomes while creating the conditions
+      for people to do their best work.
+    </p>
 
-I assign responsibilities with individual strengths and development goals in mind. I set clear expectations, provide context and remove obstacles, without prescribing every step of the solution.
+    <p>
+      I align responsibilities with individual strengths and development
+      goals, set clear expectations and remove obstacles without prescribing
+      every step. I encourage direct, respectful challenge while keeping
+      discussions focused and ensuring the team leaves with clear direction.
+    </p>
 
-I value professional relationships in which people can disagree directly and respectfully. The quality of an idea should matter more than the seniority of the person proposing it, and learning should flow in every direction.
+    <p>
+      <strong>In practice:</strong> I have led multidisciplinary analytics and
+      data science teams with highly specialized expertise, combining strong
+      individual contributions with shared accountability for delivery and
+      business results.
+    </p>
+  </section>
 
-**In practice:** I have led multidisciplinary data science and analytics teams, balancing delivery, individual development and shared responsibility for business outcomes.
+  <section class="leadership-card">
+    <h2>Leverage</h2>
 
----
+    <p>
+      I look beyond individual analyses to build capabilities that can be
+      reused across teams.
+    </p>
 
-## Leverage
+    <p>
+      Depending on the need, this may include standardized metrics, automated
+      reporting, self-service tools or recurring decision processes. I use
+      Agile and Scrum practices selectively to improve transparency, ownership
+      and delivery momentum—not as objectives in themselves.
+    </p>
 
-I look for ways to turn one analysis into a reusable capability.
+    <p>
+      <strong>In practice:</strong> I have scaled KPI reporting, led BI
+      automation and established analytical processes and tools used across
+      multiple teams.
+    </p>
+  </section>
 
-This may involve standardized metric definitions, experimentation frameworks, automated reporting, self-service data products or recurring business-review mechanisms.
+  <section class="leadership-card">
+    <h2>Influence</h2>
 
-I use Agile and Scrum practices selectively to improve transparency, clarify ownership, manage dependencies and maintain delivery momentum. The methodology serves the work; it is not the objective.
+    <p>
+      I translate business questions into analytical work and analytical
+      findings into clear choices, implications and recommendations.
+    </p>
 
-**In practice:** I have scaled KPI reporting, led BI automation and established analytical processes used across multiple teams.
+    <p>
+      I adapt the level of detail to the audience and communicate uncertainty
+      and trade-offs without losing the underlying reasoning.
+    </p>
 
----
+    <p>
+      <strong>In practice:</strong> I have aligned stakeholders around
+      marketing experiments, explained A/B testing to non-technical audiences
+      and built confidence in evidence-based decision-making. I have also
+      supported executive reviews, roadmap decisions and cross-functional
+      launches.
+    </p>
+  </section>
 
-## Influence
+  <section class="leadership-card leadership-card-wide">
+    <h2>Quality</h2>
 
-A technically correct analysis has limited value if stakeholders cannot understand it or act on it.
+    <p>
+      I make assumptions, limitations and uncertainty explicit so stakeholders
+      understand what the evidence does—and does not—support.
+    </p>
 
-I translate business questions into analytical work and translate analytical findings back into clear choices, implications and recommendations. I communicate uncertainty and trade-offs directly rather than presenting false precision.
+    <p>
+      I establish practical standards for metric definitions, validation,
+      reproducibility and appropriate causal claims. The level of rigor should
+      reflect the importance and reversibility of the decision.
+    </p>
 
-I adapt the level of detail to the audience while keeping the underlying reasoning consistent across technical teams, product partners and executives.
+    <p>
+      <strong>In practice:</strong> I have owned business-critical metrics
+      developed by my team, ensuring that definitions reflected business
+      needs, were applied consistently across teams and were used correctly in
+      decision-making. I have also established measurement frameworks and
+      analytical standards to support consistent interpretation.
+    </p>
+  </section>
 
-**In practice:** I have supported weekly executive reviews, roadmap decisions, global platform initiatives and cross-functional product launches.
+</div>
 
----
+<section class="team-expectations">
 
-## Quality
+  <h2>What teams can expect from me</h2>
 
-I establish clear standards for analytical validity, reproducibility, documentation and governance.
+  <ul>
+    <li>Clear priorities and ownership</li>
+    <li>Accountability without micromanagement</li>
+    <li>Direct, respectful feedback</li>
+    <li>Space to challenge assumptions</li>
+    <li>Responsibilities aligned with strengths and development goals</li>
+    <li>Pragmatism about when to reuse, adapt or build</li>
+    <li>A strong connection between analytical quality and business value</li>
+  </ul>
 
-I expect teams to understand the limitations of the data, validate definitions, distinguish correlation from causation and make assumptions visible. I also encourage proportionate rigor: the analytical approach should match the importance and reversibility of the decision.
-
-**In practice:** I have defined shared measurement systems, experimentation standards, product-outcome metrics and analytics operating models.
-
----
-
-## What teams can expect from me
-
-- Clear priorities and decision rights
-- Accountability without micromanagement
-- Direct, respectful feedback
-- Space to challenge assumptions and propose better approaches
-- Work aligned with individual strengths and development goals
-- A strong connection between analytical quality and business value
+</section>
+```
