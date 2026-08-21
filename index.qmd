@@ -7,11 +7,11 @@ page-layout: full
 
 # Alma Schutz
 
-<p class="home-role">Data Science & Analytics Leader</p>
+<p class="home-role">Analytics and Data Science</p>
 
-## I turn complex business questions into clear decisions, scalable analytical solutions and measurable growth.
+## I bridge business strategy and technical analytics to turn complex problems into clear decisions, scalable solutions and measurable growth.
 
-My work combines business judgment, analytical depth and cross-functional leadership across measurement, experimentation, modeling and executive decision support.
+My work spans problem framing, measurement design, modeling, implementation and executive decision support across global analytics and data science initiatives.
 
 :::
 
