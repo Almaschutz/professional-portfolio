@@ -26,8 +26,6 @@ This walkthrough uses synthetic merchant data and independently written code to 
 
 The analysis is intentionally simplified so the metric definitions, calculations, insights and decisions can be communicated clearly in a public and reproducible format.
 
-A production implementation would contain considerably more detail, including eligibility and exclusion rules, event-quality validation, merchant identity resolution, transaction reversals and refunds, market and product differences, rollout timing, cohort maturity, statistical uncertainty, operational constraints and financial impact.
-
 It contains no confidential company data, proprietary metric definitions, internal dashboards or production code. All numerical findings are illustrative and should not be interpreted as actual company results.
 
 :::
@@ -612,12 +610,6 @@ display(Markdown(
 
 6. **Treat relationships as descriptive unless incrementality is measured.**  
    Strong early adopters may already differ in readiness, demand, size or product fit.
-
-[Jump to activation analysis](#activation-analysis){.btn .btn-primary}
-
-[Jump to 30-Day Adoption](#30-day-adoption){.btn .btn-outline-primary}
-
-[Jump to later activity](#later-activity-during-days-31-60){.btn .btn-outline-primary}
 
 [Back to the executive case study](index.qmd){.btn .btn-outline-primary}
 

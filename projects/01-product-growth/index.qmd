@@ -20,7 +20,7 @@ A global merchant platform was expanding across markets, products and merchant s
 
 The challenge was not simply knowing which merchants had access to the platform. Product and commercial leaders needed to understand whether merchants were realizing value, where adoption was breaking down and which opportunities were worth prioritizing.
 
-I led analytics for the platform, establishing shared product metrics, diagnosing growth constraints and translating merchant behavior into product, roadmap and investment decisions.
+I led analytics for the platform, building a shared measurement system that connected merchant behavior with product, roadmap and investment decisions.
 
 ::: {.case-meta}
 
@@ -59,7 +59,7 @@ Supported growth in Monthly Active Users during 2025.
 
 ### 1.5M+
 
-Enabled analytics and decision support for a global merchant-platform migration.
+Supported analytics and decision-making for a global merchant-platform migration.
 
 :::
 
@@ -73,11 +73,11 @@ Supported conversion improvement in a key payment experience.
 
 :::
 
-The broader analytics capability also helped scale self-service reporting, establish shared product-outcome definitions and support roadmap expansion for more than 30 global alternative payment methods.
+The broader analytics capability also helped scale self-service reporting, establish shared product-outcome definitions and support roadmap expansion across more than 30 global alternative payment methods.
 
 ---
 
-## The challenge
+## The decision problem
 
 As the platform expanded, leadership needed to answer five questions:
 
@@ -87,34 +87,34 @@ As the platform expanded, leadership needed to answer five questions:
 4. Were merchants still active in the following period?
 5. Which gaps represented the most valuable and addressable growth opportunities?
 
-A single top-line activity metric could not answer these questions.
+A single top-line activity metric could not distinguish these behaviors.
 
-I structured the measurement system around distinct stages of merchant behavior so teams could diagnose where growth was breaking down and act on the right problem.
+I structured the measurement system around distinct stages of the merchant journey so teams could identify where growth was breaking down and focus on the right intervention.
 
 ---
 
-## What I led
+## My role
 
-I owned analytics for the Latest Merchant Platform, including product outcomes and technical metric definitions.
+I owned analytics for the merchant platform, including product outcomes and technical metric definitions.
 
-My role combined analytical depth with cross-functional leadership:
+My responsibilities included:
 
-- defined and governed core product metrics;
-- measured activation, adoption and platform growth;
-- identified behavioral patterns and growth opportunities;
-- supported product launches and roadmap decisions;
-- sized opportunities using both performance gaps and merchant population;
-- partnered with Product, Engineering, Research, Legal, Communications and Commercial teams;
-- led BI work to automate reporting and expand self-service analytics;
-- presented findings and recommendations to product and commercial leadership.
+- defining and governing core product metrics;
+- measuring activation, adoption and platform growth;
+- identifying behavioral patterns and growth opportunities;
+- sizing opportunities using both performance gaps and merchant population;
+- supporting product launches, roadmap and investment decisions;
+- leading BI automation and self-service reporting;
+- partnering across Product, Engineering, Research, Commercial and other functions;
+- translating analytical findings into recommendations for product and commercial leadership.
 
-The objective was not simply to report performance, but to create a measurement system teams could use to make better decisions.
+The goal was not simply to report performance. It was to create a measurement system teams could use repeatedly to make better decisions.
 
 ---
 
 ## Measurement framework
 
-The framework started with the first observable behavior showing that a merchant had realized value.
+The framework began with the first observable behavior showing that a merchant had realized value.
 
 ```text
 Eligible merchant
@@ -129,7 +129,7 @@ Later activity
 = 1+ successful transaction during days 31–60
 ```
 
-The public replica uses these definitions:
+The public analytical replica uses the following definitions:
 
 - **Eligible:** Merchant belongs to the population able to use the platform.
 - **Activated:** Merchant completes a first successful transaction.
@@ -138,39 +138,33 @@ The public replica uses these definitions:
 - **Later active:** At least one successful transaction during days 31–60.
 - **Activation cohort:** Month of the first successful transaction.
 
-Only merchants with complete observation windows are included in post-activation metrics, preventing newer cohorts from appearing artificially weaker simply because they have had less time to generate observable behavior.
+Only merchants with complete observation windows are included in post-activation metrics. This prevents newer cohorts from appearing weaker simply because they have had less time to generate observable behavior.
 
 ---
 
 ## How the analytics informed decisions
 
-### Diagnose where activation was breaking down
+### Diagnose activation friction
 
-Activation rate showed whether merchants reached first value.
+Activation rate showed whether merchants reached first value, while time to activation showed how quickly they got there.
 
-Time to activation showed how quickly they got there.
-
-Together, these metrics helped distinguish merchants who never activated from those who eventually activated but faced onboarding, integration or readiness delays.
+Together, they helped distinguish merchants who never activated from merchants who eventually activated but experienced onboarding, integration or readiness delays.
 
 ### Separate first use from meaningful adoption
 
-One successful transaction signaled initial value realization, but not necessarily meaningful product adoption.
+A first successful transaction indicated initial value realization, but not necessarily meaningful product adoption.
 
-30-Day Adoption provided a consistent way to measure whether first use developed into deeper early transaction behavior.
+30-Day Adoption provided a consistent measure of whether first use developed into deeper early transaction behavior.
 
-### Compare merchant cohorts fairly
+### Compare behavior fairly
 
 Fixed observation windows made cohort comparisons structurally consistent.
 
-This helped separate genuine behavioral differences from differences caused simply by cohort maturity.
+This helped separate genuine behavioral differences from apparent differences caused by cohort maturity.
 
-### Identify useful behavioral signals
+Later activity was measured independently from early adoption, allowing teams to evaluate whether stronger early usage was associated with subsequent activity without assuming the relationship was causal.
 
-Later activity was measured separately from early adoption rather than treated as an automatic next step in a funnel.
-
-This made it possible to evaluate whether stronger early transaction depth was associated with subsequent activity without assuming that the relationship was causal.
-
-### Prioritize opportunities, not just gaps
+### Prioritize value, not just performance gaps
 
 The weakest-performing segment was not automatically the best place to invest.
 
@@ -191,9 +185,9 @@ This shifted the conversation from **“Where is performance lowest?”** to **�
 
 The work extended beyond one-time analyses.
 
-I led the development of automated reporting and self-service KPI frameworks supporting:
+I led automated reporting and self-service KPI frameworks supporting:
 
-- regular business reviews;
+- recurring business reviews;
 - activation and time-to-activation monitoring;
 - adoption and cohort tracking;
 - later-activity measurement;
@@ -201,24 +195,7 @@ I led the development of automated reporting and self-service KPI frameworks sup
 - roadmap prioritization;
 - leadership reporting.
 
-The result was a more consistent measurement system connecting product behavior with recurring business and roadmap decisions.
-
----
-
-## Leadership and collaboration
-
-Creating the measurement system required alignment across technical, product and commercial teams.
-
-My role included:
-
-- aligning stakeholders around shared definitions;
-- connecting technical events with meaningful product outcomes;
-- translating analytical findings into clear executive recommendations;
-- prioritizing analytical work based on expected product value;
-- leading BI resources and reporting automation;
-- connecting product performance with commercial context.
-
-A central part of the work was making complex measurement understandable enough to support decisions without oversimplifying the underlying analytical questions.
+This created a more consistent operating system for connecting product behavior with recurring business and roadmap decisions.
 
 ---
 
@@ -230,7 +207,7 @@ The business context, analytical challenges and leadership responsibilities refl
 
 No confidential company data, proprietary metric definitions, internal dashboards or production code are included.
 
-The analytical walkthrough shows the implementation in detail, including:
+The walkthrough demonstrates:
 
 - synthetic-data generation;
 - activation and adoption measurement;
@@ -256,19 +233,12 @@ The analytical walkthrough shows the implementation in detail, including:
 
 A production measurement system could extend this work through:
 
-- activation curves by time since eligibility;
-- reasons for delayed or failed activation;
-- transaction quality and merchant value;
-- movement between transaction-depth bands;
-- early-warning indicators for declining usage;
-- incremental impact of individual product capabilities;
-- long-term merchant value by activation path;
-- experimentation for onboarding and product interventions;
-- causal measurement of roadmap changes.
+- activation curves and root causes of delayed or failed activation;
+- transaction quality, merchant value and movement between usage-depth bands;
+- experimentation on onboarding and product interventions;
+- causal measurement of roadmap changes and long-term merchant value.
 
 ---
-
-[View the analytical walkthrough](analysis.qmd){.btn .btn-primary}
 
 [Back to Case Studies](../../projects.qmd){.btn .btn-outline-primary}
 
