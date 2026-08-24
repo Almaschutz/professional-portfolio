@@ -1,13 +1,16 @@
 ---
 title: "Case Studies"
 subtitle: "Selected work in product analytics, experimentation and applied machine learning"
-description: "Case studies showing how I frame ambiguous problems, build rigorous analytical approaches and translate findings into business decisions."
-page-layout: article
+page-layout: full
 ---
+
+<div class="page-intro">
 
 These case studies show how I approach different classes of data science problems: define the decision, choose the right analytical method, evaluate the evidence and translate results into action.
 
 Each project includes an executive case study and a reproducible analytical walkthrough.
+
+</div>
 
 ---
 
@@ -21,9 +24,13 @@ This case study shows how I structured a global merchant measurement system arou
 
 **Demonstrates:** Product analytics · KPI strategy · Cohort analysis · Opportunity sizing · Executive decision support · SQL · Python
 
+<div class="project-actions">
+
 [View case study](projects/01-product-growth/index.qmd){.btn .btn-primary}
 
 [View analytical walkthrough](projects/01-product-growth/analysis.qmd){.btn .btn-outline-primary}
+
+</div>
 
 ---
 
@@ -37,7 +44,11 @@ This case study focuses on experiment design, statistical power, variance reduct
 
 **Demonstrates:** Experiment design · A/B testing · Statistical power · CUPED · Guardrails · Causal inference · R · SQL
 
+<div class="project-actions">
+
 [View case study](projects/02-experimentation/index.qmd){.btn .btn-primary}
+
+</div>
 
 ---
 
@@ -51,7 +62,8 @@ This case study shows how predictive modeling can identify retention risk while 
 
 **Demonstrates:** Machine learning · Predictive modeling · Calibration · Expected value · Model monitoring · Decision systems · Python · SQL
 
+<div class="project-actions">
+
 [View case study](projects/03-retention-ml/index.qmd){.btn .btn-primary}
 
----
-
+</div>

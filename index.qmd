@@ -175,4 +175,3 @@ Incremental marginal contribution generated through experimentation.
   </div>
 
 </div>
-```
