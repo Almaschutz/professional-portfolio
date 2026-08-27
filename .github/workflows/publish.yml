@@ -25,12 +25,13 @@ jobs:
       - name: Install R packages
         run: |
           Rscript -e 'install.packages(c(
-            "tidyverse"
-            ,"scales"
-            ,"rmarkdown"
-            ,"knitr"
-            
+            "rmarkdown",
+            "knitr",
+            "tidyverse",
+            "scales"
           ), repos="https://cloud.r-project.org")'
+          Rscript -e 'print(.libPaths())'
+          Rscript -e 'library(rmarkdown); packageVersion("rmarkdown")'
 
       - uses: quarto-dev/quarto-actions/setup@v2
 
