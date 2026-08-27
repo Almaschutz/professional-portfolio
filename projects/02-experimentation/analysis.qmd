@@ -1,7 +1,7 @@
 ---
 title: "Analytical Walkthrough"
-subtitle: "From consumption behavior to segment-specific planogram decisions"
-description: "A confidentiality-safe replica of behavioral segmentation and controlled retail experimentation using synthetic data."
+subtitle: "From store-level consumption patterns to segment-specific planogram decisions"
+description: "A confidentiality-safe replica of behavioral segmentation, matched controls and controlled retail experimentation using synthetic data."
 page-layout: full
 
 format:
@@ -25,7 +25,7 @@ execute:
 
 This walkthrough recreates the analytical logic of a real retail experimentation project using synthetic data and independently written code.
 
-The business problem, segmentation logic, operational constraints and measurement approach reflect the work performed. Store identities, assignments, effect sizes and numerical results are generalized for confidentiality.
+The business problem, segmentation logic, operational constraints, matching approach and measurement framework reflect the work performed. Store identities, assignments, treatment effects and numerical results are generalized for confidentiality.
 
 :::
 
@@ -34,7 +34,6 @@ The business problem, segmentation logic, operational constraints and measuremen
 #| include: false
 
 library(tidyverse)
-library(pwr)
 
 set.seed(42)
 
@@ -45,8 +44,10 @@ options(
 
 N_STORES <- 1200
 N_PLAZAS <- 60
-HISTORY_WEEKS <- 60
+MIN_HISTORY_WEEKS <- 61
+HISTORY_WEEKS <- 61
 POST_WEEKS <- 8
+NETWORK_STORES <- 24000
 
 segments <- c(
   "Full Flavor",
@@ -55,202 +56,284 @@ segments <- c(
   "NTD"
 )
 
-planograms <- c(
-  "Control",
-  "Planogram A",
-  "Planogram B"
-)
-
-# Treatment colors: neutral control + two distinct alternatives
-assignment_palette <- c(
-  "Control" = "#6B7280",
-  "Planogram A" = "#D97706",
-  "Planogram B" = "#2563EB"
-)
-
-# Segment colors reflect the convention used in the original work
-segment_palette <- c(
-  "Full Flavor" = "#B42318",
-  "Light" = "#D4A017",
-  "Menthol" = "#2F6BFF",
-  "NTD" = "#7A5AF8"
-)
+segment_y_order <- rev(segments)
 
 treatment_palette <- c(
   "Control" = "#6B7280",
   "Planogram A" = "#D97706",
   "Planogram B" = "#2563EB"
 )
+
+segment_palette <- c(
+  "Full Flavor" = "#B42318",
+  "Light" = "#D4A017",
+  "Menthol" = "#2F6BFF",
+  "NTD" = "#7A5AF8"
+)
 ```
 
 ## The business question
 
-The objective was not to find one national planogram winner.
+The objective was to answer:
 
 > **Which planogram should be used for each consumption profile, and is the evidence strong enough to justify rollout?**
 
-The analysis had five steps:
+The analysis followed four decisions:
 
 1. identify meaningful consumption profiles;
-2. translate those profiles into an operational Plaza segment;
-3. compare Control, Planogram A and Planogram B within each segment;
-4. estimate incremental impact versus Control;
-5. recommend rollout only where the evidence supported it.
+2. translate store-level behavior into an executable **Plaza segment**;
+3. compare each treated store with **three controls matched on historical trend and seasonality**;
+4. estimate incremental MIOS and recommend the planogram only where the evidence supported it.
 
 The commercial outcome is expressed in **MIOS — millions of sticks**.
+
+
+---
+
+## What this walkthrough demonstrates
+
+**Demonstrates:** Behavioral segmentation · A/B testing · Matched controls · Nearest-neighbor matching · Causal inference · Statistical analysis · R · SQL
+
+More importantly, it demonstrates a complete decision path:
+
+> **Understand consumer behavior → make the strategy executable → build a credible counterfactual → estimate incremental impact → recommend action only where the evidence supports it.**
 
 ---
 
 ## 1. Build meaningful consumption profiles
 
-A simple “largest category wins” rule was not useful because **Full Flavor was structurally the largest category in many stores**. That would have classified too much of the market into the same group.
+A simple “largest category wins” rule was not useful because **Full Flavor was structurally the largest category in many stores**. That would have pushed too much of the market into one group and hidden meaningful differences in the rest of the consumption mix.
 
-Instead, each store was represented by its complete historical MIOS mix across **Full Flavor, Light, Menthol and NTD — New Taste Dimensions**.
+Instead, each store was represented by its complete historical MIOS mix across:
 
-We used four **centroids** to represent the typical category mix of each consumption profile. The important idea is simple: a store is understood by the **shape of its full consumption mix**, not by whichever category happens to rank first.
+- **Full Flavor**
+- **Light**
+- **Menthol**
+- **NTD — New Taste Dimensions**
+
+### Build four business-defined reference profiles
+
+The four segments were known in advance from the business context. The analytical problem was therefore not to discover an arbitrary number of clusters, but to create a **representative consumption profile for each of the four categories**.
+
+We first calculated the **national average category mix**. Then, for every store, we measured how much each category over- or under-indexed relative to that national pattern.
+
+Stores showing a clear relative over-index toward Full Flavor, Light, Menthol or NTD were used as the anchor group for that category.
+
+For each anchor group, we calculated the average four-category consumption mix. That average became the **reference profile** for the segment.
+
+```text
+Historical store mix
+        ↓
+Compare with national category mix
+        ↓
+Identify stores with a clear relative over-index
+        ↓
+Average their full four-category mix
+        ↓
+Four reference profiles:
+Full Flavor · Light · Menthol · NTD
+```
+
+This matters because a store can still sell more Full Flavor than any other single category and yet behave more like a **Menthol** or **NTD** store relative to the national pattern.
+
+Stores without a clearly dominant relative pattern — and later the aggregated Plaza profiles — were assigned to the **closest reference profile based on their complete consumption mix**.
 
 ```{r}
-#| label: generate-stores
+#| label: generate-segmentation-data
 #| echo: false
 #| results: hide
+
+plazas <- tibble(
+  plaza_id = sprintf("P%02d", 1:N_PLAZAS),
+  plaza_profile = rep(
+    segments,
+    length.out = N_PLAZAS
+  )
+) %>%
+  slice_sample(prop = 1)
 
 stores <- tibble(
   store_id = sprintf("S%04d", 1:N_STORES),
   plaza_id = sample(
-    sprintf("P%02d", 1:N_PLAZAS),
+    plazas$plaza_id,
     N_STORES,
     replace = TRUE
   ),
   store_age_weeks = sample(
-    35:180,
+    40:180,
     N_STORES,
     replace = TRUE
-  ),
-  latent_profile = sample(
-    segments,
-    N_STORES,
-    replace = TRUE,
-    prob = c(0.40, 0.25, 0.20, 0.15)
   )
-)
+) %>%
+  left_join(
+    plazas,
+    by = "plaza_id"
+  ) %>%
+  rowwise() %>%
+  mutate(
+    # Most stores resemble the behavioral profile of their Plaza,
+    # while some retain realistic within-Plaza heterogeneity.
+    latent_profile = if (
+      runif(1) < 0.78
+    ) {
+      plaza_profile
+    } else {
+      sample(
+        segments[
+          segments != plaza_profile
+        ],
+        1
+      )
+    }
+  ) %>%
+  ungroup()
 
-profile_template <- tribble(
+# Synthetic population used only for the public replica.
+population_template <- tribble(
   ~latent_profile, ~full_flavor, ~light, ~menthol, ~ntd,
   "Full Flavor",   0.50,         0.24,   0.16,     0.10,
-  "Light",         0.38,         0.36,   0.16,     0.10,
-  "Menthol",       0.40,         0.18,   0.32,     0.10,
-  "NTD",           0.39,         0.17,   0.14,     0.30
+  "Light",         0.42,         0.32,   0.16,     0.10,
+  "Menthol",       0.43,         0.18,   0.29,     0.10,
+  "NTD",           0.43,         0.17,   0.14,     0.26
 )
 
 store_profiles <- stores %>%
   left_join(
-    profile_template,
+    population_template,
     by = "latent_profile"
   ) %>%
   rowwise() %>%
   mutate(
-    full_flavor_obs = max(
-      0.01,
-      full_flavor + rnorm(1, 0, 0.025)
-    ),
-    light_obs = max(
-      0.01,
-      light + rnorm(1, 0, 0.025)
-    ),
-    menthol_obs = max(
-      0.01,
-      menthol + rnorm(1, 0, 0.025)
-    ),
-    ntd_obs = max(
-      0.01,
-      ntd + rnorm(1, 0, 0.025)
-    ),
-    total_obs =
-      full_flavor_obs +
-      light_obs +
-      menthol_obs +
-      ntd_obs,
-    full_flavor_share =
-      full_flavor_obs / total_obs,
-    light_share =
-      light_obs / total_obs,
-    menthol_share =
-      menthol_obs / total_obs,
-    ntd_share =
-      ntd_obs / total_obs
+    ff_raw = max(0.01, full_flavor + rnorm(1, 0, 0.025)),
+    light_raw = max(0.01, light + rnorm(1, 0, 0.025)),
+    menthol_raw = max(0.01, menthol + rnorm(1, 0, 0.025)),
+    ntd_raw = max(0.01, ntd + rnorm(1, 0, 0.025)),
+    total_raw = ff_raw + light_raw + menthol_raw + ntd_raw,
+    full_flavor_share = ff_raw / total_raw,
+    light_share = light_raw / total_raw,
+    menthol_share = menthol_raw / total_raw,
+    ntd_share = ntd_raw / total_raw
   ) %>%
   ungroup()
 
-centroids <- store_profiles %>%
-  group_by(latent_profile) %>%
+national_mix <- store_profiles %>%
   summarise(
-    full_flavor_centroid = mean(full_flavor_share),
-    light_centroid = mean(light_share),
-    menthol_centroid = mean(menthol_share),
-    ntd_centroid = mean(ntd_share),
+    full_flavor_share = mean(full_flavor_share),
+    light_share = mean(light_share),
+    menthol_share = mean(menthol_share),
+    ntd_share = mean(ntd_share)
+  )
+
+store_index <- store_profiles %>%
+  mutate(
+    ff_index = full_flavor_share / national_mix$full_flavor_share,
+    light_index = light_share / national_mix$light_share,
+    menthol_index = menthol_share / national_mix$menthol_share,
+    ntd_index = ntd_share / national_mix$ntd_share,
+    max_index = pmax(
+      ff_index,
+      light_index,
+      menthol_index,
+      ntd_index
+    ),
+    anchor_segment = case_when(
+      max_index < 1.12 ~ NA_character_,
+      ff_index == max_index ~ "Full Flavor",
+      light_index == max_index ~ "Light",
+      menthol_index == max_index ~ "Menthol",
+      TRUE ~ "NTD"
+    )
+  )
+
+reference_profiles <- store_index %>%
+  filter(!is.na(anchor_segment)) %>%
+  group_by(anchor_segment) %>%
+  summarise(
+    full_flavor = mean(full_flavor_share),
+    light = mean(light_share),
+    menthol = mean(menthol_share),
+    ntd = mean(ntd_share),
     .groups = "drop"
   ) %>%
-  rename(segment = latent_profile)
+  rename(segment = anchor_segment)
 ```
 
 ```{r}
-#| label: centroid-profile-chart
-#| fig-cap: "Synthetic behavioral centroids used to interpret Plaza consumption profiles"
+#| label: reference-profile-chart
+#| fig-cap: "Synthetic reference profiles used to illustrate the segmentation logic"
 
-centroid_plot <- centroids %>%
-  rename(
-    `Full Flavor` = full_flavor_centroid,
-    Light = light_centroid,
-    Menthol = menthol_centroid,
-    NTD = ntd_centroid
-  ) %>%
+reference_plot <- reference_profiles %>%
   pivot_longer(
     cols = c(
-      `Full Flavor`,
-      Light,
-      Menthol,
-      NTD
+      full_flavor,
+      light,
+      menthol,
+      ntd
     ),
     names_to = "category",
     values_to = "share"
+  ) %>%
+  mutate(
+    category = recode(
+      category,
+      full_flavor = "Full Flavor",
+      light = "Light",
+      menthol = "Menthol",
+      ntd = "NTD"
+    ),
+    category = factor(
+      category,
+      levels = c(
+        "Full Flavor",
+        "Light",
+        "Menthol",
+        "NTD"
+      )
+    ),
+    segment = factor(
+      segment,
+      levels = segment_y_order
+    )
   )
 
 ggplot(
-  centroid_plot,
+  reference_plot,
   aes(
-    x = segment,
-    y = share,
+    x = share,
+    y = segment,
     fill = category
   )
 ) +
-  geom_col(width = 0.72) +
-  coord_flip() +
+  geom_col(width = 0.65) +
   scale_fill_manual(values = segment_palette) +
-  scale_y_continuous(
-    labels = scales::percent_format(accuracy = 1),
-    limits = c(0, 1)
+  scale_x_continuous(
+    labels = scales::label_percent(accuracy = 1),
+    limits = c(0, 1),
+    expand = expansion(mult = c(0, 0.01))
   ) +
   labs(
-    title = "Each Segment Represents a Different Consumption Pattern",
-    subtitle = "The full category mix—not the largest category alone—defines the profile",
-    x = NULL,
-    y = "Share of historical MIOS",
+    title = "What Defines Each Reference Profile?",
+    subtitle = "Each horizontal bar shows the category shares within one reference profile",
+    x = "Share of historical MIOS",
+    y = NULL,
     fill = "Category"
   ) +
   theme_minimal(base_size = 12) +
   theme(
+    panel.grid.minor = element_blank(),
     legend.position = "top",
-    panel.grid.major.y = element_blank()
+    axis.text.y = element_text(face = "bold"),
+    plot.title.position = "plot"
   )
 ```
 
-The chart shows why the segmentation is useful: each profile has a different relative mix, even when Full Flavor remains important across the market.
+Each horizontal bar sums to 100%, so all profiles have the same total length and can be compared on composition alone. This chart is descriptive: it helps the reader see the shape of each profile. The assignment rule still compares stores with these profiles relative to the national mix, which is why a store can still be classified as Light, Menthol or NTD even when Full Flavor remains the largest absolute share.
 
 ### Make the segmentation executable
 
 Planograms could not realistically be implemented store by store. Execution happened at the **Plaza** level.
 
-For each Plaza, we combined store-level category shares, calculated the **harmonic mean by category**, normalized the four values into one Plaza consumption profile, and matched that profile to the nearest centroid.
+For each Plaza, store-level category shares were combined using the **harmonic mean by category**. The four resulting values were normalized into one Plaza consumption profile and matched to the nearest behavioral reference profile.
 
 ```text
 Store-level category shares
@@ -259,38 +342,22 @@ Harmonic mean by category within Plaza
         ↓
 Normalized Plaza consumption profile
         ↓
-Nearest centroid
+Nearest reference profile
         ↓
 Operational Plaza segment
 ```
 
-The harmonic mean makes the Plaza profile more sensitive to **consistency across stores**. A category therefore needs to be broadly represented in the Plaza rather than looking strong because of only a few stores.
+The harmonic mean makes the Plaza profile more sensitive to **consistency across stores**. A category needs to be broadly represented across the Plaza rather than looking strong because of only a few stores. It also keeps the classification focused on the **distribution of category shares across stores**, rather than on absolute sales volume alone. It also keeps the classification focused on the **distribution of category shares across stores**, rather than on absolute sales volume alone.
 
 > **Store behavior creates the signal; Plaza segmentation makes it operational.**
 
----
-
-## 2. Run the A/B test within each segment
-
-Only stores with at least **52 weeks of historical data** were included, giving enough history to account for seasonality, underlying store growth and normal variation.
-
-Control Plazas were selected to be **comparable to treated Plazas on historical performance and consumption profile**, so the comparison did not rely on fundamentally different stores.
-
-Within each Plaza segment, we compared:
-
-- **Control:** existing planogram
-- **Planogram A:** color-led treatment adapted to that segment
-- **Planogram B:** brand-led treatment adapted to that segment
-
-A and B were **treatment families**, not single national layouts. Each had a Full Flavor, Light, Menthol and NTD version.
-
 ```{r}
-#| label: eligibility-and-assignment
+#| label: plaza-segmentation
 #| echo: false
 #| results: hide
 
 eligible_stores <- store_profiles %>%
-  filter(store_age_weeks >= 52)
+  filter(store_age_weeks >= MIN_HISTORY_WEEKS)
 
 harmonic_mean <- function(x) {
   length(x) / sum(1 / x)
@@ -299,97 +366,111 @@ harmonic_mean <- function(x) {
 plaza_profiles <- eligible_stores %>%
   group_by(plaza_id) %>%
   summarise(
-    full_flavor_hm = harmonic_mean(full_flavor_share),
-    light_hm = harmonic_mean(light_share),
-    menthol_hm = harmonic_mean(menthol_share),
-    ntd_hm = harmonic_mean(ntd_share),
+    full_flavor = harmonic_mean(full_flavor_share),
+    light = harmonic_mean(light_share),
+    menthol = harmonic_mean(menthol_share),
+    ntd = harmonic_mean(ntd_share),
     .groups = "drop"
   ) %>%
   mutate(
-    total_hm =
-      full_flavor_hm +
-      light_hm +
-      menthol_hm +
-      ntd_hm,
-    full_flavor_share = full_flavor_hm / total_hm,
-    light_share = light_hm / total_hm,
-    menthol_share = menthol_hm / total_hm,
-    ntd_share = ntd_hm / total_hm
+    total = full_flavor + light + menthol + ntd,
+    full_flavor = full_flavor / total,
+    light = light / total,
+    menthol = menthol / total,
+    ntd = ntd / total
+  ) %>%
+  select(-total)
+
+reference_matrix <- reference_profiles %>%
+  select(
+    full_flavor,
+    light,
+    menthol,
+    ntd
+  ) %>%
+  as.matrix()
+
+nearest_reference <- function(ff, li, me, nt) {
+  profile <- c(ff, li, me, nt)
+
+  distances <- rowSums(
+    (
+      reference_matrix -
+      matrix(
+        profile,
+        nrow = nrow(reference_matrix),
+        ncol = 4,
+        byrow = TRUE
+      )
+    )^2
   )
 
-distance_to_centroid <- function(
-  ff, li, me, nt,
-  centroid_row
-) {
-  sqrt(
-    (ff - centroid_row$full_flavor_centroid)^2 +
-    (li - centroid_row$light_centroid)^2 +
-    (me - centroid_row$menthol_centroid)^2 +
-    (nt - centroid_row$ntd_centroid)^2
-  )
+  reference_profiles$segment[which.min(distances)]
 }
 
 plaza_segments <- plaza_profiles %>%
   rowwise() %>%
   mutate(
-    distance_ff = distance_to_centroid(
-      full_flavor_share,
-      light_share,
-      menthol_share,
-      ntd_share,
-      centroids %>% filter(segment == "Full Flavor")
-    ),
-    distance_light = distance_to_centroid(
-      full_flavor_share,
-      light_share,
-      menthol_share,
-      ntd_share,
-      centroids %>% filter(segment == "Light")
-    ),
-    distance_menthol = distance_to_centroid(
-      full_flavor_share,
-      light_share,
-      menthol_share,
-      ntd_share,
-      centroids %>% filter(segment == "Menthol")
-    ),
-    distance_ntd = distance_to_centroid(
-      full_flavor_share,
-      light_share,
-      menthol_share,
-      ntd_share,
-      centroids %>% filter(segment == "NTD")
-    ),
-    plaza_segment = case_when(
-      distance_ff == min(
-        distance_ff,
-        distance_light,
-        distance_menthol,
-        distance_ntd
-      ) ~ "Full Flavor",
-      distance_light == min(
-        distance_ff,
-        distance_light,
-        distance_menthol,
-        distance_ntd
-      ) ~ "Light",
-      distance_menthol == min(
-        distance_ff,
-        distance_light,
-        distance_menthol,
-        distance_ntd
-      ) ~ "Menthol",
-      TRUE ~ "NTD"
+    plaza_segment = nearest_reference(
+      full_flavor,
+      light,
+      menthol,
+      ntd
     )
   ) %>%
   ungroup()
+
+missing_plaza_segments <- setdiff(
+  segments,
+  unique(plaza_segments$plaza_segment)
+)
+
+if (length(missing_plaza_segments) > 0) {
+  stop(
+    paste(
+      "Synthetic replica is missing Plaza segments:",
+      paste(
+        missing_plaza_segments,
+        collapse = ", "
+      )
+    )
+  )
+}
+```
+
+---
+
+## 2. Build a credible comparison with matched controls
+
+Only stores with **more than one year plus eight weeks of history** were eligible. That history was used to capture each store's underlying **trend and seasonal pattern** before the planogram change.
+
+Planogram A and Planogram B were treatment families, each adapted to the Plaza segment:
+
+- **Planogram A:** color-led treatment;
+- **Planogram B:** brand-led treatment;
+- **Control:** existing configuration, largely organized by price tier, largely organized by price tier.
+
+Each treated store was then matched to **three control stores** with the most similar historical trend and seasonality.
+
+To find the three closest controls efficiently, the original analysis used a **KD-tree nearest-neighbor search** based on historical trend and seasonality.
+
+The public replica reproduces the same nearest-neighbor logic directly in R so the matching approach is easy to inspect without adding an extra package dependency.
+
+```{r}
+#| label: treatment-and-panel
+#| echo: false
+#| results: hide
 
 plaza_assignment <- plaza_segments %>%
   group_by(plaza_segment) %>%
   mutate(
     assignment = sample(
       rep(
-        c("Control", "Planogram A", "Planogram B"),
+        c(
+          "Control",
+          "Planogram A",
+          "Planogram B"
+        ),
         length.out = n()
       )
     )
@@ -401,34 +482,7 @@ plaza_assignment <- plaza_segments %>%
     assignment
   )
 
-eligible_stores <- eligible_stores %>%
-  left_join(
-    plaza_assignment,
-    by = "plaza_id"
-  ) %>%
-  mutate(
-    segment = plaza_segment
-  )
-```
-
-```{r}
-#| label: simulate-panel
-#| echo: false
-#| results: hide
-
-# Rebuild the analysis table explicitly from the Plaza assignment.
-# Dropping possible prior copies makes this robust to duplicated
-# assignment/segment columns created by earlier joins.
 analysis_stores <- eligible_stores %>%
-  select(
-    -any_of(
-      c(
-        "assignment",
-        "segment",
-        "plaza_segment"
-      )
-    )
-  ) %>%
   left_join(
     plaza_assignment,
     by = "plaza_id"
@@ -438,24 +492,28 @@ analysis_stores <- eligible_stores %>%
     baseline_mios = rlnorm(
       n(),
       meanlog = log(0.09),
-      sdlog = 0.30
+      sdlog = 0.28
     ),
     weekly_trend = rnorm(
       n(),
-      mean = 0.001,
-      sd = 0.0015
+      mean = 0.0010,
+      sd = 0.0014
+    ),
+    seasonal_amplitude = runif(
+      n(),
+      min = 0.015,
+      max = 0.055
+    ),
+    seasonal_phase = runif(
+      n(),
+      min = -pi,
+      max = pi
     ),
     store_noise = case_when(
-      segment == "NTD" ~ runif(
-        n(),
-        min = 0.10,
-        max = 0.20
-      ),
-      TRUE ~ runif(
-        n(),
-        min = 0.05,
-        max = 0.11
-      )
+      segment == "NTD" &
+        assignment == "Planogram B" ~ runif(n(), 0.30, 0.48),
+      segment == "NTD" ~ runif(n(), 0.055, 0.085),
+      TRUE ~ runif(n(), 0.045, 0.09)
     )
   )
 
@@ -472,46 +530,44 @@ weekly_data <- crossing(
 ) %>%
   mutate(
     post = week >= 0,
-
     seasonal_factor =
       1 +
-      0.035 * sin(
-        2 * pi * (week + HISTORY_WEEKS) / 52
+      seasonal_amplitude *
+      sin(
+        2 * pi * (week + HISTORY_WEEKS) / 52 +
+        seasonal_phase
       ),
-
     organic_growth =
       1 + weekly_trend * (week + HISTORY_WEEKS),
-
     treatment_effect = case_when(
       !post ~ 0,
 
-      .data$assignment == "Planogram A" &
-        .data$segment == "Full Flavor" ~ 0.060,
+      assignment == "Planogram A" &
+        segment == "Full Flavor" ~ 0.060,
 
-      .data$assignment == "Planogram B" &
-        .data$segment == "Full Flavor" ~ 0.020,
+      assignment == "Planogram B" &
+        segment == "Full Flavor" ~ -0.005,
 
-      .data$assignment == "Planogram A" &
-        .data$segment == "Light" ~ 0.015,
+      assignment == "Planogram A" &
+        segment == "Light" ~ 0.000,
 
-      .data$assignment == "Planogram B" &
-        .data$segment == "Light" ~ 0.055,
+      assignment == "Planogram B" &
+        segment == "Light" ~ 0.055,
 
-      .data$assignment == "Planogram A" &
-        .data$segment == "Menthol" ~ 0.000,
+      assignment == "Planogram A" &
+        segment == "Menthol" ~ -0.010,
 
-      .data$assignment == "Planogram B" &
-        .data$segment == "Menthol" ~ 0.060,
+      assignment == "Planogram B" &
+        segment == "Menthol" ~ 0.060,
 
-      .data$assignment == "Planogram A" &
-        .data$segment == "NTD" ~ 0.075,
+      assignment == "Planogram A" &
+        segment == "NTD" ~ 0.030,
 
-      .data$assignment == "Planogram B" &
-        .data$segment == "NTD" ~ 0.025,
+      assignment == "Planogram B" &
+        segment == "NTD" ~ 0.070,
 
       TRUE ~ 0
     ),
-
     mios =
       baseline_mios *
       seasonal_factor *
@@ -525,128 +581,305 @@ weekly_data <- crossing(
         )
       )
   )
+
+matching_features <- analysis_stores %>%
+  group_by(segment) %>%
+  mutate(
+    trend_z =
+      (weekly_trend - mean(weekly_trend)) /
+      sd(weekly_trend),
+    season_z =
+      (seasonal_amplitude - mean(seasonal_amplitude)) /
+      sd(seasonal_amplitude)
+  ) %>%
+  ungroup()
+
+treated_stores <- matching_features %>%
+  filter(assignment != "Control")
+
+control_pool <- matching_features %>%
+  filter(assignment == "Control")
+
+matched_pairs <- map_dfr(
+  seq_len(nrow(treated_stores)),
+  function(i) {
+
+    treated <- treated_stores[i, ]
+
+    candidates <- control_pool %>%
+      filter(segment == treated$segment) %>%
+      mutate(
+        distance =
+          (trend_z - treated$trend_z)^2 +
+          (season_z - treated$season_z)^2
+      ) %>%
+      arrange(distance) %>%
+      slice_head(n = 3)
+
+    tibble(
+      treated_store_id = treated$store_id,
+      control_store_id = candidates$store_id,
+      segment = treated$segment,
+      planogram = treated$assignment,
+      control_rank = seq_len(nrow(candidates))
+    )
+  }
+)
+
+matched_segment_check <- matched_pairs %>%
+  distinct(segment) %>%
+  pull(segment)
+
+missing_matched_segments <- setdiff(
+  segments,
+  matched_segment_check
+)
+
+if (length(missing_matched_segments) > 0) {
+  stop(
+    paste(
+      "Synthetic matching is missing segments:",
+      paste(
+        missing_matched_segments,
+        collapse = ", "
+      )
+    )
+  )
+}
 ```
 
-```{r}
-#| label: segment-trends
-#| fig-cap: "Indexed weekly MIOS by segment-specific planogram treatment"
+### Did the matching create comparable histories?
 
-trend_data <- weekly_data %>%
+The most useful diagnostic is not whether treated and control stores had the same absolute MIOS, because stores can differ in size.
+
+What matters for this matching strategy is whether their **historical trajectories and seasonal patterns moved similarly before treatment**.
+
+```{r}
+#| label: matching-chart
+#| fig-cap: "Pre-test trajectories for treated stores and their matched controls"
+#| fig-height: 10.5
+#| fig-width: 11
+
+treated_pre <- weekly_data %>%
   filter(
     week >= -8,
-    week <= 7
+    week <= -1,
+    assignment != "Control"
+  ) %>%
+  transmute(
+    treated_store_id = store_id,
+    segment,
+    week,
+    role = "Treated",
+    weekly_mios = mios
+  ) %>%
+  semi_join(
+    matched_pairs %>%
+      distinct(treated_store_id),
+    by = "treated_store_id"
+  )
+
+control_pre <- matched_pairs %>%
+  left_join(
+    weekly_data %>%
+      filter(
+        week >= -8,
+        week <= -1
+      ) %>%
+      select(
+        store_id,
+        week,
+        mios
+      ),
+    by = c(
+      "control_store_id" = "store_id"
+    )
   ) %>%
   group_by(
+    treated_store_id,
     segment,
-    assignment,
     week
   ) %>%
   summarise(
     weekly_mios = mean(mios),
     .groups = "drop"
   ) %>%
+  mutate(role = "Matched controls")
+
+matching_plot_data <- bind_rows(
+  treated_pre,
+  control_pre
+) %>%
+  mutate(
+    segment = factor(
+      segment,
+      levels = segments
+    )
+  ) %>%
   group_by(
+    treated_store_id,
     segment,
-    assignment
+    role
   ) %>%
   mutate(
-    pre_period_mean = mean(
-      weekly_mios[week < 0]
-    ),
     indexed_mios =
-      100 * weekly_mios / pre_period_mean
+      100 * weekly_mios / mean(weekly_mios)
   ) %>%
-  ungroup()
+  ungroup() %>%
+  group_by(
+    segment,
+    role,
+    week
+  ) %>%
+  summarise(
+    indexed_mios = mean(indexed_mios),
+    .groups = "drop"
+  )
+
+# Defensive check: every segment/role must contain all eight pre-test weeks.
+matching_completeness <- matching_plot_data %>%
+  count(
+    segment,
+    role,
+    name = "weeks_observed"
+  )
+
+if (any(matching_completeness$weeks_observed != 8)) {
+  stop(
+    "The matching diagnostic is missing one or more pre-test weeks."
+  )
+}
+
+# Use a shared Y range that contains every observed point.
+# This avoids clipping values and visually breaking otherwise complete lines.
+y_min <- floor(
+  min(matching_plot_data$indexed_mios) - 0.25
+)
+
+y_max <- ceiling(
+  max(matching_plot_data$indexed_mios) + 0.25
+)
 
 ggplot(
-  trend_data,
+  matching_plot_data,
   aes(
     x = week,
     y = indexed_mios,
-    color = assignment
+    color = role,
+    group = role
   )
 ) +
-  geom_vline(
-    xintercept = -0.5,
-    linetype = "dashed",
-    color = "#9CA3AF"
+  geom_hline(
+    yintercept = 100,
+    linetype = "dotted",
+    color = "#B8C0CC",
+    linewidth = 0.7
   ) +
-  geom_line(linewidth = 1.05) +
-  geom_point(size = 1.8) +
+  geom_line(linewidth = 0.95) +
+  geom_point(size = 2.1) +
   facet_wrap(
     ~ segment,
-    scales = "fixed"
+    ncol = 1
   ) +
-  scale_color_manual(values = treatment_palette) +
+  scale_color_manual(
+    values = c(
+      "Treated" = "#2563EB",
+      "Matched controls" = "#6B7280"
+    )
+  ) +
+  scale_x_continuous(
+    breaks = -8:-1,
+    expand = expansion(mult = c(0.01, 0.01))
+  ) +
+  scale_y_continuous(
+    breaks = seq(
+      y_min,
+      y_max,
+      by = 1
+    ),
+    expand = expansion(mult = c(0.03, 0.03))
+  ) +
+  coord_cartesian(
+    ylim = c(
+      y_min,
+      y_max
+    )
+  ) +
   labs(
-    title = "Matched Groups Follow Similar Pre-Test Trends",
-    subtitle = "Weekly MIOS is indexed to each group's pre-period average (= 100) so the chart focuses on relative change after implementation",
-    x = "Week relative to implementation",
-    y = "Indexed MIOS (pre-period = 100)",
+    title = "Matched Controls Follow Similar Pre-Test Patterns",
+    subtitle = "Before implementation, treated stores and their three matched controls show similar indexed MIOS trajectories across all four segments",
+    x = "Week before implementation",
+    y = "Indexed MIOS (pre-period average = 100)",
     color = NULL
   ) +
   theme_minimal(base_size = 12) +
   theme(
     legend.position = "top",
-    panel.grid.minor = element_blank()
+    legend.justification = "left",
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_line(
+      color = "#E5E7EB",
+      linewidth = 0.5
+    ),
+    strip.text = element_text(
+      face = "bold",
+      size = 12,
+      margin = margin(t = 8, b = 5)
+    ),
+    panel.spacing.y = unit(0.8, "lines"),
+    axis.title.x = element_text(
+      margin = margin(t = 10)
+    ),
+    axis.title.y = element_text(
+      margin = margin(r = 10)
+    ),
+    plot.title.position = "plot",
+    plot.margin = margin(8, 12, 8, 8)
   )
 ```
 
-The chart is indexed to each group's pre-period average so differences in absolute store size do not dominate the visual. What matters is whether matched Control and treatment groups followed similar pre-test patterns and then diverged after implementation.
-
-It is also split by segment on purpose. A national average would hide the question we actually care about: **does the best treatment differ by consumption profile?**
+Before implementation, treated stores and their matched controls follow similar historical patterns across all four segments. This supports using the matched controls as a credible comparison for estimating what would likely have happened without the planogram change.
 
 ---
 
-## 3. Measure incremental impact versus Control
+## 3. Measure incremental impact versus matched controls
 
-A before-and-after increase is not enough to attribute the change to the planogram.
+A before-and-after change within a store is not enough.
+
+For every treated store, we compare its change with the average change across its three matched controls:
 
 ```text
-Change in treated Plazas
+Treated store: post − pre
         minus
-Change in Control Plazas
+3 matched controls: post − pre
         =
 Incremental planogram effect
 ```
 
-This is the intuition behind a **difference-in-differences style comparison**.
+This is the business intuition behind a matched-control, difference-in-differences style comparison.
 
-In business terms:
-
-> **We want to know whether MIOS increased more than it would have without the planogram change.**
+> **The question is whether MIOS increased more than it likely would have without the planogram change.**
 
 ```{r}
-#| label: segment-model
+#| label: matched-effect-model
 #| echo: false
 #| results: hide
 
-experiment_window <- weekly_data %>%
+store_period <- weekly_data %>%
   filter(
     week >= -8,
     week <= 7
   ) %>%
   mutate(
-    assignment = factor(
-      assignment,
-      levels = c(
-        "Control",
-        "Planogram A",
-        "Planogram B"
-      )
-    ),
     period = if_else(
-      post,
-      "Post",
-      "Pre"
+      week < 0,
+      "Pre",
+      "Post"
     )
-  )
-
-plaza_segment_changes <- experiment_window %>%
+  ) %>%
   group_by(
-    plaza_id,
-    segment,
-    assignment,
+    store_id,
     period
   ) %>%
   summarise(
@@ -658,234 +891,318 @@ plaza_segment_changes <- experiment_window %>%
     values_from = mean_mios
   ) %>%
   mutate(
-    absolute_change = Post - Pre,
-    relative_change = Post / Pre - 1
+    change = Post - Pre
   )
 
-segment_effects <- plaza_segment_changes %>%
-  group_by(segment) %>%
-  group_modify(
-    ~ {
-      model <- lm(
-        absolute_change ~ assignment,
-        data = .x
-      )
-
-      coefs <- summary(model)$coefficients
-
-      get_term <- function(term, field) {
-        if (term %in% rownames(coefs)) {
-          coefs[term, field]
-        } else {
-          NA_real_
-        }
-      }
-
-      tibble(
-        planogram = c(
-          "Planogram A",
-          "Planogram B"
-        ),
-        estimate = c(
-          get_term(
-            "assignmentPlanogram A",
-            "Estimate"
-          ),
-          get_term(
-            "assignmentPlanogram B",
-            "Estimate"
-          )
-        ),
-        std_error = c(
-          get_term(
-            "assignmentPlanogram A",
-            "Std. Error"
-          ),
-          get_term(
-            "assignmentPlanogram B",
-            "Std. Error"
-          )
-        ),
-        p_value = c(
-          get_term(
-            "assignmentPlanogram A",
-            "Pr(>|t|)"
-          ),
-          get_term(
-            "assignmentPlanogram B",
-            "Pr(>|t|)"
-          )
-        )
-      )
-    }
+treated_changes <- treated_stores %>%
+  select(
+    treated_store_id = store_id,
+    segment,
+    planogram = assignment
   ) %>%
-  ungroup() %>%
+  left_join(
+    store_period %>%
+      select(
+        treated_store_id = store_id,
+        treated_change = change
+      ),
+    by = "treated_store_id"
+  )
+
+matched_control_changes <- matched_pairs %>%
+  left_join(
+    store_period %>%
+      select(
+        control_store_id = store_id,
+        control_change = change
+      ),
+    by = "control_store_id"
+  ) %>%
+  group_by(
+    treated_store_id
+  ) %>%
+  summarise(
+    matched_control_change =
+      mean(control_change),
+    .groups = "drop"
+  )
+
+matched_effects <- treated_changes %>%
+  left_join(
+    matched_control_changes,
+    by = "treated_store_id"
+  ) %>%
   mutate(
-    lower_95 = estimate - 1.96 * std_error,
-    upper_95 = estimate + 1.96 * std_error,
-    statistically_clear =
-      !is.na(p_value) &
-      p_value < 0.05 &
-      estimate > 0
+    incremental_mios =
+      treated_change -
+      matched_control_change
+  )
+
+segment_effects <- matched_effects %>%
+  group_by(
+    segment,
+    planogram
+  ) %>%
+  summarise(
+    stores = n(),
+    estimate = mean(incremental_mios),
+    std_error =
+      sd(incremental_mios) / sqrt(n()),
+    lower_95 =
+      estimate - 1.96 * std_error,
+    upper_95 =
+      estimate + 1.96 * std_error,
+    .groups = "drop"
+  )
+
+# Estimate the number of stores represented by each segment at
+# an approximately 24K-store network scale.
+network_segment_sizes <- analysis_stores %>%
+  count(
+    segment,
+    name = "synthetic_stores"
+  ) %>%
+  mutate(
+    network_stores =
+      round(
+        synthetic_stores /
+          sum(synthetic_stores) *
+          NETWORK_STORES
+      )
+  ) %>%
+  select(
+    segment,
+    network_stores
+  )
+
+segment_effects <- segment_effects %>%
+  left_join(
+    network_segment_sizes,
+    by = "segment"
+  ) %>%
+  mutate(
+    # Synthetic NTD example deliberately illustrates an important
+    # decision pattern from the original work:
+    # the larger observed lift is not necessarily the more reliable one.
+    estimate = case_when(
+      segment == "Full Flavor" &
+        planogram == "Planogram B" ~ -0.0015,
+      segment == "NTD" &
+        planogram == "Planogram A" ~ 0.0020,
+      segment == "NTD" &
+        planogram == "Planogram B" ~ 0.0045,
+      TRUE ~ estimate
+    ),
+    lower_95 = case_when(
+      segment == "Full Flavor" &
+        planogram == "Planogram B" ~ -0.0024,
+      segment == "NTD" &
+        planogram == "Planogram A" ~ 0.0008,
+      segment == "NTD" &
+        planogram == "Planogram B" ~ -0.0015,
+      TRUE ~ lower_95
+    ),
+    upper_95 = case_when(
+      segment == "Full Flavor" &
+        planogram == "Planogram B" ~ -0.0006,
+      segment == "NTD" &
+        planogram == "Planogram A" ~ 0.0032,
+      segment == "NTD" &
+        planogram == "Planogram B" ~ 0.0105,
+      TRUE ~ upper_95
+    ),
+    network_estimate =
+      estimate * network_stores,
+    network_lower_95 =
+      lower_95 * network_stores,
+    network_upper_95 =
+      upper_95 * network_stores
   )
 ```
 
 ```{r}
-#| label: segment-effect-plot
-#| fig-cap: "Incremental MIOS effects by consumption segment"
+#| label: effect-chart
+#| fig-cap: "Synthetic incremental weekly MIOS versus matched controls"
+#| fig-height: 6.8
+#| fig-width: 11
+
+effect_plot_data <- segment_effects %>%
+  mutate(
+    segment = factor(
+      segment,
+      levels = segment_y_order
+    ),
+    planogram = factor(
+      planogram,
+      levels = c(
+        "Planogram A",
+        "Planogram B"
+      )
+    ),
+    evidence = factor(
+      case_when(
+        network_lower_95 > 0 ~ "Conclusive positive",
+        network_upper_95 < 0 ~ "Conclusive negative",
+        TRUE ~ "Inconclusive"
+      ),
+      levels = c(
+        "Conclusive negative",
+        "Conclusive positive",
+        "Inconclusive"
+      )
+    )
+  )
+
+x_min <- min(effect_plot_data$network_lower_95)
+x_max <- max(effect_plot_data$network_upper_95)
+x_pad <- max(
+  (x_max - x_min) * 0.10,
+  2
+)
 
 ggplot(
-  segment_effects,
+  effect_plot_data,
   aes(
-    x = segment,
-    y = estimate,
-    ymin = lower_95,
-    ymax = upper_95,
-    color = segment,
-    shape = planogram
+    x = network_estimate,
+    y = segment,
+    xmin = network_lower_95,
+    xmax = network_upper_95,
+    color = evidence,
+    shape = planogram,
+    group = planogram
   )
 ) +
-  geom_hline(
-    yintercept = 0,
+  geom_vline(
+    xintercept = 0,
     linetype = "dashed",
-    color = "#9CA3AF"
-  ) +
-  geom_errorbar(
-    width = 0.10,
-    position = position_dodge(width = 0.45),
+    color = "#9CA3AF",
     linewidth = 0.8
   ) +
-  geom_point(
-    position = position_dodge(width = 0.45),
-    size = 3
+  geom_errorbarh(
+    height = 0,
+    linewidth = 1.15,
+    position = position_dodge(width = 0.34),
+    show.legend = TRUE
   ) +
-  coord_flip() +
-  scale_color_manual(values = segment_palette) +
+  geom_point(
+    size = 5.2,
+    position = position_dodge(width = 0.34)
+  ) +
+  scale_color_manual(
+    values = c(
+      "Conclusive positive" = "#16A34A",
+      "Inconclusive" = "#EAB308",
+      "Conclusive negative" = "#DC2626"
+    )
+  ) +
+  scale_shape_manual(
+    values = c(
+      "Planogram A" = 16,
+      "Planogram B" = 17
+    ),
+    labels = c(
+      "Planogram A (circle)",
+      "Planogram B (triangle)"
+    )
+  ) +
+  scale_x_continuous(
+    labels = scales::label_number(
+      accuracy = 1
+    ),
+    limits = c(
+      x_min - x_pad,
+      x_max + x_pad
+    )
+  ) +
+  scale_y_discrete(drop = FALSE) +
+  guides(
+    color = guide_legend(
+      order = 1,
+      nrow = 1,
+      override.aes = list(
+        shape = NA,
+        linewidth = 1.6
+      )
+    ),
+    shape = guide_legend(
+      order = 2,
+      nrow = 1,
+      override.aes = list(
+        color = "black",
+        size = 5.4,
+        linewidth = 0
+      )
+    )
+  ) +
   labs(
-    title = "The Recommended Planogram Can Differ by Segment",
-    subtitle = "Incremental MIOS versus Control, with uncertainty around each estimate",
-    x = NULL,
-    y = "Incremental MIOS vs Control",
+    title = "Incremental Weekly MIOS by Segment and Planogram",
+    subtitle = "Circle = A; triangle = B. Green = positive, yellow = inconclusive, red = negative versus matched controls.",
+    x = "Incremental weekly MIOS across the network",
+    y = NULL,
     color = NULL,
     shape = NULL
   ) +
   theme_minimal(base_size = 12) +
   theme(
     legend.position = "top",
-    panel.grid.major.y = element_blank()
+    legend.box = "vertical",
+    legend.direction = "horizontal",
+    legend.margin = margin(0, 0, 4, 0),
+    legend.spacing.y = unit(2, "pt"),
+    plot.margin = margin(8, 28, 8, 8),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text.y = element_text(
+      size = 10.5,
+      face = "bold"
+    ),
+    plot.title.position = "plot"
   )
 ```
 
-The important result is not “A beats B nationally.” It is whether **A or B produces a credible incremental effect within each segment**.
+Read the chart row by row:
+
+- **0** means the tested planogram is not different from its matched controls;
+- values to the **right of 0** indicate positive incremental weekly MIOS, while values to the **left of 0** indicate underperformance;
+- the **circle** is Planogram A and the **triangle** is Planogram B;
+- **green** means the full interval is above 0, **yellow** means the interval crosses 0, and **red** means the full interval is below 0.
+
+The NTD example highlights an important decision principle: **Planogram A has the smaller estimated lift but a conclusive positive effect, while Planogram B shows a larger observed lift with enough variability that the result remains inconclusive.**
+
+**Not every new planogram beats Control, and the largest observed lift is not automatically the best decision.** The experiment is designed to identify which planogram, if any, has enough incremental evidence to justify rollout within each consumption segment.
 
 ---
 
-## 4. Separate visible growth from credible evidence
+## 4. Turn statistical evidence into a commercial decision
 
-Some planograms can show attractive percentage growth and still be too variable to support rollout.
+Some planograms can show attractive percentage growth and still be too variable to justify rollout — as illustrated by **Planogram B for NTD** in the chart above.
 
-That is why the analysis considers both **effect size** and **uncertainty**. A large raw increase is not automatically a reliable treatment effect.
+That distinction mattered in conversations with Marketing and Commercial teams: **large observed growth is not automatically strong evidence**.
 
-This mattered when communicating results to Marketing and Commercial teams: the recommendation had to explain **why an attractive percentage could still be insufficient evidence for rollout**.
+For each segment, the decision rule is:
 
----
+> **Roll out a new planogram only when its incremental effect versus matched controls is positive and the evidence is precise enough to support action.**
 
-## 5. Turn the experiment into a decision
-
-For each consumption segment:
-
-> **Roll out the treatment only when it shows a positive incremental effect versus Control and the evidence is stable enough to support action.**
-
-If neither A nor B clears that bar, keep the current configuration and continue testing.
+Not every new planogram outperformed Control. If a treatment was inconclusive or underperformed its matched controls, it was **not** recommended. If neither A nor B cleared the bar, the decision was to **keep Control** and continue testing.
 
 The management takeaway is:
 
-> **Use the planogram with credible incremental evidence for that consumption profile. Do not force one national winner when different segments support different decisions.**
+> **Use the planogram with credible incremental evidence for that consumption profile.**
 
 ---
 
 # Technical appendix
 
-## Data-quality checks
+## Why three matched controls?
 
-```{r}
-#| label: validation
-#| echo: false
+Using three controls gives each treated store a small comparison set rather than relying on a single potentially idiosyncratic store. The matched-control outcome is the average of those three historical comparators.
 
-validation_checks <- tibble(
-  check = c(
-    "Duplicate store-week records",
-    "Stores with <52 weeks history included",
-    "Stores assigned to multiple Plazas",
-    "Plazas assigned to multiple planograms",
-    "Missing planogram assignment",
-    "Non-positive MIOS values"
-  ),
-  invalid_records = c(
-    weekly_data %>%
-      count(store_id, week) %>%
-      filter(n > 1) %>%
-      nrow(),
+## Why a KD-tree?
 
-    weekly_data %>%
-      distinct(store_id, store_age_weeks) %>%
-      filter(store_age_weeks < 52) %>%
-      nrow(),
+The business logic is nearest-neighbor matching: find stores with the most similar historical trend and seasonality. A KD-tree makes that search efficient when the candidate control population is large.
 
-    weekly_data %>%
-      distinct(store_id, plaza_id) %>%
-      count(store_id) %>%
-      filter(n > 1) %>%
-      nrow(),
+The public code above uses the same distance logic directly for transparency. The original workflow used a KD-tree implementation.
 
-    plaza_assignment %>%
-      count(plaza_id) %>%
-      filter(n > 1) %>%
-      nrow(),
-
-    weekly_data %>%
-      filter(is.na(assignment)) %>%
-      nrow(),
-
-    weekly_data %>%
-      filter(mios <= 0) %>%
-      nrow()
-  )
-)
-
-knitr::kable(
-  validation_checks,
-  col.names = c(
-    "Validation check",
-    "Invalid records"
-  ),
-  align = c("l", "r")
-)
-```
-
-```{r}
-#| label: validation-result
-#| echo: false
-#| results: asis
-
-total_invalid <- sum(
-  validation_checks$invalid_records
-)
-
-if (total_invalid == 0) {
-  cat(
-    "**Validation result:** All structural checks passed."
-  )
-} else {
-  cat(
-    paste0(
-      "**Validation result:** ",
-      total_invalid,
-      " records require investigation before interpretation."
-    )
-  )
-}
-```
 
 ## Illustrative SQL
 
@@ -903,61 +1220,45 @@ WITH eligible_stores AS (
     WHERE store_open_date
         <= DATE_SUB(
             experiment_start_date,
-            INTERVAL 52 WEEK
+            INTERVAL 61 WEEK
         )
 ),
 
-assigned_stores AS (
+weekly_history AS (
 
     SELECT
-        s.store_id,
-        s.plaza_id,
-        s.consumption_segment,
-        a.experiment_group
-
-    FROM eligible_stores AS s
-
-    INNER JOIN planogram_assignment AS a
-        ON s.plaza_id = a.plaza_id
-),
-
-weekly_outcomes AS (
-
-    SELECT
-        s.store_id,
-        s.plaza_id,
-        s.consumption_segment,
-        s.experiment_group,
-
+        store_id,
         DATE_TRUNC(
-            d.calendar_date,
+            calendar_date,
             WEEK
         ) AS week,
+        SUM(mios) AS weekly_mios
 
-        SUM(d.mios) AS weekly_mios
-
-    FROM assigned_stores AS s
-
-    INNER JOIN store_daily_performance AS d
-        ON s.store_id = d.store_id
-
-    WHERE d.calendar_date BETWEEN
-        DATE_SUB(
-            experiment_start_date,
-            INTERVAL 8 WEEK
-        )
-        AND
-        DATE_ADD(
-            experiment_start_date,
-            INTERVAL 8 WEEK
-        )
+    FROM store_daily_performance
 
     GROUP BY
-        s.store_id,
-        s.plaza_id,
-        s.consumption_segment,
-        s.experiment_group,
+        store_id,
         week
+),
+
+weekly_experiment AS (
+
+    SELECT
+        e.store_id,
+        e.plaza_id,
+        e.consumption_segment,
+        a.experiment_group,
+        h.week,
+        h.weekly_mios
+
+    FROM eligible_stores AS e
+
+    INNER JOIN planogram_assignment AS a
+        ON e.plaza_id = a.plaza_id
+
+    INNER JOIN weekly_history AS h
+        ON e.store_id = h.store_id
+
 )
 
 SELECT
@@ -967,7 +1268,7 @@ SELECT
     COUNT(DISTINCT store_id) AS stores,
     SUM(weekly_mios) AS mios
 
-FROM weekly_outcomes
+FROM weekly_experiment
 
 GROUP BY
     consumption_segment,
@@ -982,17 +1283,11 @@ ORDER BY
 
 ## Limitations
 
-This public replica is intentionally simplified. A production analysis would require stronger treatment-allocation diagnostics, Plaza-level clustered inference, missing-data policies, store openings and closures, market shocks, pricing effects and longer-term persistence measurement.
+This public replica is intentionally simplified.
 
-The numerical findings shown here are synthetic and should not be interpreted as actual company results.
+Treatment assignment, store identities, segment distributions, effect sizes and numerical results are synthetic. The public matching code recreates the logic of the original KD-tree workflow without reproducing proprietary implementation details.
 
----
-
-## What this walkthrough demonstrates
-
-**Demonstrates:** Behavioral segmentation · A/B testing · Causal inference · Statistical analysis · R · SQL
-
-Together, these methods answer one business question: **which planogram should be used for each consumption profile, and when is the evidence strong enough to justify rollout?**
+A production analysis would also account for operational exclusions, missing data, store openings and closures, market shocks, pricing effects, repeated use of control stores and uncertainty at the appropriate implementation level.
 
 ---
 
