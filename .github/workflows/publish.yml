@@ -25,8 +25,11 @@ jobs:
       - name: Install R packages
         run: |
           Rscript -e 'install.packages(c(
-            "tidyverse",
-            "scales"
+            "tidyverse"
+            ,"scales"
+            ,"rmarkdown"
+            ,"knitr"
+            
           ), repos="https://cloud.r-project.org")'
 
       - uses: quarto-dev/quarto-actions/setup@v2
