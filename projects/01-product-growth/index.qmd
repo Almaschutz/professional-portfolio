@@ -158,7 +158,7 @@ The walkthrough is a confidentiality-safe reconstruction using synthetic merchan
 
 It demonstrates activation and adoption measurement, cohort analysis, later-activity analysis, opportunity sizing, data-quality validation and illustrative SQL.
 
-[View the analytical walkthrough](analysis.qmd){.btn .btn-primary}
+[View analytical walkthrough](analysis.qmd){.btn .btn-primary}
 
 ---
 
@@ -170,6 +170,6 @@ It demonstrates activation and adoption measurement, cohort analysis, later-acti
 
 ---
 
-[Back to Case Studies](../../projects.qmd){.btn .btn-outline-primary}
+[Back to case studies](../../projects.qmd){.btn .btn-outline-primary}
 
-[Download Resume](../../Resume-Alma-Schutz.pdf){.btn .btn-outline-primary}
+[Download resume](../../Resume-Alma-Schutz.pdf){.btn .btn-outline-primary}

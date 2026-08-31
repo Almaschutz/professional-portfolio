@@ -6,7 +6,7 @@ page-layout: full
 
 <div class="page-intro">
 
-I am a Data Science and Analytics Leader with 15+ years of experience building analytics capabilities, leading multidisciplinary teams and turning data into measurable business impact.
+I work across Analytics and Data Science, with 15+ years of experience building analytical capabilities, leading multidisciplinary teams and turning data into measurable business impact.
 
 My background spans product analytics, commercial analytics, experimentation and machine learning across PayPal, Philip Morris International and Accenture. I am most effective where the problem is ambiguous, the evidence needs careful interpretation and several teams must align around a practical decision.
 
@@ -119,13 +119,13 @@ Delivered pricing, commercial, and supply-chain analytics solutions for global c
 
 ## Current focus
 
-I am interested in leadership and senior individual-contributor opportunities where I can combine analytics strategy, technical depth and organizational influence.
+I am interested in senior leadership and individual-contributor opportunities across Analytics and Data Science where I can combine strategy, technical depth and organizational influence.
 
-**Target roles:** Staff / Lead Data Scientist, Product Analytics Lead, and Analytics Leadership.
+**Target scope:** Analytics and Data Science · Product analytics · Experimentation · Measurement strategy
 
 ::: {.about-actions}
 
-[Download my Resume](Resume-Alma-Schutz.pdf){.btn .btn-primary}
+[Download resume](Resume-Alma-Schutz.pdf){.btn .btn-primary}
 
 [Connect on LinkedIn](https://www.linkedin.com/in/almaschutz){.btn .btn-outline-primary}
 

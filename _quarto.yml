@@ -1,9 +1,12 @@
 project:
   type: website
   output-dir: _site
+  render:
+    - "*.qmd"
+    - "projects/**/*.qmd"
 
 website:
-  title: "Alma Schutz | Data Science & Analytics Leader"
+  title: "Alma Schutz | Analytics and Data Science"
 
   navbar:
     left:
@@ -52,15 +55,3 @@ format:
 
 execute:
   enabled: false
-
-  navbar:
-  title: "Alma Schutz"
-  right:
-    - href: index.qmd
-      text: Home
-    - href: about.qmd
-      text: About
-    - href: projects.qmd
-      text: Projects
-    - href: Resume-Alma-Schutz.pdf
-      text: Resume

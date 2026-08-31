@@ -611,7 +611,7 @@ display(Markdown(
 6. **Treat relationships as descriptive unless incrementality is measured.**  
    Strong early adopters may already differ in readiness, demand, size or product fit.
 
-[Back to the executive case study](index.qmd){.btn .btn-outline-primary}
+[Back to executive case](index.qmd){.btn .btn-outline-primary}
 
 ---
 
@@ -1667,8 +1667,8 @@ The numerical findings are illustrative and are not actual company results.
 
 ---
 
-[Back to the executive case study](index.qmd){.btn .btn-primary}
+[Back to executive case](index.qmd){.btn .btn-primary}
 
-[Back to Case Studies](../../projects.qmd){.btn .btn-outline-primary}
+[Back to case studies](../../projects.qmd){.btn .btn-outline-primary}
 
-[Download Resume](../../Resume-Alma-Schutz.pdf){.btn .btn-outline-primary}
+[Download resume](../../Resume-Alma-Schutz.pdf){.btn .btn-outline-primary}

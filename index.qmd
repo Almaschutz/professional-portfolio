@@ -17,7 +17,7 @@ Across 15+ years in industry and consulting, I have led analytics from problem f
 
 ---
 
-## Selected Business Impact
+## Selected business impact
 
 ::: {.impact-grid}
 
@@ -57,13 +57,13 @@ Incremental marginal contribution generated through experimentation.
 
 ---
 
-## Areas of Expertise
+## Areas of expertise
 
 ::: {.expertise-grid}
 
 ::: {.expertise-column}
 
-### Applied Analytics
+### Applied analytics
 
 - Product and growth analytics
 - Commercial and marketing analytics
@@ -74,7 +74,7 @@ Incremental marginal contribution generated through experimentation.
 
 ::: {.expertise-column}
 
-### Data Science & Experimentation
+### Data science and experimentation
 
 - Machine learning
 - Predictive modeling
@@ -85,7 +85,7 @@ Incremental marginal contribution generated through experimentation.
 
 ::: {.expertise-column}
 
-### Leadership & Scale
+### Leadership and scale
 
 - Cross-functional leadership
 - Executive communication
@@ -100,7 +100,7 @@ Incremental marginal contribution generated through experimentation.
 
 ---
 
-## Featured Case Studies
+## Featured case studies
 
 ```{=html}
 <div class="case-grid">

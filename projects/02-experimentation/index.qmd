@@ -106,7 +106,7 @@ The analytical walkthrough is a confidentiality-safe reconstruction using synthe
 
 It demonstrates behavioral reference profiles, Plaza-level aggregation, matched controls, longitudinal pre/post measurement, uncertainty assessment and segment-specific treatment decisions.
 
-[View the analytical walkthrough](analysis.qmd){.btn .btn-primary}
+[View analytical walkthrough](analysis.qmd){.btn .btn-primary}
 
 ---
 
@@ -118,6 +118,6 @@ It demonstrates behavioral reference profiles, Plaza-level aggregation, matched 
 
 ---
 
-[Back to Case Studies](../../projects.qmd){.btn .btn-outline-primary}
+[Back to case studies](../../projects.qmd){.btn .btn-outline-primary}
 
-[Download Resume](../../Resume-Alma-Schutz.pdf){.btn .btn-outline-primary}
+[Download resume](../../Resume-Alma-Schutz.pdf){.btn .btn-outline-primary}

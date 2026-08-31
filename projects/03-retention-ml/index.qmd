@@ -1,79 +1,20 @@
 ---
-title: "Retention Risk and Intervention System"
+title: "Retention Risk System"
 subtitle: "Prediction is useful only when it changes a decision"
+description: "A forthcoming case study on retention risk, model calibration and intervention value."
+page-layout: full
 ---
 
-## Executive summary
+<div class="page-intro">
 
-This project predicts churn risk, but its primary artifact is an intervention
-policy based on expected incremental value—not merely an AUC score.
+## Coming soon
 
-## Python modeling pipeline
+This case study is in development. It will show how predictive modeling can identify retention risk while incorporating calibration, intervention economics and monitoring to determine which predictions are actionable.
 
-```{python}
-#| label: retention-model
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from sklearn.impute import SimpleImputer
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import roc_auc_score, average_precision_score
-import pandas as pd
+The focus will be the decision system—not merely model performance—including who to prioritize, when intervention is economically justified and how results should be monitored after deployment.
 
-numeric_features = [
-    "sessions_28d", "value_actions_28d", "days_since_last_active",
-    "support_contacts_90d"
-]
-categorical_features = ["plan", "country", "acquisition_channel"]
+</div>
 
-numeric_pipeline = Pipeline([
-    ("impute", SimpleImputer(strategy="median")),
-    ("scale", StandardScaler())
-])
+---
 
-categorical_pipeline = Pipeline([
-    ("impute", SimpleImputer(strategy="most_frequent")),
-    ("encode", OneHotEncoder(handle_unknown="ignore"))
-])
-
-preprocess = ColumnTransformer([
-    ("numeric", numeric_pipeline, numeric_features),
-    ("categorical", categorical_pipeline, categorical_features)
-])
-
-model = Pipeline([
-    ("preprocess", preprocess),
-    ("model", LogisticRegression(max_iter=2000, class_weight="balanced"))
-])
-
-# X_train, X_test, y_train and y_test should use a temporal split.
-model.fit(X_train, y_train)
-pred = model.predict_proba(X_test)[:, 1]
-
-print({
-    "roc_auc": roc_auc_score(y_test, pred),
-    "average_precision": average_precision_score(y_test, pred)
-})
-```
-
-## Expected-value policy
-
-```python
-def expected_intervention_value(
-    churn_probability: float,
-    treatment_uplift: float,
-    retained_value: float,
-    treatment_cost: float
-) -> float:
-    return (
-        churn_probability
-        * treatment_uplift
-        * retained_value
-        - treatment_cost
-    )
-```
-
-## Monitoring
-
-Track feature drift, calibration, intervention rate, incremental retention,
-cost per saved user and subgroup performance.
+[Back to case studies](../../projects.qmd){.btn .btn-outline-primary}

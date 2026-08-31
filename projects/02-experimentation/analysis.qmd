@@ -1286,6 +1286,8 @@ A production analysis would also account for operational exclusions, missing dat
 
 ---
 
-[Back to the executive case study](index.qmd){.btn .btn-primary}
+[Back to executive case](index.qmd){.btn .btn-primary}
 
-[Back to Case Studies](../../projects.qmd){.btn .btn-outline-primary}
+[Back to case studies](../../projects.qmd){.btn .btn-outline-primary}
+
+[Download resume](../../Resume-Alma-Schutz.pdf){.btn .btn-outline-primary}
