@@ -18,7 +18,7 @@ page-layout: full
 
 I led the analytical design of a national field experiment that translated consumer research into an executable planogram strategy for Mexico's convenience channel.
 
-Working with Marketing, I segmented Plazas by consumption mix, tested color-led and brand-led layouts against matched controls, and established a clear rollout rule: change the planogram only where the incremental evidence was positive and sufficiently reliable. The result was a practical way to protect competitive share in a structurally declining market without mistaking normal variation for treatment impact.
+Working with Marketing, I segmented Plazas by consumption mix and tested color-led and brand-led layouts against matched controls across two eight-week experimentation rounds. The successful segment-specific configurations were implemented, generating approximately **$4.2M in incremental marginal contribution in 2022**.
 
 ::: {.case-meta}
 
@@ -26,6 +26,38 @@ Working with Marketing, I segmented Plazas by consumption mix, tested color-led 
 **Organization:** Philip Morris International  
 **Scope:** National convenience channel in Mexico  
 **Focus:** Behavioral segmentation, field experimentation, causal measurement and commercial decision support
+
+:::
+
+:::
+
+---
+
+## Business outcome
+
+::: {.impact-grid .impact-grid-three}
+
+::: {.impact-card}
+
+### 2 × 8 weeks
+
+Two experimentation rounds used to test and confirm the segment-level decisions.
+
+:::
+
+::: {.impact-card}
+
+### $4.2M
+
+Approximate incremental marginal contribution generated in 2022.
+
+:::
+
+::: {.impact-card}
+
+### Implemented
+
+Successful segment-specific planograms moved from experiment into field execution.
 
 :::
 
@@ -67,13 +99,15 @@ Treatment was coordinated by Plaza while measurement remained at store level. On
 
 ### 3. Estimate incremental impact
 
-Each treated store was compared with three controls selected for similar historical trend and seasonality. The analysis then estimated incremental weekly MIOS—the treatment change relative to the matched-control change—and evaluated the estimate against its uncertainty.
+Each treated store was compared with three controls selected for similar historical trend and seasonality. The analysis then estimated incremental weekly MIOS (**millions of sticks**)—the treatment change relative to the matched-control change—and evaluated the estimate against its uncertainty.
 
 This distinction was important because the largest observed percentage increase was not always the most reliable result. A smaller but consistent effect could support action; a larger but highly variable result could not.
 
 ---
 
 ## Decision delivered
+
+The first eight-week round identified the strongest segment-specific candidates; the second tested whether those results were reliable enough to implement. Following the second round, the successful configurations moved into field execution.
 
 The work produced a segment-specific decision framework rather than a single national winner:
 

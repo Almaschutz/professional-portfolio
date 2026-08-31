@@ -58,6 +58,8 @@ I build teams, operating models and measurement systems that allow analytics to 
 
 **Data Science Manager — Merchant Products**
 
+*May 2023 – February 2026*
+
 Led product analytics and data science initiatives supporting large-scale merchant experiences and platform migration.
 
 - Contributed to growth from **1.2M to 1.7M monthly active users**
@@ -73,9 +75,11 @@ Led product analytics and data science initiatives supporting large-scale mercha
 
 **Data Science Manager**
 
+*October 2021 – May 2023*
+
 Led commercial analytics, experimentation, and segmentation initiatives across international markets.
 
-- Generated approximately **$4.2M in incremental business value**
+- Generated approximately **$4.2M in incremental marginal contribution through experimentation**
 - Built experimentation and measurement frameworks
 - Developed segmentation models used in production
 - Helped establish a scalable data science operating model
@@ -87,6 +91,8 @@ Led commercial analytics, experimentation, and segmentation initiatives across i
 ### Accenture
 
 **Analytics and Data Science Consulting**
+
+*February 2018 – October 2021*
 
 Delivered pricing, commercial, and supply-chain analytics solutions for global consumer-goods organizations.
 
@@ -126,6 +132,8 @@ I am interested in senior leadership and individual-contributor opportunities ac
 ::: {.about-actions}
 
 [Download resume](Resume-Alma-Schutz.pdf){.btn .btn-primary}
+
+[Email me](mailto:alma.schutz0@gmail.com){.btn .btn-outline-primary}
 
 [Connect on LinkedIn](https://www.linkedin.com/in/almaschutz){.btn .btn-outline-primary}
 

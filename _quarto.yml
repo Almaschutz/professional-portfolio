@@ -23,6 +23,10 @@ website:
         text: About
 
     right:
+      - icon: envelope
+        href: mailto:alma.schutz0@gmail.com
+        aria-label: Email Alma Schutz
+
       - icon: github
         href: https://github.com/Almaschutz
         aria-label: GitHub
@@ -30,6 +34,9 @@ website:
       - icon: linkedin
         href: https://www.linkedin.com/in/almaschutz
         aria-label: LinkedIn
+
+      - href: Resume-Alma-Schutz.pdf
+        text: Resume
 
   page-footer:
     left: "© 2026 Alma Schutz"

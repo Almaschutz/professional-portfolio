@@ -216,6 +216,10 @@ h3 {
    ================================================== */
 
 .home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 210px;
+  gap: 2.25rem;
+  align-items: center;
   margin-top: 0.5rem;
 }
 
@@ -243,9 +247,23 @@ h3 {
   line-height: 1.35;
 }
 
-.home-hero > p:last-child {
+.home-hero-copy > p:not(.home-role):not(.home-location) {
   max-width: 980px;
   margin-bottom: 0;
+}
+
+.home-photo {
+  width: 210px;
+  height: 210px;
+  object-fit: cover;
+  border: 1px solid;
+  border-radius: var(--card-radius);
+}
+
+.home-location {
+  margin: 1rem 0 0;
+  font-size: 0.96rem;
+  font-weight: 600;
 }
 
 
@@ -258,6 +276,10 @@ h3 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
   margin: 1rem 0;
+}
+
+.impact-grid-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .impact-card {
@@ -590,6 +612,10 @@ body.quarto-light .timeline-item {
   border-left-color: var(--light-border);
 }
 
+body.quarto-light .home-photo {
+  border-color: var(--light-border);
+}
+
 body.quarto-light .case-icon {
   background: rgba(47, 128, 237, 0.1);
 }
@@ -653,6 +679,10 @@ body.quarto-dark .timeline-item {
   border-left-color: var(--dark-border);
 }
 
+body.quarto-dark .home-photo {
+  border-color: var(--dark-border);
+}
+
 body.quarto-dark .impact-card:hover,
 body.quarto-dark a.home-case-card:hover {
   border-color: #4b9cff;
@@ -700,6 +730,16 @@ body.quarto-dark .case-tags {
 
 
 @media (max-width: 850px) {
+
+  .home-hero {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .home-photo {
+    width: 180px;
+    height: 180px;
+  }
 
   .about-grid,
   .leadership-grid {

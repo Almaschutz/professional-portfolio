@@ -5,6 +5,8 @@ page-layout: full
 
 ::: {.home-hero}
 
+::: {.home-hero-copy}
+
 # Alma Schutz
 
 <p class="home-role">Analytics and Data Science</p>
@@ -12,6 +14,12 @@ page-layout: full
 ## I turn complex product and commercial questions into measurement systems, experiments and decisions leaders can act on.
 
 Across 15+ years in industry and consulting, I have led analytics from problem framing through implementation—combining technical depth, business judgment and executive communication to deliver measurable growth.
+
+<p class="home-location"><i class="bi bi-geo-alt" aria-hidden="true"></i> Valencia, Spain</p>
+
+:::
+
+<img src="assets/alma-schutz-headshot.jpg" class="home-photo" alt="Professional portrait of Alma Schutz">
 
 :::
 
@@ -49,7 +57,7 @@ Conversion uplift in a key digital payment journey.
 
 ### $4.2M
 
-Incremental marginal contribution generated through experimentation.
+Incremental marginal contribution generated through commercial experimentation in 2022.
 
 :::
 
