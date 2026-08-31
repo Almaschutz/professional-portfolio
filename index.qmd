@@ -9,15 +9,15 @@ page-layout: full
 
 <p class="home-role">Analytics and Data Science</p>
 
-## I bridge business strategy and technical analytics to turn complex problems into clear decisions, scalable solutions and measurable growth.
+## I turn complex product and commercial questions into measurement systems, experiments and decisions leaders can act on.
 
-My work spans problem framing, measurement design, modeling, implementation and executive decision support across global analytics and data science initiatives.
+Across 15+ years in industry and consulting, I have led analytics from problem framing through implementation—combining technical depth, business judgment and executive communication to deliver measurable growth.
 
 :::
 
 ---
 
-## Business Impact at Scale
+## Selected Business Impact
 
 ::: {.impact-grid}
 
@@ -114,8 +114,8 @@ Incremental marginal contribution generated through experimentation.
     <h3>Product Growth &amp; Platform Analytics</h3>
 
     <p>
-      A global measurement system for diagnosing adoption,
-      sizing growth opportunities and informing product and investment decisions.
+      Building a global measurement system to diagnose adoption,
+      size growth opportunities and guide product investment.
     </p>
 
     <div class="case-tags">
@@ -128,28 +128,28 @@ Incremental marginal contribution generated through experimentation.
 
   </a>
 
-  <div class="home-case-card home-case-card-disabled">
+  <a href="projects/02-experimentation/" class="home-case-card">
 
     <div class="case-icon">
       <i class="bi bi-flask"></i>
     </div>
 
-    <h3>Experimentation Platform</h3>
+    <h3>Planogram Experimentation &amp; Market Segmentation</h3>
 
     <p>
-      A scalable experimentation framework for designing rigorous tests,
-      improving precision and supporting confident decisions.
+      Translating consumer behavior into market segments and a controlled field experiment
+      to support segment-specific planogram decisions.
     </p>
 
     <div class="case-tags">
-      Experimentation · Causal Inference · R · SQL
+      Experimentation · Segmentation · Causal Inference · R · SQL
     </div>
 
-    <div class="case-link case-link-muted">
-      Coming soon
+    <div class="case-link">
+      View case study <i class="bi bi-arrow-right"></i>
     </div>
 
-  </div>
+  </a>
 
   <div class="home-case-card home-case-card-disabled">
 
@@ -175,3 +175,4 @@ Incremental marginal contribution generated through experimentation.
   </div>
 
 </div>
+```

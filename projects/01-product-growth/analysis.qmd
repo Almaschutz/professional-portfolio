@@ -711,6 +711,7 @@ display(activation_segment_display)
 ```{python}
 #| label: activation-chart
 #| fig-cap: "Activation rate by synthetic merchant segment"
+#| fig-alt: "Bar chart comparing activation rates for Small, Mid-Market and Enterprise synthetic merchants. Small has the lowest activation rate and Enterprise the highest."
 
 activation_order = segment_summary.sort_values(
     "activation_rate"
@@ -775,6 +776,7 @@ Activation rate does not show how quickly merchants realize value.
 ```{python}
 #| label: activation-time-histogram
 #| fig-cap: "Days from eligibility to first successful transaction"
+#| fig-alt: "Histogram showing the distribution of days from eligibility to first successful transaction among activated synthetic merchants."
 
 activated_merchants = merchant_data.loc[
     merchant_data["activated"]
@@ -798,6 +800,7 @@ plt.show()
 ```{python}
 #| label: activation-time-by-segment
 #| fig-cap: "Median time to activation by merchant segment"
+#| fig-alt: "Bar chart of median activation time by synthetic merchant segment: Enterprise 6 days, Mid-Market 10 days and Small 14 days."
 
 time_order = segment_summary.sort_values(
     "median_days_to_activation"
@@ -893,6 +896,7 @@ display(adoption_segment_display)
 ```{python}
 #| label: adoption-chart
 #| fig-cap: "30-Day Adoption among mature activated merchants"
+#| fig-alt: "Bar chart comparing 30-Day Adoption rates among mature activated synthetic merchants. Small is 29.3 percent, Mid-Market 84.5 percent and Enterprise 99.8 percent."
 
 adoption_order = segment_summary.sort_values(
     "adoption_30d_rate"
@@ -985,6 +989,7 @@ display(cohort_display)
 ```{python}
 #| label: cohort-chart
 #| fig-cap: "30-Day Adoption by mature synthetic activation cohort"
+#| fig-alt: "Line chart of 30-Day Adoption rates by monthly synthetic activation cohort from January through August 2025, with rates labeled at each month."
 
 plt.figure(figsize=(9, 5))
 
@@ -1102,6 +1107,7 @@ display(later_activity_display)
 ```{python}
 #| label: later-activity-chart
 #| fig-cap: "Later activity during days 31–60 by early-adoption status"
+#| fig-alt: "Bar chart comparing later-activity rates: 44.0 percent for merchants that did not reach the 30-Day Adoption threshold and 79.0 percent for those that did."
 
 plt.figure(figsize=(9, 5))
 
@@ -1185,6 +1191,7 @@ display(activation_opportunity_display)
 ```{python}
 #| label: activation-opportunity-chart
 #| fig-cap: "Directional incremental activation opportunity"
+#| fig-alt: "Bar chart of directional incremental activation opportunity by synthetic merchant segment: approximately 1,250 for Small, 250 for Mid-Market and zero for Enterprise."
 
 plt.figure(figsize=(8, 5))
 
@@ -1292,9 +1299,9 @@ The final prioritization should combine analytical opportunity with value, feasi
 
 ---
 
-# Technical appendix
+## Technical appendix
 
-## Synthetic-data methodology
+### Synthetic-data methodology
 
 The dataset contains 10,000 fictional eligible merchants distributed across three segments, four markets and multiple eligibility dates.
 
@@ -1338,7 +1345,7 @@ The synthetic model is designed to demonstrate the analytical workflow, not to r
 
 ---
 
-## Data-quality validation
+### Data-quality validation
 
 Before interpreting the results, the analysis checks that the derived dates, transaction metrics and merchant statuses follow the expected business logic.
 
@@ -1446,7 +1453,7 @@ investigation before the analysis can be used for decisions.
 
 ---
 
-## Illustrative SQL implementation
+### Illustrative SQL implementation
 
 The following SQL illustrates how activation, 30-Day Adoption and later activity could be derived from eligibility and transaction tables.
 
@@ -1620,7 +1627,7 @@ In production, 30-Day Adoption could be reported after 30 days, while later acti
 
 ---
 
-## Limitations
+### Limitations
 
 This public replica is intentionally simplified.
 

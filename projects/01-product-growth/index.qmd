@@ -1,6 +1,6 @@
 ---
 title: "Product Growth & Platform Analytics"
-subtitle: "Building a measurement system to turn merchant behavior into product and investment decisions"
+subtitle: "Building a measurement system for product and investment decisions"
 description: "A product analytics case study on activation, adoption, growth measurement and executive decision support for a global merchant platform."
 categories:
   - Product Analytics
@@ -14,13 +14,11 @@ page-layout: full
 
 ::: {.case-hero}
 
-## Turning merchant behavior into better product decisions
+## Executive answer
 
-A global merchant platform was expanding across markets, products and merchant segments.
+I led analytics for a global merchant platform, building a shared measurement system that connected merchant behavior with product, roadmap and investment decisions.
 
-The challenge was not simply knowing which merchants had access to the platform. Product and commercial leaders needed to understand whether merchants were realizing value, where adoption was breaking down and which opportunities were worth prioritizing.
-
-I led analytics for the platform, building a shared measurement system that connected merchant behavior with product, roadmap and investment decisions.
+The framework separated access from activation, meaningful early adoption and later activity. It gave Product and Commercial leaders a consistent way to see where growth was breaking down, size the addressable opportunity and prioritize interventions rather than relying on a single top-line activity metric.
 
 ::: {.case-meta}
 
@@ -43,7 +41,7 @@ I led analytics for the platform, building a shared measurement system that conn
 
 ### +30%
 
-Exceeded the Full Stack Monthly Active Users target in 2024.
+Exceeded the 2024 Full Stack Monthly Active Users target.
 
 :::
 
@@ -59,7 +57,7 @@ Supported growth in Monthly Active Users during 2025.
 
 ### 1.5M+
 
-Supported analytics and decision-making for a global merchant-platform migration.
+Merchants supported through global platform migration and measurement.
 
 :::
 
@@ -73,48 +71,27 @@ Supported conversion improvement in a key payment experience.
 
 :::
 
-The broader analytics capability also helped scale self-service reporting, establish shared product-outcome definitions and support roadmap expansion across more than 30 global alternative payment methods.
+The capability also established shared product-outcome definitions, scaled self-service reporting and supported roadmap expansion across more than 30 global alternative payment methods.
 
 ---
 
-## The decision problem
+## Business decision
 
-As the platform expanded, leadership needed to answer five questions:
+As the platform expanded across markets, products and merchant segments, leadership needed to know whether eligible merchants were realizing value—not simply whether they had access.
 
-1. Were eligible merchants actually reaching first value?
+Five questions shaped the work:
+
+1. Were eligible merchants reaching a first successful transaction?
 2. How quickly were they activating?
 3. Did first use develop into meaningful transaction depth?
-4. Were merchants still active in the following period?
-5. Which gaps represented the most valuable and addressable growth opportunities?
+4. Were they still active in the following period?
+5. Which gaps represented the largest valuable and addressable opportunities?
 
-A single top-line activity metric could not distinguish these behaviors.
-
-I structured the measurement system around distinct stages of the merchant journey so teams could identify where growth was breaking down and focus on the right intervention.
+A single activity metric could not distinguish onboarding friction, shallow use and later inactivity. I therefore structured the measurement around the merchant journey and the decisions available at each stage.
 
 ---
 
-## My role
-
-I owned analytics for the merchant platform, including product outcomes and technical metric definitions.
-
-My responsibilities included:
-
-- defining and governing core product metrics;
-- measuring activation, adoption and platform growth;
-- identifying behavioral patterns and growth opportunities;
-- sizing opportunities using both performance gaps and merchant population;
-- supporting product launches, roadmap and investment decisions;
-- leading BI automation and self-service reporting;
-- partnering across Product, Engineering, Research, Commercial and other functions;
-- translating analytical findings into recommendations for product and commercial leadership.
-
-The goal was not simply to report performance. It was to create a measurement system teams could use repeatedly to make better decisions.
-
----
-
-## Measurement framework
-
-The framework began with the first observable behavior showing that a merchant had realized value.
+## Measurement system
 
 ```text
 Eligible merchant
@@ -129,114 +106,67 @@ Later activity
 = 1+ successful transaction during days 31–60
 ```
 
-The public analytical replica uses the following definitions:
+Only merchants with complete observation windows were included in post-activation metrics. This prevented newer cohorts from appearing weaker simply because they had less time to generate observable behavior.
 
-- **Eligible:** Merchant belongs to the population able to use the platform.
-- **Activated:** Merchant completes a first successful transaction.
-- **Time to activation:** Days between eligibility and activation.
-- **30-Day Adoption:** At least 10 successful transactions during days 0–30 after activation.
-- **Later active:** At least one successful transaction during days 31–60.
-- **Activation cohort:** Month of the first successful transaction.
+The framework answered three different management questions:
 
-Only merchants with complete observation windows are included in post-activation metrics. This prevents newer cohorts from appearing weaker simply because they have had less time to generate observable behavior.
+- **Activation rate and speed:** Are merchants reaching first value, and where is onboarding or integration slowing them down?
+- **Early adoption:** Does first use develop into meaningful transaction depth?
+- **Later activity:** Does engagement continue beyond the initial adoption window?
 
----
-
-## How the analytics informed decisions
-
-### Diagnose activation friction
-
-Activation rate showed whether merchants reached first value, while time to activation showed how quickly they got there.
-
-Together, they helped distinguish merchants who never activated from merchants who eventually activated but experienced onboarding, integration or readiness delays.
-
-### Separate first use from meaningful adoption
-
-A first successful transaction indicated initial value realization, but not necessarily meaningful product adoption.
-
-30-Day Adoption provided a consistent measure of whether first use developed into deeper early transaction behavior.
-
-### Compare behavior fairly
-
-Fixed observation windows made cohort comparisons structurally consistent.
-
-This helped separate genuine behavioral differences from apparent differences caused by cohort maturity.
-
-Later activity was measured independently from early adoption, allowing teams to evaluate whether stronger early usage was associated with subsequent activity without assuming the relationship was causal.
-
-### Prioritize value, not just performance gaps
-
-The weakest-performing segment was not automatically the best place to invest.
-
-Prioritization also considered:
-
-- merchant population;
-- expected business value;
-- addressability;
-- product and engineering effort;
-- market constraints;
-- measurement feasibility.
-
-This shifted the conversation from **“Where is performance lowest?”** to **“Where can intervention create the most meaningful value?”**
+Separating these outcomes made cohort and segment comparisons structurally fair and avoided treating correlation between early and later behavior as causal evidence.
 
 ---
 
-## From analysis to operating system
+## Decisions enabled
 
-The work extended beyond one-time analyses.
+### Diagnose the constraint before choosing the intervention
 
-I led automated reporting and self-service KPI frameworks supporting:
+Activation rate distinguished merchants who never reached first value; time to activation identified merchants who eventually activated but experienced friction. Product teams could therefore separate access, readiness and integration problems from deeper adoption challenges.
 
-- recurring business reviews;
-- activation and time-to-activation monitoring;
-- adoption and cohort tracking;
-- later-activity measurement;
-- product launch evaluation;
-- roadmap prioritization;
-- leadership reporting.
+### Prioritize value, not the largest performance gap
 
-This created a more consistent operating system for connecting product behavior with recurring business and roadmap decisions.
+The weakest-performing segment was not automatically the best investment. Opportunity sizing combined the performance gap with merchant population, expected value, addressability, engineering effort, market constraints and measurement feasibility.
+
+This changed the question from “Where is performance lowest?” to “Where can intervention create the most meaningful value?”
+
+### Turn measurement into an operating rhythm
+
+I led automated reporting and self-service KPI frameworks for recurring business reviews, cohort tracking, product launches, roadmap prioritization and leadership reporting. The result was a reusable operating system, not a collection of one-time analyses.
+
+---
+
+## My contribution
+
+I owned product outcomes and technical metric definitions for the platform. My work included:
+
+- defining and governing core product metrics;
+- measuring activation, adoption and platform growth;
+- identifying behavioral patterns and sizing opportunities;
+- supporting product launches, roadmap and investment decisions;
+- leading BI automation and self-service reporting;
+- partnering with Product, Engineering, Research and Commercial teams;
+- translating analytical findings into executive recommendations.
+
+The hardest part was creating definitions precise enough for analysts and engineers while keeping them intuitive enough to guide recurring leadership decisions.
 
 ---
 
 ## Public analytical replica
 
-This case study is a confidentiality-safe replica inspired by my real work leading product analytics for a large-scale global merchant platform.
+The walkthrough is a confidentiality-safe reconstruction using synthetic merchant data and independently written Python and SQL. It preserves the analytical questions and leadership decisions while simplifying metric definitions and excluding confidential data, dashboards and production code.
 
-The business context, analytical challenges and leadership responsibilities reflect the type of work I performed. The public implementation uses synthetic merchant data, simplified public-safe definitions and independently written Python and SQL.
-
-No confidential company data, proprietary metric definitions, internal dashboards or production code are included.
-
-The walkthrough demonstrates:
-
-- synthetic-data generation;
-- activation and adoption measurement;
-- cohort analysis;
-- later-activity analysis;
-- opportunity sizing;
-- data-quality validation;
-- illustrative SQL.
+It demonstrates activation and adoption measurement, cohort analysis, later-activity analysis, opportunity sizing, data-quality validation and illustrative SQL.
 
 [View the analytical walkthrough](analysis.qmd){.btn .btn-primary}
 
 ---
 
-## Tools and methods
+## Methods and extensions
 
-**Analytics:** SQL · Python · Product analytics · Activation analysis · Cohort analysis · Time-to-event analysis · Merchant segmentation · Behavioral analysis · KPI design · Opportunity sizing · Experimentation
+**Methods:** SQL · Python · Product analytics · KPI design · Cohort analysis · Behavioral segmentation · Opportunity sizing · Experimentation
 
-**Leadership:** Product measurement strategy · Metric governance · Cross-functional leadership · Executive communication · Business reviews · Roadmap decision support · Self-service analytics
-
----
-
-## What I would measure next
-
-A production measurement system could extend this work through:
-
-- activation curves and root causes of delayed or failed activation;
-- transaction quality, merchant value and movement between usage-depth bands;
-- experimentation on onboarding and product interventions;
-- causal measurement of roadmap changes and long-term merchant value.
+**Further development:** Activation curves and root causes · Usage-depth transitions · Onboarding experiments · Causal roadmap measurement · Long-term merchant value
 
 ---
 

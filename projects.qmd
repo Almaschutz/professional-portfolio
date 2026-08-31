@@ -6,9 +6,9 @@ page-layout: full
 
 <div class="page-intro">
 
-These case studies show how I approach different classes of data science problems: define the decision, choose the right analytical method, evaluate the evidence and translate results into action.
+These case studies show how I define the decision, choose an appropriate method, evaluate the evidence and translate the result into action.
 
-Each project includes an executive case study and a reproducible analytical walkthrough.
+Each published project pairs an executive case study with a reproducible analytical walkthrough.
 
 </div>
 
@@ -34,19 +34,21 @@ This case study shows how I structured a global merchant measurement system arou
 
 ---
 
-## Experimentation Platform
+## Planogram Experimentation & Market Segmentation
 
-### Building reliable evidence for product decisions
+### Turning consumer behavior into an executable retail strategy
 
-How do you design experiments that support confident product decisions rather than simply report whether a metric moved?
+How do you protect competitive share in a declining market when consumer behavior varies across locations and field execution cannot happen store by store?
 
-This case study focuses on experiment design, statistical power, variance reduction, guardrails and causal interpretation in a scalable experimentation framework.
+This case study shows how I translated consumer research into behavioral market segments, adapted the design to Plaza-level execution and compared two planogram strategies with matched controls before recommending rollout.
 
-**Demonstrates:** Experiment design · A/B testing · Statistical power · CUPED · Guardrails · Causal inference · R · SQL
+**Demonstrates:** Behavioral segmentation · Field experimentation · Matched controls · Causal inference · Commercial decision support · R · SQL
 
 <div class="project-actions">
 
 [View case study](projects/02-experimentation/index.qmd){.btn .btn-primary}
+
+[View analytical walkthrough](projects/02-experimentation/analysis.qmd){.btn .btn-outline-primary}
 
 </div>
 
@@ -58,12 +60,12 @@ This case study focuses on experiment design, statistical power, variance reduct
 
 A high-performing model is not automatically a useful decision system.
 
-This case study shows how predictive modeling can identify retention risk while incorporating calibration, intervention economics and monitoring to determine which predictions are actionable.
+This forthcoming case study will show how predictive modeling can identify retention risk while incorporating calibration, intervention economics and monitoring to determine which predictions are actionable.
 
 **Demonstrates:** Machine learning · Predictive modeling · Calibration · Expected value · Model monitoring · Decision systems · Python · SQL
 
 <div class="project-actions">
 
-[View case study](projects/03-retention-ml/index.qmd){.btn .btn-primary}
+**Coming soon**
 
 </div>

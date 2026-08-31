@@ -72,11 +72,9 @@ segment_palette <- c(
 )
 ```
 
-## The business question
+## Executive summary
 
-The objective was to answer:
-
-> **Which planogram should be used for each consumption profile, and is the evidence strong enough to justify rollout?**
+This walkthrough answers a practical decision: **Which planogram, if any, should be used for each consumption profile—and is the evidence strong enough to justify rollout?**
 
 The analysis followed four decisions:
 
@@ -85,19 +83,9 @@ The analysis followed four decisions:
 3. compare each treated store with **three controls matched on historical trend and seasonality**;
 4. estimate incremental MIOS and recommend the planogram only where the evidence supported it.
 
-The commercial outcome is expressed in **MIOS — millions of sticks**.
+The commercial outcome is expressed in **MIOS — millions of sticks**. The methods demonstrated are behavioral segmentation, matched controls, nearest-neighbor matching, causal inference, R and SQL.
 
-
----
-
-## What this walkthrough demonstrates
-
-**Demonstrates:** Behavioral segmentation · A/B testing · Matched controls · Nearest-neighbor matching · Causal inference · Statistical analysis · R · SQL
-
-More importantly, it demonstrates a complete decision path:
-
-> **Understand consumer behavior → make the strategy executable → build a credible counterfactual → estimate incremental impact → recommend action only where the evidence supports it.**
-
+The category operated in a structurally declining tobacco market, where total volume was expected to contract over time. The strategic objective was therefore not to treat absolute volume as the primary signal, but to **protect relative market share and competitive position** as the market became smaller.
 ---
 
 ## 1. Build meaningful consumption profiles
@@ -136,7 +124,7 @@ Full Flavor · Light · Menthol · NTD
 
 This matters because a store can still sell more Full Flavor than any other single category and yet behave more like a **Menthol** or **NTD** store relative to the national pattern.
 
-Stores without a clearly dominant relative pattern — and later the aggregated Plaza profiles — were assigned to the **closest reference profile based on their complete consumption mix**.
+The resulting reference profiles were later used to classify each Plaza from its complete aggregated consumption mix.
 
 ```{r}
 #| label: generate-segmentation-data
@@ -261,6 +249,7 @@ reference_profiles <- store_index %>%
 ```{r}
 #| label: reference-profile-chart
 #| fig-cap: "Synthetic reference profiles used to illustrate the segmentation logic"
+#| fig-alt: "Four horizontal 100-percent stacked bars showing the synthetic Full Flavor, Light, Menthol and NTD reference profiles. Each profile emphasizes its corresponding category relative to the other three."
 
 reference_plot <- reference_profiles %>%
   pivot_longer(
@@ -327,18 +316,18 @@ ggplot(
   )
 ```
 
-Each horizontal bar sums to 100%, so all profiles have the same total length and can be compared on composition alone. This chart is descriptive: it helps the reader see the shape of each profile. The assignment rule still compares stores with these profiles relative to the national mix, which is why a store can still be classified as Light, Menthol or NTD even when Full Flavor remains the largest absolute share.
+Each horizontal bar sums to 100%, so all profiles have the same total length and can be compared on composition alone. This chart is descriptive: it helps the reader see the shape of each profile. The eventual assignment rule compares each Plaza's complete aggregated mix with these profiles, so a Plaza can still be classified as Light, Menthol or NTD even when Full Flavor remains the largest absolute share.
 
 ### Make the segmentation executable
 
 Planograms could not realistically be implemented store by store. Execution happened at the **Plaza** level.
 
-For each Plaza, store-level category shares were combined using the **harmonic mean by category**. The four resulting values were normalized into one Plaza consumption profile and matched to the nearest behavioral reference profile.
+Classification was therefore performed at the same level. Because Full Flavor was structurally predominant—and total tobacco volume was expected to decline—pooling absolute MIOS would have obscured meaningful differences in the category mix. Instead, each store was represented by its **category shares**, and those shares were combined within each Plaza using the **harmonic mean by category**. The result was normalized into one Plaza consumption profile and assigned to the closest behavioral reference profile for execution.
 
 ```text
-Store-level category shares
+Four behavioral reference profiles
         ↓
-Harmonic mean by category within Plaza
+Harmonic mean by category within each Plaza
         ↓
 Normalized Plaza consumption profile
         ↓
@@ -347,39 +336,12 @@ Nearest reference profile
 Operational Plaza segment
 ```
 
-The harmonic mean makes the Plaza profile more sensitive to **consistency across stores**. A category needs to be broadly represented across the Plaza rather than looking strong because of only a few stores. It also keeps the classification focused on the **distribution of category shares across stores**, rather than on absolute sales volume alone. It also keeps the classification focused on the **distribution of category shares across stores**, rather than on absolute sales volume alone.
-
-> **Store behavior creates the signal; Plaza segmentation makes it operational.**
+This keeps the analytical unit aligned with the operational decision: stores provide the consumption data, but the Plaza receives the segment and planogram. Using shares focuses the classification on **market composition and competitive share rather than absolute volume**, while the harmonic mean favors category strength that is consistent across stores rather than driven by one unusually high value.
 
 ```{r}
 #| label: plaza-segmentation
 #| echo: false
 #| results: hide
-
-eligible_stores <- store_profiles %>%
-  filter(store_age_weeks >= MIN_HISTORY_WEEKS)
-
-harmonic_mean <- function(x) {
-  length(x) / sum(1 / x)
-}
-
-plaza_profiles <- eligible_stores %>%
-  group_by(plaza_id) %>%
-  summarise(
-    full_flavor = harmonic_mean(full_flavor_share),
-    light = harmonic_mean(light_share),
-    menthol = harmonic_mean(menthol_share),
-    ntd = harmonic_mean(ntd_share),
-    .groups = "drop"
-  ) %>%
-  mutate(
-    total = full_flavor + light + menthol + ntd,
-    full_flavor = full_flavor / total,
-    light = light / total,
-    menthol = menthol / total,
-    ntd = ntd / total
-  ) %>%
-  select(-total)
 
 reference_matrix <- reference_profiles %>%
   select(
@@ -407,6 +369,31 @@ nearest_reference <- function(ff, li, me, nt) {
 
   reference_profiles$segment[which.min(distances)]
 }
+
+eligible_stores <- store_profiles %>%
+  filter(store_age_weeks >= MIN_HISTORY_WEEKS)
+
+harmonic_mean <- function(x) {
+  length(x) / sum(1 / x)
+}
+
+plaza_profiles <- eligible_stores %>%
+  group_by(plaza_id) %>%
+  summarise(
+    full_flavor = harmonic_mean(full_flavor_share),
+    light = harmonic_mean(light_share),
+    menthol = harmonic_mean(menthol_share),
+    ntd = harmonic_mean(ntd_share),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    total = full_flavor + light + menthol + ntd,
+    full_flavor = full_flavor / total,
+    light = light / total,
+    menthol = menthol / total,
+    ntd = ntd / total
+  ) %>%
+  select(-total)
 
 plaza_segments <- plaza_profiles %>%
   rowwise() %>%
@@ -438,8 +425,6 @@ if (length(missing_plaza_segments) > 0) {
 }
 ```
 
----
-
 ## 2. Build a credible comparison with matched controls
 
 Only stores with **more than one year plus eight weeks of history** were eligible. That history was used to capture each store's underlying **trend and seasonal pattern** before the planogram change.
@@ -448,7 +433,7 @@ Planogram A and Planogram B were treatment families, each adapted to the Plaza s
 
 - **Planogram A:** color-led treatment;
 - **Planogram B:** brand-led treatment;
-- **Control:** existing configuration, largely organized by price tier, largely organized by price tier.
+- **Control:** existing configuration, largely organized by price tier.
 
 Each treated store was then matched to **three control stores** with the most similar historical trend and seasonality.
 
@@ -657,6 +642,7 @@ What matters for this matching strategy is whether their **historical trajectori
 ```{r}
 #| label: matching-chart
 #| fig-cap: "Pre-test trajectories for treated stores and their matched controls"
+#| fig-alt: "Four vertically faceted line charts comparing indexed pre-test MIOS for treated stores and matched controls across weeks minus eight to minus one. The two trajectories follow similar patterns in each segment."
 #| fig-height: 10.5
 #| fig-width: 11
 
@@ -859,7 +845,7 @@ Incremental planogram effect
 
 This is the business intuition behind a matched-control, difference-in-differences style comparison.
 
-> **The question is whether MIOS increased more than it likely would have without the planogram change.**
+The relevant question is whether MIOS increased more than it likely would have without the planogram change.
 
 ```{r}
 #| label: matched-effect-model
@@ -1023,6 +1009,7 @@ segment_effects <- segment_effects %>%
 ```{r}
 #| label: effect-chart
 #| fig-cap: "Synthetic incremental weekly MIOS versus matched controls"
+#| fig-alt: "Forest plot of Planogram A and Planogram B incremental weekly MIOS estimates across four consumption segments. Horizontal intervals are colored by conclusive positive, inconclusive or conclusive negative evidence relative to zero."
 #| fig-height: 6.8
 #| fig-width: 11
 
@@ -1179,32 +1166,40 @@ Some planograms can show attractive percentage growth and still be too variable 
 
 That distinction mattered in conversations with Marketing and Commercial teams: **large observed growth is not automatically strong evidence**.
 
-For each segment, the decision rule is:
-
-> **Roll out a new planogram only when its incremental effect versus matched controls is positive and the evidence is precise enough to support action.**
+For each segment, the decision rule is to roll out a new planogram only when its incremental effect versus matched controls is positive and the evidence is precise enough to support action.
 
 Not every new planogram outperformed Control. If a treatment was inconclusive or underperformed its matched controls, it was **not** recommended. If neither A nor B cleared the bar, the decision was to **keep Control** and continue testing.
 
-The management takeaway is:
-
-> **Use the planogram with credible incremental evidence for that consumption profile.**
+The management takeaway is to use the planogram with credible incremental evidence for that consumption profile.
 
 ---
 
-# Technical appendix
+## Technical appendix
 
-## Why three matched controls?
+### Plaza aggregation with the harmonic mean
+
+For category $c$ in a Plaza with $n$ eligible stores, the Plaza value was calculated as:
+
+$$
+H_c = \frac{n}{\sum_{i=1}^{n} 1 / s_{ic}}
+$$
+
+where $s_{ic}$ is category $c$'s share in store $i$. The four category-level harmonic means were then normalized to sum to 100% before the Plaza was matched to its nearest reference profile.
+
+Using store shares instead of raw MIOS prevented high-volume stores—and the structurally predominant Full Flavor category—from determining the Plaza profile through volume alone. The harmonic mean further reduced the influence of isolated high shares: a category had to be consistently represented across stores to strongly influence the result. Full Flavor's structural dominance was addressed through comparison with the complete behavioral reference profiles rather than through a simple largest-category rule.
+
+### Why three matched controls?
 
 Using three controls gives each treated store a small comparison set rather than relying on a single potentially idiosyncratic store. The matched-control outcome is the average of those three historical comparators.
 
-## Why a KD-tree?
+### Why a KD-tree?
 
 The business logic is nearest-neighbor matching: find stores with the most similar historical trend and seasonality. A KD-tree makes that search efficient when the candidate control population is large.
 
 The public code above uses the same distance logic directly for transparency. The original workflow used a KD-tree implementation.
 
 
-## Illustrative SQL
+### Illustrative SQL
 
 ```sql
 WITH eligible_stores AS (
@@ -1281,7 +1276,7 @@ ORDER BY
     week;
 ```
 
-## Limitations
+### Limitations
 
 This public replica is intentionally simplified.
 

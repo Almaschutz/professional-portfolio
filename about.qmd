@@ -6,9 +6,9 @@ page-layout: full
 
 <div class="page-intro">
 
-I am a Data Science and Analytics Leader with 15+ years of experience building analytics capabilities, leading multidisciplinary teams, and translating data into measurable business impact.
+I am a Data Science and Analytics Leader with 15+ years of experience building analytics capabilities, leading multidisciplinary teams and turning data into measurable business impact.
 
-My background spans product analytics, commercial analytics, marketing measurement, experimentation, and machine learning. I have worked across global organizations including PayPal, Philip Morris International, and Accenture, helping teams improve products, identify growth opportunities, and make better investment decisions.
+My background spans product analytics, commercial analytics, experimentation and machine learning across PayPal, Philip Morris International and Accenture. I am most effective where the problem is ambiguous, the evidence needs careful interpretation and several teams must align around a practical decision.
 
 </div>
 
@@ -24,7 +24,7 @@ I combine three perspectives that are often treated separately:
 
 ### Business strategy
 
-I focus on business decisions, not the models. I work with stakeholders to define the problem, clarify success metrics, and identify where analytics can create meaningful value.
+I start with the decision: what must change, who will act and what evidence would be useful? From there, I clarify the problem, success measures and where analytics can create meaningful value.
 
 :::
 
@@ -32,7 +32,7 @@ I focus on business decisions, not the models. I work with stakeholders to defin
 
 ### Data science
 
-I use experimentation, causal inference, predictive modeling, and product analytics to turn complex data into practical and clear recommendations.
+I use experimentation, causal inference, predictive modeling and product analytics to produce recommendations that are technically sound and practical to implement.
 
 :::
 
@@ -40,7 +40,7 @@ I use experimentation, causal inference, predictive modeling, and product analyt
 
 ### Leadership
 
-I build teams, operating models, and measurement systems that allow analytics to scale beyond individual projects and become part of how an organization makes decisions.
+I build teams, operating models and measurement systems that allow analytics to scale beyond individual projects and become part of how an organization makes decisions.
 
 :::
 
@@ -127,6 +127,6 @@ I am interested in leadership and senior individual-contributor opportunities wh
 
 [Download my Resume](Resume-Alma-Schutz.pdf){.btn .btn-primary}
 
-[Connect on LinkedIn](https://www.linkedin.com/in/alma-schutz){.btn .btn-outline-primary}
+[Connect on LinkedIn](https://www.linkedin.com/in/almaschutz){.btn .btn-outline-primary}
 
 :::

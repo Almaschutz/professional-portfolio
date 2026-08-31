@@ -1,7 +1,7 @@
 ---
 title: "Planogram Experimentation & Market Segmentation"
-subtitle: "Using consumer behavior, segmentation and controlled field experiments to improve retail decision-making"
-description: "A retail analytics case study combining behavioral insight, market segmentation and controlled experimentation."
+subtitle: "Turning consumer behavior into an executable retail strategy"
+description: "A retail analytics case study combining behavioral segmentation, matched controls and controlled field experimentation."
 categories:
   - Experimentation
   - Segmentation
@@ -14,20 +14,18 @@ page-layout: full
 
 ::: {.case-hero}
 
-## Turning consumer behavior into a testable retail strategy
+## Executive answer
 
-In a highly restricted marketing environment, point-of-sale execution was an important commercial lever.
+I led the analytical design of a national field experiment that translated consumer research into an executable planogram strategy for Mexico's convenience channel.
 
-Previous consumer research had shown that shoppers did not necessarily navigate planograms according to the traditional merchandising hierarchy. Eye-movement studies suggested that visual patterns, colors and brand recognition influenced how consumers explored the display.
-
-Working closely with Marketing, I helped translate those behavioral insights into a national field experiment: segment markets according to consumption patterns, test alternative planogram strategies and measure whether they improved performance relative to comparable controls.
+Working with Marketing, I segmented Plazas by consumption mix, tested color-led and brand-led layouts against matched controls, and established a clear rollout rule: change the planogram only where the incremental evidence was positive and sufficiently reliable. The result was a practical way to protect competitive share in a structurally declining market without mistaking normal variation for treatment impact.
 
 ::: {.case-meta}
 
 **Role:** Data Science Manager  
 **Organization:** Philip Morris International  
 **Scope:** National convenience channel in Mexico  
-**Focus:** Market segmentation, controlled experimentation, longitudinal analysis and commercial decision support
+**Focus:** Behavioral segmentation, field experimentation, causal measurement and commercial decision support
 
 :::
 
@@ -35,253 +33,88 @@ Working closely with Marketing, I helped translate those behavioral insights int
 
 ---
 
-## The decision problem
+## Business context and decision
 
-Historically, planograms largely followed a price-oriented hierarchy, with more expensive brands positioned toward the top and lower-priced products toward the bottom.
+In a highly restricted marketing environment, point-of-sale execution was one of the few important commercial levers. Consumer research suggested that shoppers navigated displays through visual patterns, colors and brand recognition—not only through the traditional price hierarchy.
 
-Consumer research suggested another possibility: shoppers appeared to navigate the display using visual cues such as color, shapes and brands.
+At the same time, total tobacco volume was expected to keep declining. The strategic objective was therefore to protect relative market share and competitive position rather than optimize for absolute volume alone.
 
-Marketing wanted to test alternative planogram strategies.
+The decision was:
 
-The analytical question was not simply **which layout performed best**.
+> Which planogram, if any, should be used for each consumption profile—and was the evidence strong enough to justify rollout?
 
-We first needed to determine whether different markets had meaningfully different consumption patterns and whether those differences should influence how the experiment was designed.
-
-Our analysis showed that **category consumption differentiated markets more meaningfully than geography alone**.
-
-That led to a different recommendation: segment markets by consumption profile first, and evaluate the planogram strategies within that structure.
+Answering it required more than comparing percentage growth. We needed a segmentation that reflected consumer behavior, an experiment the field could execute consistently and a credible estimate of what would have happened without the change.
 
 ---
 
-## My role
+## Analytical approach
 
-I worked closely with Marketing to translate consumer research into an analytically rigorous and operationally executable experiment.
+### 1. Segment markets by consumption behavior
 
-My responsibilities included:
+Full Flavor was structurally predominant, so a largest-category rule would have hidden meaningful differences in the rest of the mix. I used the complete historical category shares to define four behavioral reference profiles: **Full Flavor, Light, Menthol and NTD**.
 
-- adapting the market segmentation to observed consumption behavior;
-- helping define treatment and control populations;
-- translating store-level analytics into an experiment that could realistically be executed in the field;
-- evaluating performance before and after implementation using longitudinal store data;
-- accounting for historical variation and seasonality;
-- assessing results relative to their variability rather than relying on percentage growth alone;
-- communicating statistical findings to Marketing and Commercial teams in practical decision terms.
+Planograms could not be implemented store by store, so the operational segment was assigned at the **Plaza** level. Store category shares were combined within each Plaza using the harmonic mean, normalized into one Plaza profile and matched to the nearest reference profile. This emphasized market composition and consistency across stores rather than raw sales volume.
 
-The objective was not to produce the most sophisticated experimental design possible in theory.
+### 2. Design for field execution
 
-It was to design the strongest analysis that could also be implemented consistently across a national retail network.
+Marketing developed two alternatives based on the consumer-research hypothesis:
 
----
+- **Planogram A:** a color-led layout designed to strengthen visual differentiation;
+- **Planogram B:** a brand-led layout organized more strongly around brand recognition;
+- **Control:** the existing configuration, largely organized by price tier.
 
-## From consumer research to testable strategies
+Treatment was coordinated by Plaza while measurement remained at store level. Only stores with more than a year of history were eligible, providing enough pre-period data to model trend and seasonality before the eight-week test.
 
-Previous research provided the behavioral hypothesis behind the experiment.
+### 3. Estimate incremental impact
 
-Based on how consumers visually navigated the display, two alternative planogram concepts were developed:
+Each treated store was compared with three controls selected for similar historical trend and seasonality. The analysis then estimated incremental weekly MIOS—the treatment change relative to the matched-control change—and evaluated the estimate against its uncertainty.
 
-**Planogram A — Color-led**  
-Products were organized to create stronger visual differentiation through color.
-
-**Planogram B — Brand-led**  
-Products were organized more strongly around brand recognition.
-
-The experiment tested whether either approach could outperform the existing configuration — and whether effectiveness depended on local consumption patterns.
+This distinction was important because the largest observed percentage increase was not always the most reliable result. A smaller but consistent effect could support action; a larger but highly variable result could not.
 
 ---
 
-## Consumption-based segmentation
+## Decision delivered
 
-The underlying data was available at the individual store and daily level.
+The work produced a segment-specific decision framework rather than a single national winner:
 
-We used store-level consumption patterns to classify markets into four dominant profiles:
+1. roll out a new planogram only when its incremental effect versus matched controls was positive and precise enough to support action;
+2. retain the existing configuration when the treatment was inconclusive or underperformed;
+3. continue testing where the signal was promising but not yet reliable;
+4. adapt the recommendation to the Plaza's consumption profile and operational constraints.
 
-- **Full Flavor**
-- **Light**
-- **Menthol**
-- **Flavors**
-
-This was an important analytical decision.
-
-Rather than assuming that geographic markets were inherently different, the segmentation identified differences that were directly connected to observed consumer behavior.
-
-It also created a more meaningful basis for evaluating whether a particular planogram worked better for a particular demand profile.
+This gave Marketing and Commercial teams a common standard for separating attractive movements from evidence strong enough to act on.
 
 ---
 
-## Designing for analytical rigor and operational reality
+## My contribution
 
-The most granular experimental design would have assigned different planograms store by store.
+I owned the analytical path from behavioral hypothesis to commercial recommendation. My work included:
 
-That was not operationally realistic.
+- translating consumer research into measurable segmentation and treatment logic;
+- adapting a store-level analytical problem to Plaza-level execution;
+- defining eligibility, treatment and matched-control populations;
+- accounting for historical trend, seasonality and statistical uncertainty;
+- explaining the results in practical decision terms to Marketing and Commercial leaders.
 
-Planogram execution needed to be coordinated across geographic operating areas, so we used the **Plaza** as the practical implementation unit while retaining store-level data for segmentation and measurement.
-
-```text
-Daily store-level data
-        ↓
-Consumption-based segmentation
-        ↓
-Full Flavor · Light · Menthol · Flavors
-        ↓
-Operational assignment by Plaza
-        ↓
-Planogram A · Planogram B · Control
-        ↓
-Store-level performance measurement
-```
-
-This distinction mattered.
-
-The analytical unit and the operational unit did not need to be identical. The design had to preserve as much analytical information as possible while remaining executable by the business.
-
----
-
-## Establishing a reliable baseline
-
-Stores across the retailer's national network were observed, but not every store was appropriate for the analysis.
-
-We required at least one year of historical data before including a store in the experimental evaluation.
-
-Without sufficient history, an apparent post-implementation increase could reflect:
-
-- normal seasonality;
-- underlying store growth;
-- an unusually weak or strong prior period;
-- or the planogram intervention itself.
-
-The historical data allowed us to understand normal variation before attributing changes to the new configuration.
-
----
-
-## Experiment and measurement
-
-Selected Plazas received either Planogram A or Planogram B, while comparable Plazas retained the existing configuration as controls.
-
-Performance was evaluated using weekly store-level data before implementation and over an eight-week post-implementation period.
-
-The analysis considered both:
-
-1. how performance changed after implementation within treatment markets;
-2. how that change compared with markets where the planogram had not changed.
-
-Conceptually:
-
-```text
-Observed change in treatment
-          minus
-Observed change in control
-          =
-Incremental treatment signal
-```
-
-This prevented us from interpreting every post-period increase as evidence that the planogram caused the improvement.
-
----
-
-## Statistical significance changed the conversation
-
-Some treatment groups initially appeared to show large percentage increases.
-
-Those results naturally attracted attention.
-
-However, once we considered the underlying variability, some of the apparent differences were not statistically strong enough to support a confident commercial conclusion.
-
-This became an important part of my role with Marketing and Commercial teams.
-
-Rather than presenting statistical significance as a technical hurdle, I explained the decision in practical terms:
-
-**A large observed increase is not necessarily reliable if normal performance varies widely enough to produce similar movements without the intervention.**
-
-That distinction helped separate promising signals from evidence strong enough to support broader implementation.
-
----
-
-## From experiment to commercial decision
-
-The recommendation therefore considered more than the largest percentage increase.
-
-A planogram was more compelling when:
-
-1. performance improved after implementation;
-2. the improvement exceeded what was observed in comparable controls;
-3. the effect was meaningful relative to normal historical variation;
-4. the result was sufficiently consistent over the observation period;
-5. the effect made sense within the relevant consumption segment;
-6. the strategy could be executed consistently at the Plaza level.
-
-This shifted the conversation from:
-
-**“Which planogram grew the most?”**
-
-to:
-
-**“Which observed improvement is both commercially meaningful and analytically credible — and for which type of market?”**
-
----
-
-## What this work demonstrates
-
-This project combined several parts of the analytics lifecycle that are often treated separately:
-
-- behavioral research informed the hypotheses;
-- consumption data informed the segmentation;
-- operational constraints shaped the experimental design;
-- longitudinal store data provided the baseline;
-- treatment and control groups supported incremental measurement;
-- statistical uncertainty influenced the recommendation;
-- and analytical results were translated into language business teams could use.
-
-The value of the work was not simply running an experiment.
-
-It was creating a decision process that connected consumer behavior, analytical evidence and practical execution.
+The hardest part was not selecting the most sophisticated method. It was preserving analytical credibility while designing something field teams could implement consistently across a national network.
 
 ---
 
 ## Public analytical replica
 
-This case study is a confidentiality-safe reconstruction inspired by my real work in retail analytics and experimentation.
+The analytical walkthrough is a confidentiality-safe reconstruction using synthetic data and independently written R and SQL. It preserves the business problem, segmentation logic, operational constraints, matching approach and decision framework while generalizing identities, assignments and numerical results.
 
-The business problem, analytical structure and decision logic reflect the type of work performed. The public implementation uses synthetic data and simplified definitions.
-
-Retailer identity, segment definitions, observation windows, experimental assignments, metric definitions and numerical results have been generalized for confidentiality.
-
-No confidential company data, proprietary consumer research, internal planogram designs or production code are included.
-
-The analytical walkthrough demonstrates:
-
-- synthetic daily store-level data;
-- consumption-based segmentation;
-- historical baseline construction;
-- treatment and control assignment at market level;
-- pre/post performance analysis;
-- difference-in-differences-style estimation;
-- uncertainty and statistical-significance assessment;
-- segment-level treatment effects;
-- illustrative R and SQL.
+It demonstrates behavioral reference profiles, Plaza-level aggregation, matched controls, longitudinal pre/post measurement, uncertainty assessment and segment-specific treatment decisions.
 
 [View the analytical walkthrough](analysis.qmd){.btn .btn-primary}
 
 ---
 
-## Tools and methods
+## Methods and extensions
 
-**Analytics:** R · SQL · Market segmentation · Controlled experimentation · Longitudinal analysis · Treatment/control comparison · Statistical inference · Heterogeneous-effect analysis
+**Methods:** R · SQL · Behavioral segmentation · Harmonic-mean aggregation · Matched controls · Nearest-neighbor matching · Longitudinal analysis · Statistical inference
 
-**Decision support:** Experiment design · Consumer analytics · Commercial analytics · Cross-functional partnership · Statistical communication · Retail strategy
-
----
-
-## What I would extend next
-
-A production experimentation framework could extend this work through:
-
-- formal pre-treatment balance diagnostics;
-- parallel-trend assessment;
-- confidence intervals around treatment effects;
-- sensitivity to alternative control groups;
-- explicit modeling of Plaza-level clustering;
-- longer-term persistence measurement;
-- financial-value estimates relative to implementation cost.
+**Further validation:** Pre-treatment balance · Parallel trends · Plaza-level clustering · Alternative-control sensitivity · Longer-term persistence · Financial value relative to implementation cost
 
 ---
 
