@@ -1,0 +1,31 @@
+---
+title: "FMCG Pricing Models"
+subtitle: "Turning product-level demand signals into category pricing decisions"
+description: "A forthcoming case study on pricing analytics across thousands of products and 18 U.S. categories."
+categories:
+  - FMCG Pricing
+  - Price Sensitivity
+  - Cross-Price Modeling
+  - Promotion Analytics
+  - Optimization
+  - Revenue Strategy
+page-layout: full
+---
+
+<div class="page-intro">
+
+## Coming soon
+
+This case study will describe pricing-model development for Nestlé in the U.S. across thousands of products and 18 categories.
+
+The work covered price-sensitivity models, cross-price models, promotional versus non-promotional splits, and optimization frontiers linking expected prices with quantities. It also helped reduce the category pricing cycle from four months to two weeks.
+
+The full case will focus on the analytical framework, operating process and decision logic without disclosing confidential client data.
+
+</div>
+
+---
+
+[Back to case studies](../../projects.qmd){.btn .btn-outline-primary}
+
+[Download resume](../../Resume-Alma-Schutz.pdf){.btn .btn-outline-primary}

@@ -162,18 +162,18 @@ Incremental marginal contribution generated through commercial experimentation i
   <div class="home-case-card home-case-card-disabled">
 
     <div class="case-icon">
-      <i class="bi bi-diagram-3"></i>
+      <i class="bi bi-graph-up-arrow"></i>
     </div>
 
-    <h3>Retention Risk System</h3>
+    <h3>FMCG Pricing Models</h3>
 
     <p>
-      A predictive decision system combining retention risk,
-      model calibration and expected value to prioritize intervention.
+      Pricing models across thousands of products and 18 U.S. categories,
+      spanning sensitivity, cross-price effects and optimization frontiers.
     </p>
 
     <div class="case-tags">
-      Machine Learning · Decision Systems · Python · SQL
+      Pricing Analytics · Demand Modeling · Promotion Analytics · Optimization
     </div>
 
     <div class="case-link case-link-muted">

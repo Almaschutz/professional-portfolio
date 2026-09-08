@@ -1,6 +1,6 @@
 ---
 title: "Case Studies"
-subtitle: "Selected work in product analytics, experimentation and applied machine learning"
+subtitle: "Selected work in product analytics, experimentation and commercial analytics"
 page-layout: full
 ---
 
@@ -54,15 +54,15 @@ This case study shows how I translated consumer research into behavioral market 
 
 ---
 
-## Retention Risk System
+## FMCG Pricing Models
 
-### Prioritizing intervention with predictive risk and expected value
+### Turning product-level demand signals into category pricing decisions
 
-A high-performing model is not automatically a useful decision system.
+How do you set prices across thousands of products while accounting for demand sensitivity, cross-product effects and promotional mix?
 
-This forthcoming case study will show how predictive modeling can identify retention risk while incorporating calibration, intervention economics and monitoring to determine which predictions are actionable.
+Working with Nestlé in the U.S., I developed pricing models across thousands of products and 18 categories. The work included sensitivity models, cross-price models, promotional versus non-promotional splits, and optimization frontiers linking expected prices with quantities. I also helped streamline the category pricing process from four months to two weeks.
 
-**Demonstrates:** Machine learning · Predictive modeling · Calibration · Expected value · Model monitoring · Decision systems · Python · SQL
+**Demonstrates:** FMCG pricing · Price sensitivity · Cross-price modeling · Promotion analytics · Price-volume optimization · Revenue strategy
 
 <div class="project-actions">
 
