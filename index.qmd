@@ -11,7 +11,7 @@ page-layout: full
 
 <p class="home-role">Analytics and Data Science</p>
 
-## I turn complex product and commercial questions into measurement systems, experiments and decisions leaders can act on.
+## I bridge business strategy and technical analytics to turn complex problems into clear decisions, scalable solutions and measurable growth.
 
 Across 15+ years in industry and consulting, I have led analytics from problem framing through implementation—combining technical depth, business judgment and executive communication to deliver measurable growth.
 
@@ -75,7 +75,7 @@ Incremental marginal contribution generated through commercial experimentation i
 
 - Product and growth analytics
 - Commercial and marketing analytics
-- Supply chain analytics
+- Data visualization and storytelling
 - KPI design and opportunity sizing
 
 :::
@@ -84,9 +84,9 @@ Incremental marginal contribution generated through commercial experimentation i
 
 ### Data science and experimentation
 
-- Machine learning
-- Predictive modeling
 - Experimentation
+- Statistical modeling
+- Forecasting
 - Causal inference
 
 :::
