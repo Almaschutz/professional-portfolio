@@ -15,7 +15,7 @@ page-layout: full
 
 Across 15+ years in industry and consulting, I have led analytics from problem framing through implementation—combining technical depth, business judgment and executive communication to deliver measurable growth.
 
-<p class="home-location"><i class="bi bi-geo-alt" aria-hidden="true"></i> Valencia, Spain</p>
+<p class="home-location"><i class="bi bi-geo-alt" aria-hidden="true"></i> Spain</p>
 
 :::
 
