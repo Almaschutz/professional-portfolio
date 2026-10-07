@@ -144,7 +144,7 @@ I owned product outcomes and technical metric definitions for the platform. My w
 - measuring activation, adoption and platform growth;
 - identifying behavioral patterns and sizing opportunities;
 - supporting product launches, roadmap and investment decisions;
-- implementing time series models to provide Finance and Product teams with forecasts and targets;
+- developing and implementing forecasting models to support financial planning and product target setting;
 - leading BI automation and self-service reporting;
 - partnering with Product, Engineering, Research and Commercial teams;
 - translating analytical findings into executive recommendations.
