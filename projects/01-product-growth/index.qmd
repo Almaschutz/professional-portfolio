@@ -152,6 +152,14 @@ The hardest part was creating definitions precise enough for analysts and engine
 
 ---
 
+## AI assistant pilot
+
+At PayPal, I led an AI assistant pilot within my product analytics domain, in collaboration with AI/ML specialists. The pilot focused on the most stable products in my scope and aimed to answer recurring stakeholder questions.
+
+I documented all relevant fields and tables, developed example queries showing how to answer business questions, and provided business context tailored to different stakeholders' needs. I also worked with the specialists to test the assistant's responses.
+
+---
+
 ## Public analytical replica
 
 The walkthrough is a confidentiality-safe reconstruction using synthetic merchant data and independently written Python and SQL. It preserves the analytical questions and leadership decisions while simplifying metric definitions and excluding confidential data, dashboards and production code.

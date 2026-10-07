@@ -64,6 +64,7 @@ Led product analytics and data science initiatives supporting large-scale mercha
 
 - Contributed to growth from **1.2M to 1.7M monthly active users**
 - Supported migration and measurement for **1.5M+ merchants**
+- Led an AI assistant pilot with AI/ML specialists to address recurring stakeholder questions, creating field and table definitions, example queries to answer business questions, and stakeholder-specific context, and testing the assistant's responses
 - Helped improve conversion by **5%** in a key payment experience
 - Built KPI frameworks, business reviews, and self-service measurement systems
 
