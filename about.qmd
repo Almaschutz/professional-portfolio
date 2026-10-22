@@ -64,7 +64,7 @@ Led product analytics and data science initiatives supporting large-scale mercha
 
 - Contributed to growth from **1.2M to 1.7M monthly active users**
 - Supported migration and measurement for **1.5M+ merchants**
-- Led an AI assistant pilot with AI/ML specialists to address recurring stakeholder questions, creating field and table definitions, example queries to answer business questions, and stakeholder-specific context, and testing the assistant's responses
+- Led an AI assistant pilot with AI/ML specialists to address recurring stakeholder questions
 - Helped improve conversion by **5%** in a key payment experience
 - Built KPI frameworks, business reviews, and self-service measurement systems
 - Developed and implemented forecasting models to support financial planning and product target setting
@@ -106,6 +106,14 @@ Delivered pricing, commercial, and supply-chain analytics solutions for global c
 :::
 
 :::
+
+---
+
+## AI assistant pilot
+
+At PayPal, I led an AI assistant pilot within my product analytics domain, in collaboration with AI/ML specialists. The pilot focused on the most stable products in my scope and aimed to answer recurring stakeholder questions.
+
+I documented all relevant fields and tables, developed example queries showing how to answer business questions, and provided business context tailored to different stakeholders' needs. I also worked with the specialists to test the assistant's responses.
 
 ---
 
