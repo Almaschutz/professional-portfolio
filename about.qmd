@@ -63,7 +63,7 @@ I build teams, operating models and measurement systems that allow analytics to 
 #### Business Growth & Strategic Advisory
 
 - Helped exceed the 2024 Full Stack Monthly Active Users (MAU) target by 30% and grow MAU from 1.2M to 1.7M in 2025 by evaluating Product, Commercial and Marketing initiatives against original targets.
-- Identified migration opportunities for 1.5M+ merchants, including legacy account-creation channels; recommended retiring those channels and led Engineering, partnering with Commercial, to route new accounts to the Latest Merchant Platform.
+- Identified migration opportunities for 1.5M+ merchants, including legacy account-creation channels; recommended retiring those channels and led Engineering efforts, in partnership with Commercial, to route new accounts to the Latest Merchant Platform.
 - Supported a 5 bps PayNow conversion uplift by analyzing performance levers and advising Product, Commercial, Legal and Research on priorities and changes.
 - Assessed markets and early merchant engagement for 30+ alternative payment methods to guide geographic expansion.
 
@@ -72,7 +72,7 @@ I build teams, operating models and measurement systems that allow analytics to 
 - Developed and implemented forecasting models for financial planning and product targets.
 - Applied existing ML models to understand merchant behavior, identify growth opportunities and propose refinements.
 - Automated compliance checks for PayPal’s largest partners using up to 60 available fields per merchant, replacing manual reviews across millions of merchants and reporting daily migration readiness.
-- Led an AI assistant pilot with AI/ML specialists to address recurring stakeholder questions; documented field and table definitions, example queries and stakeholder context, and tested responses.
+- Led an AI assistant pilot with AI/ML specialists to address recurring stakeholder questions; documented field and table definitions, example business queries and stakeholder context, and tested responses.
 
 #### Analytics Leadership & Measurement
 

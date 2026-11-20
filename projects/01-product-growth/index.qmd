@@ -149,7 +149,7 @@ I owned outcome measurement and technical metric definitions for the Latest Merc
 - partnering with Product, Engineering, Research and Commercial teams;
 - presenting recommendations in Weekly Business Reviews and monthly Analytics Readouts.
 
-I recommended retiring legacy account-creation channels and led Engineering, partnering with Commercial, to route new accounts directly to the Latest Merchant Platform. Separately, I automated compliance checks using up to 60 available data fields per merchant for PayPal’s largest partners. This replaced manual reviews across millions of merchants and provided daily migration-readiness status to partners, Engineering and Product.
+I recommended retiring legacy account-creation channels and led Engineering efforts, in partnership with Commercial, to route new accounts directly to the Latest Merchant Platform. Separately, I automated compliance checks using up to 60 available data fields per merchant for PayPal’s largest partners. This replaced manual reviews across millions of merchants and provided daily migration-readiness status to partners, Engineering and Product.
 
 The hardest part was creating definitions precise enough for analysts and engineers while keeping them intuitive enough to guide recurring leadership decisions.
 
