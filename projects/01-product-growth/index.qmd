@@ -22,7 +22,7 @@ The framework separated access from activation, meaningful early adoption and la
 
 ::: {.case-meta}
 
-**Role:** Data Science Manager — Merchant Products  
+**Role:** Analytics and Data Science Manager — Merchant Products<br>
 **Organization:** PayPal  
 **Scope:** Global merchant platform  
 **Focus:** Product analytics, KPI strategy, behavioral analysis, experimentation and executive decision support
@@ -41,7 +41,7 @@ The framework separated access from activation, meaningful early adoption and la
 
 ### +30%
 
-Exceeded the 2024 Full Stack Monthly Active Users target.
+Contributed to exceeding the 2024 Full Stack Monthly Active Users target by 30%.
 
 :::
 
@@ -57,21 +57,21 @@ Supported growth in Monthly Active Users during 2025.
 
 ### 1.5M+
 
-Merchants supported through global platform migration and measurement.
+Merchants for whom I identified migration opportunities to the Latest Merchant Platform.
 
 :::
 
 ::: {.impact-card}
 
-### +5%
+### +5 bps
 
-Supported conversion improvement in a key payment experience.
-
-:::
+Supported PayNow conversion uplift through analysis and recommendations.
 
 :::
 
-The capability also established shared product-outcome definitions, scaled self-service reporting and supported roadmap expansion across more than 30 global alternative payment methods.
+:::
+
+I also owned outcome measurement and technical metric definitions, expanded self-service reporting and assessed markets and early merchant engagement for 30+ alternative payment methods to guide geographic expansion.
 
 ---
 
@@ -138,16 +138,18 @@ I led automated reporting and self-service KPI frameworks for recurring business
 
 ## My contribution
 
-I owned product outcomes and technical metric definitions for the platform. My work included:
+I owned outcome measurement and technical metric definitions for the Latest Merchant Platform. My work included:
 
 - defining and governing core product metrics;
 - measuring activation, adoption and platform growth;
 - identifying behavioral patterns and sizing opportunities;
 - supporting product launches, roadmap and investment decisions;
 - developing and implementing forecasting models to support financial planning and product target setting;
-- leading BI automation and self-service reporting;
+- directing BI reporting automation and expanding self-service KPI frameworks, eliminating manual processes handled by five full-time staff;
 - partnering with Product, Engineering, Research and Commercial teams;
-- translating analytical findings into executive recommendations.
+- presenting recommendations in Weekly Business Reviews and monthly Analytics Readouts.
+
+I recommended retiring legacy account-creation channels and led Engineering, partnering with Commercial, to route new accounts directly to the Latest Merchant Platform. Separately, I automated compliance checks using up to 60 available data fields per merchant for PayPal’s largest partners. This replaced manual reviews across millions of merchants and provided daily migration-readiness status to partners, Engineering and Product.
 
 The hardest part was creating definitions precise enough for analysts and engineers while keeping them intuitive enough to guide recurring leadership decisions.
 

@@ -6,7 +6,7 @@ page-layout: full
 
 <div class="page-intro">
 
-I work across Analytics and Data Science, with 15+ years of experience building analytical capabilities, leading multidisciplinary teams and turning data into measurable business impact.
+Analytics and Data Science Manager with 10+ years of experience in global organizations. I bridge business and technical perspectives, leading teams and collaborating across functions to identify opportunities, shape solutions, and deliver measurable business impact.
 
 My background spans product analytics, commercial analytics, experimentation and machine learning across PayPal, Philip Morris International and Accenture. I am most effective where the problem is ambiguous, the evidence needs careful interpretation and several teams must align around a practical decision.
 
@@ -56,18 +56,29 @@ I build teams, operating models and measurement systems that allow analytics to 
 
 ### PayPal
 
-**Data Science Manager — Merchant Products**
+**Analytics and Data Science Manager — Merchant Products**
 
-*May 2023 – February 2026*
+*May 2023 – Feb 2026*
 
-Led product analytics and data science initiatives supporting large-scale merchant experiences and platform migration.
+#### Business Growth & Strategic Advisory
 
-- Contributed to growth from **1.2M to 1.7M monthly active users**
-- Supported migration and measurement for **1.5M+ merchants**
-- Led an AI assistant pilot with AI/ML specialists to address recurring stakeholder questions, creating field and table definitions, example queries to answer business questions, and stakeholder-specific context, and testing the assistant's responses
-- Helped improve conversion by **5%** in a key payment experience
-- Built KPI frameworks, business reviews, and self-service measurement systems
-- Developed and implemented forecasting models to support financial planning and product target setting
+- Helped exceed the 2024 Full Stack Monthly Active Users (MAU) target by 30% and grow MAU from 1.2M to 1.7M in 2025 by evaluating Product, Commercial and Marketing initiatives against original targets.
+- Identified migration opportunities for 1.5M+ merchants, including legacy account-creation channels; recommended retiring those channels and led Engineering, partnering with Commercial, to route new accounts to the Latest Merchant Platform.
+- Supported a 5 bps PayNow conversion uplift by analyzing performance levers and advising Product, Commercial, Legal and Research on priorities and changes.
+- Assessed markets and early merchant engagement for 30+ alternative payment methods to guide geographic expansion.
+
+#### Data Science & Technical Solutions
+
+- Developed and implemented forecasting models for financial planning and product targets.
+- Applied existing ML models to understand merchant behavior, identify growth opportunities and propose refinements.
+- Automated compliance checks for PayPal’s largest partners using up to 60 available fields per merchant, replacing manual reviews across millions of merchants and reporting daily migration readiness.
+- Led an AI assistant pilot with AI/ML specialists to address recurring stakeholder questions; documented field and table definitions, example queries and stakeholder context, and tested responses.
+
+#### Analytics Leadership & Measurement
+
+- Owned outcome measurement and technical metric definitions for the Latest Merchant Platform.
+- Directed BI reporting automation and self-service KPI frameworks, eliminating manual processes handled by five full-time staff.
+- Presented recommendations to Product and Commercial leadership in Weekly Business Reviews and monthly Analytics Readouts.
 
 :::
 
@@ -75,16 +86,14 @@ Led product analytics and data science initiatives supporting large-scale mercha
 
 ### Philip Morris International
 
-**Data Science Manager**
+**Data Science Manager — Combustible Cigarettes**
 
-*October 2021 – May 2023*
+*Oct 2021 – May 2023*
 
-Led commercial analytics, experimentation, and segmentation initiatives across international markets.
-
-- Generated approximately **$4.2M in incremental marginal contribution through experimentation**
-- Built experimentation and measurement frameworks
-- Developed segmentation models used in production
-- Helped establish a scalable data science operating model
+- Built data products for retailer assessment and store segmentation; optimized wholesale routes, cutting delivery costs by 7% and improving vehicle-loading accuracy by 8 bps.
+- Designed A/B testing frameworks for marketing initiatives that delivered $4.2M in incremental marginal contribution in 2022.
+- Managed the Data Science team and prioritized projects by business needs and opportunity value.
+- Established and scaled the Data Science operating model and expanded self-service analytics.
 
 :::
 
@@ -92,20 +101,54 @@ Led commercial analytics, experimentation, and segmentation initiatives across i
 
 ### Accenture
 
-**Analytics and Data Science Consulting**
+**Data Science Manager — Applied Intelligence**
 
-*February 2018 – October 2021*
+*Feb 2018 – Oct 2021*
 
-Delivered pricing, commercial, and supply-chain analytics solutions for global consumer-goods organizations.
+- **Pricing and revenue strategy**
+    - Led global, cross-functional teams across 18+ US consumer goods categories, cutting the category-pricing process from four months to two weeks.
+- **Value-chain analytics**
+    - Defined KPIs and analytical approaches to uncover savings through value-chain synergies and process optimization.
+    - Visualized findings and facilitated Design Thinking workshops for structured problem-solving.
+- **Revenue growth management for a leading beverage company**
+    - Developed logistic regression models for retail execution, cutting resource requirements by approximately 50%.
+    - Analyzed sentiment in public web data to inform pricing strategies.
+    - Automated extraction, transformation, consolidation and BI reporting of sell-in, sell-out and inventory data for 25+ Mexican retailers.
 
-- Led multidisciplinary analytics teams
-- Developed pricing and optimization models
-- Worked with engineering teams to operationalize analytical solutions
-- Translated technical findings into executive recommendations
+:::
+
+::: {.timeline-item}
+
+### Willis Towers Watson Uruguay
+
+**Data and Consolidation Manager — EMEA & LATAM**
+
+*Jul 2013 – Aug 2017*
+
+- Standardized data processes across 15+ countries, improving governance and reporting.
+- Built and managed a team consolidating data and developing analytical models and insights for brokers.
+
+:::
+
+::: {.timeline-item}
+
+### Towers Watson
+
+**Actuarial Consultant**
+
+*Jun 2005 – Jul 2013*
+
+- Produced actuarial valuations and financial models to support M&A and strategic decisions.
 
 :::
 
 :::
+
+## Education
+
+Northwestern University – Kellogg | Leading with Analytics and AI, 2020
+
+Universidad Anáhuac México | BSc Actuarial Science, 2003–2007
 
 ---
 

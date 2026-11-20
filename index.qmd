@@ -9,11 +9,11 @@ page-layout: full
 
 # Alma Schutz
 
-<p class="home-role">Analytics and Data Science</p>
+<p class="home-role">Analytics and Data Science Manager</p>
 
-## I bridge business strategy and technical analytics to turn complex problems into clear decisions, scalable solutions and measurable growth.
+## I bridge business and technical perspectives, leading teams and collaborating across functions to identify opportunities, shape solutions, and deliver measurable business impact.
 
-Across 15+ years in industry and consulting, I have led analytics from problem framing through implementation—combining technical depth, business judgment and executive communication to deliver measurable growth.
+Analytics and Data Science Manager with 10+ years of experience in global organizations.
 
 <p class="home-location"><i class="bi bi-geo-alt" aria-hidden="true"></i> Spain</p>
 
@@ -33,7 +33,7 @@ Across 15+ years in industry and consulting, I have led analytics from problem f
 
 ### +30%
 
-Exceeded the annual active-user growth target.
+Contributed to exceeding the 2024 Full Stack Monthly Active Users target by 30%.
 
 :::
 
@@ -41,15 +41,15 @@ Exceeded the annual active-user growth target.
 
 ### 1.5M+
 
-Merchants supported through global platform migration and adoption.
+Merchants for whom I identified migration opportunities to the Latest Merchant Platform.
 
 :::
 
 ::: {.impact-card}
 
-### +5%
+### +5 bps
 
-Conversion uplift in a key digital payment journey.
+Supported PayNow conversion uplift through analysis and recommendations.
 
 :::
 
@@ -57,7 +57,7 @@ Conversion uplift in a key digital payment journey.
 
 ### $4.2M
 
-Incremental marginal contribution generated through commercial experimentation in 2022.
+Incremental marginal contribution delivered by marketing initiatives evaluated through A/B testing in 2022.
 
 :::
 
@@ -168,7 +168,7 @@ Incremental marginal contribution generated through commercial experimentation i
     <h3>FMCG Pricing Models</h3>
 
     <p>
-      Pricing models across thousands of products and 18 U.S. categories,
+      Pricing models across thousands of products and 18+ U.S. categories,
       spanning sensitivity, cross-price effects and optimization frontiers.
     </p>
 

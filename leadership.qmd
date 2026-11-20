@@ -44,7 +44,7 @@ I set clear expectations, align responsibilities with individual strengths and d
 
 I look beyond the immediate analysis to create capabilities other teams can reuse: common definitions, automated reporting, self-service tools and recurring decision processes.
 
-**In practice:** I have scaled KPI reporting, led BI automation and established analytical frameworks used across products, markets and teams.
+**In practice:** At PayPal, I directed BI reporting automation and expanded self-service KPI frameworks, eliminating manual processes handled by five full-time staff.
 
 :::
 
@@ -54,7 +54,7 @@ I look beyond the immediate analysis to create capabilities other teams can reus
 
 I translate business questions into analytical work, then translate the evidence back into choices, implications and recommendations. I adapt the detail to the audience without hiding uncertainty or trade-offs.
 
-**In practice:** I have guided decisions on marketing experiments, product roadmaps and cross-functional launches, helping technical and non-technical leaders work from the same evidence.
+**In practice:** I assessed markets and early merchant engagement to guide geographic expansion, advised teams on PayNow conversion priorities, and presented recommendations in Weekly Business Reviews and monthly Analytics Readouts.
 
 :::
 
@@ -64,7 +64,7 @@ I translate business questions into analytical work, then translate the evidence
 
 I make assumptions, limitations and uncertainty explicit. Metric definitions, validation and causal claims should be rigorous enough for the importance and reversibility of the decision—not more elaborate than the decision requires, and never less reliable.
 
-**In practice:** I have owned business-critical metrics developed by my teams and established measurement standards that supported consistent interpretation across functions.
+**In practice:** I owned outcome measurement and technical metric definitions for PayPal’s Latest Merchant Platform, supporting consistent interpretation across functions.
 
 :::
 

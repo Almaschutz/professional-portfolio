@@ -22,7 +22,7 @@ Working with Marketing, I segmented Plazas by consumption mix and tested color-l
 
 ::: {.case-meta}
 
-**Role:** Data Science Manager  
+**Role:** Data Science Manager — Combustible Cigarettes<br>
 **Organization:** Philip Morris International  
 **Scope:** National convenience channel in Mexico  
 **Focus:** Behavioral segmentation, field experimentation, causal measurement and commercial decision support
